@@ -36,11 +36,11 @@ A comprehensive Django-based web application to manage legal documents.
 
 ## Access Information
 
-### SuperUser
+### Admin
 - **Username**: `admin`
 - **Password**: `admin123`
 
-### Sample Faculty
-- **Username**: `jsmith`
-- **Password**: `john#123`
+### User
+- **Username**: `gids`
+- **Password**: `gids0428`
 
