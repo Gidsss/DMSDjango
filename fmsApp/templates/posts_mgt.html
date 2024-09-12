@@ -55,7 +55,7 @@
 <script>
     $(function() {
         $('#add_new').click(function() {
-            uni_modal('<i class="fa fa-plus"></i> Add Departmnet', '{% url "manage-post" %}', 'modal-md')
+            uni_modal('<i class="fa fa-plus"></i> Add File', '{% url "manage-post" %}', 'modal-md')
         })
         $('.edit-data').click(function() {
             uni_modal('<i class="fa fa-edit"></i> Edit post', '{% url "manage-post" %}/' + $(this).attr('data-id'), 'modal-md')

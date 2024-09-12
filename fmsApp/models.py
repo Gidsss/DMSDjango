@@ -15,6 +15,7 @@ class Post(models.Model):
     title = models.CharField(max_length=250)
     description = models.TextField(blank=True, null=True)
     file_path = models.FileField(upload_to='uploads/',blank=True, null=True)
+    file_data = models.TextField(blank=True, null=True)
     date_created = models.DateTimeField(default=timezone.now)
     date_updated = models.DateTimeField(auto_now=True)
 

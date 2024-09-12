@@ -98,27 +98,47 @@ def manage_post(request, pk=None):
 
 @login_required
 def save_post(request):
-    resp = {'status':'failed', 'msg':''}
+    resp = {'status': 'failed', 'msg': ''}
+    
     if request.method == 'POST':
-        if not request.POST['id'] == '':
+        if request.POST.get('id') and not request.POST['id'] == '':
             post = Post.objects.get(id=request.POST['id'])
-            form = SavePost(request.POST,request.FILES,instance=post)
+            form = SavePost(request.POST, request.FILES, instance=post)
         else:
-            form = SavePost(request.POST,request.FILES)
+            form = SavePost(request.POST, request.FILES)
+        
         if form.is_valid():
-            form.save()
-            messages.success(request,'File has been saved successfully.')
+            # Save the form to the instance
+            saved_post = form.save(commit=False)
+
+            # Handle file upload and encode to base64
+            if 'file_path' in request.FILES:
+                file = request.FILES['file_path']
+                # Convert the file to base64
+                file_data = base64.b64encode(file.read()).decode('utf-8')
+                saved_post.file_data = file_data  # Save the base64-encoded file data to the TextField
+
+            # Save the instance after processing the file
+            saved_post.save()
+
+            # Success message and status
+            messages.success(request, 'File has been saved successfully.')
             resp['status'] = 'success'
         else:
-            for fields in form:
-                for error in fields.errors:
-                    resp['msg'] += str( error +'<br/>')
-            form = SavePost(request.POST,request.FILES)
+            # Collect and format validation errors
+            for field in form:
+                for error in field.errors:
+                    resp['msg'] += str(error) + '<br/>'
+            form = SavePost(request.POST, request.FILES)
             
     else:
         resp['msg'] = "No Data sent."
+    
+    # Print response for debugging (optional)
     print(resp)
-    return HttpResponse(json.dumps(resp),content_type="application/json")
+    
+    # Return response as JSON
+    return HttpResponse(json.dumps(resp), content_type="application/json")
 
 @login_required
 def delete_post(request):
