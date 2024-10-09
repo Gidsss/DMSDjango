@@ -4,10 +4,10 @@ import random
 from math import ceil, log2
 
 
-def build_markov_json(filename: str, corpus_file: str):
+def build_markov_json(filename: str, corpus_file: str, state_size:int = 2):
 	""" Takes in a corpus txt file and constructs a markov model in json """
 	with open(corpus_file, "r") as f:
-		model = markovify.Text(f.read())
+		model = markovify.Text(f.read(), state_size=state_size)
 
 	with open(f"markov_models/{filename}.json", "w") as f:
 		f.write(model.to_json())
