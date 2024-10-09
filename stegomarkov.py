@@ -6,9 +6,9 @@ from math import ceil, log2
 
 def build_markov_json(filename: str, corpus_file: str, state_size:int = 2):
 	""" Takes in a corpus txt file and constructs a markov model in json """
-	with open(corpus_file, "r") as f:
+	with open(corpus_file, "r", encoding="utf8") as f:
 		model = markovify.Text(f.read(), state_size=state_size)
-
+	os.makedirs("markov_models", exist_ok=True)
 	with open(f"markov_models/{filename}.json", "w") as f:
 		f.write(model.to_json())
 
@@ -370,3 +370,5 @@ class Decoder:
 			truncated_list = lst[:limit]
 			remaining_count = len(lst) - limit
 			return ", ".join(truncated_list) + f", and {remaining_count} more"
+
+build_markov_json("model_state_1", "clean_neg.txt", 1)
