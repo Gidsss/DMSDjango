@@ -169,6 +169,8 @@ class Encoder:
 		while not self.finished:
 			self.step()
 
+		return self.output
+
 	def _consume_from_list(self, lst):
 		# Get max possible bit length based on length of list
 		list_length = len(lst)
@@ -364,6 +366,8 @@ class Decoder:
 		""" Consumes the entire steganographic text and generates an output bitstream """
 		while not self.finished:
 			self.step()
+
+		return self.output
 
 	def _get_transitions(self, gram):
 		trans_matrix = self.model.chain.model[gram]
