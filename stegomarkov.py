@@ -29,7 +29,7 @@ def _string_to_bitstream(data_string):
 		# Append the binary string to the bit list.
 		bit_list.extend([str(int(bit)) for bit in binary_string])
 
-	return bit_list
+	return "".join(bit_list)
 
 
 class Encoder:
