@@ -18,6 +18,7 @@ def build_model(json_file: str):
 	with open(json_file, "r") as f:
 		return markovify.Text.from_json(f.read())
 
+
 def _string_to_bitstream(data_string):
 	byte_array = bytearray(data_string, "ascii")
 
@@ -37,6 +38,7 @@ class Encoder:
 	Encodes a bitstream using a Markov Model.
 	For basic usage, run `self.generate()` and get the generated output from `self.output_str`.
 	"""
+
 	def __init__(self, model: markovify.Text, bitstream: str, logging: bool):
 		"""
 		Initializes a Markov Encoder.
@@ -214,6 +216,7 @@ class Decoder:
 	Decodes a steganographic text using a Markov Model.
 	For basic usage, run `self.solve()` and get the generated output from `self.output`.
 	"""
+
 	def __init__(self, model: markovify.Text, stega_text: str, logging: bool):
 		"""
 		Initializes a Markov Decoder. Run `self.solve()` and get the generated output from `self.output`.
