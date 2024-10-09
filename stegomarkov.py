@@ -1,10 +1,11 @@
 import os
+import time
 import markovify
 import random
 from math import ceil, log2
 
 
-def build_markov_json(filename: str, corpus_file: str, state_size:int = 2):
+def build_markov_json(filename: str, corpus_file: str, state_size: int = 2):
 	""" Takes in a corpus txt file and constructs a markov model in json """
 	with open(corpus_file, "r", encoding="utf8") as f:
 		model = markovify.Text(f.read(), state_size=state_size)
@@ -54,7 +55,8 @@ class Encoder:
 		if self.model.state_size == 1:
 			self.entrypoints = [key for key in model.chain.model.get(("___BEGIN__",)).keys()]
 		else:
-			self.entrypoints = [key[1:] for key in model.chain.model.keys() if "___BEGIN__" in key][1:]
+			self.entrypoints = [key[-1] for key in model.chain.model.keys()
+								if key.count("___BEGIN__") == self.model.state_size - 1][1:]
 
 		self.current_gram = None
 		self.output_tokens = []
@@ -100,7 +102,7 @@ class Encoder:
 			if self.model.state_size == 1:
 				self.current_gram = (next_token,)
 			else:
-				self.current_gram = ("___BEGIN__", *next_token)
+				self.current_gram = (*["___BEGIN__"]*(self.model.state_size-1), next_token)
 
 		# Get next word
 		else:
@@ -141,7 +143,10 @@ class Encoder:
 			self.current_gram = tuple(next_gram[1:])
 
 		# Add token to output
-		self.output_tokens.append(next_token)
+		if type(next_token) == tuple:
+			self.output_tokens.extend(next_token)
+		else:
+			self.output_tokens.append(next_token)
 
 		if not self.bitstream:
 			self.end_key = len(removed)
@@ -234,7 +239,8 @@ class Decoder:
 		if self.model.state_size == 1:
 			self.entrypoints = [key for key in model.chain.model.get(("___BEGIN__",)).keys()]
 		else:
-			self.entrypoints = [key[1:] for key in model.chain.model.keys() if "___BEGIN__" in key][1:]
+			self.entrypoints = [key[-1] for key in model.chain.model.keys()
+								if key.count("___BEGIN__") == self.model.state_size - 1][1:]
 		self.endkey = 0
 		self.current_gram = None
 		self.index = 0
@@ -277,9 +283,9 @@ class Decoder:
 			if self.model.state_size == 1:
 				self.current_gram = (token,)
 			else:
-				self.current_gram = ("___BEGIN__", *self.stega_text[self.index: self.index+self.model.state_size-1])
+				self.current_gram = (*["___BEGIN__"]*(self.model.state_size-1), token)
 
-			embedded_index = self.entrypoints.index(self.current_gram[1])
+			embedded_index = self.entrypoints.index(token)
 			bit_length = ceil(log2(len(self.entrypoints)))
 			if len(self.entrypoints) < 2 ** bit_length:
 				bit_length -= 1
