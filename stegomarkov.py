@@ -397,4 +397,42 @@ class Decoder:
 			remaining_count = len(lst) - limit
 			return ", ".join(truncated_list) + f", and {remaining_count} more"
 
-build_markov_json("model_state_1", "clean_neg.txt", 1)
+
+# For quick testing
+if __name__ == '__main__':
+	print("Building models...")
+	model_state_1 = build_model("markov_models/model_state_1.json")
+	model_state_2 = build_model("markov_models/model_state_2.json")
+	model_state_3 = build_model("markov_models/model_state_3.json")
+
+	models = [model_state_1, model_state_2, model_state_3]
+
+	text = "acehappybirthday071603!"
+	bitstream = _string_to_bitstream(text)
+
+	encoders = [Encoder(model, bitstream, False) for model in models]
+	outputs = []
+
+	print(f"\nText to be Encoded: {text}")
+	for i, encoder in enumerate(encoders):
+		print(f"\n-- Encoding with State Size {i + 1} --")
+		a = time.perf_counter()
+		output = encoder.generate()
+		b = time.perf_counter()
+		outputs.append(output)
+		print(f"Output: {output}")
+		print(f"Statistics: ")
+		print(f"\t- Speed: {b - a: 0.4f} secs")
+		print(f"\t- Embedding Rate: {len(bitstream) * 100 / (len(output) * 8): 0.2f}%")
+
+	decoders = [Decoder(model, output, False) for model, output in zip(models, outputs)]
+	print("\nTesting decoding...")
+	for i, decoder in enumerate(decoders):
+		print(f"\n-- Decoding with State Size {i + 1} --")
+		a = time.perf_counter()
+		output = decoder.solve()
+		b = time.perf_counter()
+		print(f"Output: {output}")
+		print(f"Statistics: ")
+		print(f"\t- Speed: {b - a: 0.4f} secs")
+		print(f"\t- Valid: {output == bitstream}")
