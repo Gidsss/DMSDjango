@@ -18,6 +18,19 @@ def build_model(json_file: str):
 	with open(json_file, "r") as f:
 		return markovify.Text.from_json(f.read())
 
+def _string_to_bitstream(data_string):
+	byte_array = bytearray(data_string, "ascii")
+
+	# Convert each byte to a binary string.
+	bit_list = []
+	for byte in byte_array:
+		# Left pad the binary string with 0s to make it 8 bits long.
+		binary_string = bin(byte)[2:].zfill(8)
+		# Append the binary string to the bit list.
+		bit_list.extend([str(int(bit)) for bit in binary_string])
+
+	return bit_list
+
 
 class Encoder:
 	"""
