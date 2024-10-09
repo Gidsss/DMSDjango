@@ -39,7 +39,7 @@ class Encoder:
 		self.entrypoints = [key[1] for key in model.chain.model.keys() if "___BEGIN__" in key][1:]
 
 		self.current_gram = None
-		self.output = []
+		self.output_tokens = []
 		self.exhausts = 0
 		self.end_key = 0
 		self.exhausted = True
@@ -48,9 +48,9 @@ class Encoder:
 		self.logging = logging
 
 	@property
-	def output_str(self):
+	def output(self):
 		""" Returns the current state of the output string. """
-		return " ".join(self.output)
+		return " ".join(self.output_tokens)
 
 	def step(self):
 		""" Generates a new word for the output and appends it to the output string. """
@@ -119,25 +119,25 @@ class Encoder:
 			self.current_gram = tuple(next_gram[1:])
 
 		# Add token to output
-		self.output.append(next_token)
+		self.output_tokens.append(next_token)
 
 		if not self.bitstream:
 			self.end_key = len(removed)
 
 			# Inject end key into output
-			i = random.randint(0, len(self.output) - 1)
+			i = random.randint(0, len(self.output_tokens) - 1)
 			char_key = chr(self.end_key + 97)
-			self.output[i] += char_key
+			self.output_tokens[i] += char_key
 
 			if self.logging:
 				os.system("")
-				injected_word = self.output[i]
-				print(f"Output: {self.output_str}")
+				injected_word = self.output_tokens[i]
+				print(f"Output: {self.output}")
 				print(f"\tEnd Key: {self.end_key} ({char_key})")
 				print(f"\tInjection Point: \"{injected_word[:-1]}\" at index {i}")
-				print(f"\tInjection Preview: ... {' '.join(self.output[max(0, i - 2):i])} "
+				print(f"\tInjection Preview: ... {' '.join(self.output_tokens[max(0, i - 2):i])} "
 					  f"{f'|{injected_word}|'} "
-					  f"{' '.join(self.output[i + 1: min(len(self.output) - 1, i + 3)])} ...")
+					  f"{' '.join(self.output_tokens[i + 1: min(len(self.output_tokens) - 1, i + 3)])} ...")
 
 			self.finished = True
 
