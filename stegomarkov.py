@@ -36,7 +36,10 @@ class Encoder:
 		self.model = model
 		self.bitstream = bitstream
 
-		self.entrypoints = [key[1] for key in model.chain.model.keys() if "___BEGIN__" in key][1:]
+		if self.model.state_size == 1:
+			self.entrypoints = [key for key in model.chain.model.get(("___BEGIN__",)).keys()]
+		else:
+			self.entrypoints = [key[1:] for key in model.chain.model.keys() if "___BEGIN__" in key][1:]
 
 		self.current_gram = None
 		self.output_tokens = []
@@ -57,6 +60,7 @@ class Encoder:
 		if self.finished:
 			return
 
+		# Display limits for logging
 		char_limit = 20
 		matrix_limit = 10
 
@@ -78,7 +82,10 @@ class Encoder:
 				print()
 
 			# Construct gram
-			self.current_gram = ("___BEGIN__", next_token)
+			if self.model.state_size == 1:
+				self.current_gram = (next_token,)
+			else:
+				self.current_gram = ("___BEGIN__", *next_token)
 
 		# Get next word
 		else:
@@ -206,7 +213,10 @@ class Decoder:
 		self.model = model
 		self.stega_text = stega_text.split(" ")
 
-		self.entrypoints = [key[1] for key in model.chain.model.keys() if "___BEGIN__" in key][1:]
+		if self.model.state_size == 1:
+			self.entrypoints = [key for key in model.chain.model.get(("___BEGIN__",)).keys()]
+		else:
+			self.entrypoints = [key[1:] for key in model.chain.model.keys() if "___BEGIN__" in key][1:]
 		self.endkey = 0
 		self.current_gram = None
 		self.index = 0
@@ -218,6 +228,8 @@ class Decoder:
 
 	def step(self):
 		""" Consumes a word from the steganographic text and appends the appropriate bits to the output """
+
+		# Display limits for logging
 		matrix_limit = 10
 		char_limit = 20
 
@@ -244,7 +256,11 @@ class Decoder:
 					print(f"\tEncoded End Key: {self.endkey}")
 					print()
 
-			self.current_gram = ("___BEGIN__", token)
+			if self.model.state_size == 1:
+				self.current_gram = (token,)
+			else:
+				self.current_gram = ("___BEGIN__", *self.stega_text[self.index: self.index+self.model.state_size-1])
+
 			embedded_index = self.entrypoints.index(self.current_gram[1])
 			bit_length = ceil(log2(len(self.entrypoints)))
 			if len(self.entrypoints) < 2 ** bit_length:
