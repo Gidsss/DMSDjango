@@ -20,6 +20,7 @@ urlpatterns = [
     path('manage_post', views.manage_post, name='manage-post'),
     path('manage_post/<int:pk>', views.manage_post, name='manage-post'),
     path('save_post', views.save_post, name='save-post'),
+    path('view-post/<int:pk>/', views.view_post, name='view-post'),  # This is the URL for viewing post file data
     path('delet_post', views.delete_post, name='delete-post'),
     path(r'shareF/<str:id>', views.shareF, name='share-file-id'),
     path('shareF/', views.shareF, name='share-file'),

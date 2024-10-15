@@ -4,38 +4,64 @@
         {% csrf_token %}
         <input type="hidden" name="id" value="{{ post.id }}">
         <input type="hidden" name="user" value="{% if not post %}{{ user.id }}{% else %}{{ post.user.id }}{% endif %}">
+
+        <!-- Title Input -->
         <div class="form-group mb-3 ">
             <label for="title" class="control-label">Title</label>
             <input type="text" class="form-control rounded-0" id="title" name="title" value="{{ post.title }}" required>
         </div>
+
+        <!-- Description Textarea -->
         <div class="form-group mb-3">
             <label for="description" class="control-label">Description</label>
-            <textarea class="form-control rounded-0" name="description" id="description" rows="5" required>{{ post.description }}</textarea>
+            <textarea class="form-control rounded-0" name="description" id="description" rows="5"
+                required>{{ post.description }}</textarea>
         </div>
+
+        <!-- File Upload Input -->
         <div class="form-group mb-3 ">
             <label for="file_path" class="control-label">File</label>
-            <input type="file" class="form-control rounded-0" id="file_path" name="file_path" value="" accept='image/*, video/*, audio/*, application/pdf, text/csv, text/plain, application/zip, .docs,.doc, application/ppt, .ppt' {% if not post %} required {% endif %}> 
-            <small class="text-muted"><i>Accept Only: image/*, video/*, audio/*, application/pdf, text/csv, text/plain, application/zip, .docs,.doc, application/ppt, .ppt</i></small>
+            <input type="file" class="form-control rounded-0" id="file_path" name="file_path" value=""
+                accept='image/*, video/*, audio/*, application/pdf, text/csv, text/plain, application/zip, .docs,.doc, application/ppt, .ppt'
+                {% if not post %} required {% endif %}>
+            <small class="text-muted"><i>Accept Only: image/*, video/*, audio/*, application/pdf, text/csv, text/plain,
+                    application/zip, .docs,.doc, application/ppt, .ppt</i></small>
             {% if post.file_path %}
-            <div><small><span class="text-muted">Current File:</span> <a href="{{ post.file_path.url }}" target="_blank">{{ post.file_path|replaceBlank:"uploads/" }}</a></small> </div>
+            <div><small><span class="text-muted">Current File:</span> <a href="{{ post.file_path.url }}"
+                        target="_blank">{{ post.file_path|replaceBlank:"uploads/" }}</a></small> </div>
             {% endif %}
         </div>
+
+        <!-- Decoded Binary Data (New Text Field) -->
+        {% if post.file_data %}
+        <div class="form-group mb-3 ">
+            <label for="decoded_binary" class="control-label">Decoded Binary Data</label>
+            <textarea class="form-control rounded-0" id="decoded_binary" rows="10"
+                readonly>{{ post.file_data|decode_binary }}</textarea>
+        </div>
+        {% endif %}
     </form>
 </div>
+
+<!-- JavaScript to handle form submission -->
 <script>
-    $(function() {
-        $('#post-form').submit(function(e) {
+    $(function () {
+        $('#post-form').submit(function (e) {
             e.preventDefault();
-            var _this = $(this)
+            var _this = $(this);
             $('.err-msg').remove();
-            var el = $('<div>')
-            el.addClass("alert alert-danger err-msg")
-            el.hide()
+            var el = $('<div>');
+            el.addClass("alert alert-danger err-msg");
+            el.hide();
+
             if (_this[0].checkValidity() == false) {
                 _this[0].reportValidity();
                 return false;
             }
+
             start_loader();
+
+            // AJAX submission
             $.ajax({
                 url: "{% url 'save-post' %}",
                 data: new FormData($(this)[0]),
@@ -46,27 +72,48 @@
                 type: 'POST',
                 dataType: 'json',
                 error: err => {
-                    console.log(err)
-                    alert("An error occured ", 'error');
+                    console.log(err);
+                    alert("An error occurred ", 'error');
                     end_loader();
                 },
-                success: function(resp) {
+                success: function (resp) {
                     if (typeof resp == 'object' && resp.status == 'success') {
-                        el.removeClass("alert alert-danger err-msg ")
-                        location.reload()
+                        el.removeClass("alert alert-danger err-msg");
+                        location.reload();
                     } else if (resp.status == 'failed' && !!resp.msg) {
-                        el.html(resp.msg)
+                        el.html(resp.msg);
                     } else {
-                        el.text("An error occured ", 'error');
+                        el.text("An error occurred", 'error');
                         end_loader();
-                        console.err(resp)
+                        console.err(resp);
                     }
-                    _this.prepend(el)
-                    el.show('slow')
+                    _this.prepend(el);
+                    el.show('slow');
                     $("html, body, .modal ").scrollTop(0);
-                    end_loader()
+                    end_loader();
                 }
-            })
-        })
-    })
+            });
+        });
+
+        // Fetch binary data and populate the decoded binary text field dynamically when the modal is opened
+        $('.edit-data').click(function () {
+            var post_id = $(this).attr('data-id');
+            $.ajax({
+                url: '/view-post/' + post_id + '/', // Ensure this URL matches your view that fetches the post data
+                method: 'GET',
+                success: function (resp) {
+                    if (resp.status == 'success') {
+                        let decoded_binary = resp.data.binary_data;
+                        $('#decoded_binary').val(decoded_binary); // Populate the textarea with decoded binary data
+                    } else {
+                        alert('Failed to load file data.');
+                    }
+                },
+                error: function (err) {
+                    console.error(err);
+                    alert('An error occurred while fetching the file.');
+                }
+            });
+        });
+    });
 </script>
