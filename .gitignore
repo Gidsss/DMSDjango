@@ -1,3 +1,5 @@
 markov_models/
 *.txt
 *.json
+media/default/
+media/uploads/
