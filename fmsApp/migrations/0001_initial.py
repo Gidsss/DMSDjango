@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=250)),
                 ('description', models.TextField(blank=True, null=True)),
                 ('file_path', models.FileField(blank=True, null=True, upload_to='uploads/')),
+                ('file_data', models.TextField(blank=True, null=True)), # This field is new
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

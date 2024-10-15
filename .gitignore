@@ -1,5 +1,6 @@
 markov_models/
 *.txt
 *.json
-media/default/
-media/uploads/
+
+# Ignore the media uploads folder
+media/uploads 

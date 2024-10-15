@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 from fms_django.settings import MEDIA_ROOT, MEDIA_URL
 import json
 from django.contrib import messages
@@ -11,11 +13,26 @@ from fmsApp.models import Post
 from cryptography.fernet import Fernet
 from django.conf import settings
 import base64
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from .models import Post
+import base64
+# from .stegomarkov_old import Encoder, Decoder, file_to_bitstream, bitstream_to_file, build_model
+from .stegomarkov import Encoder, Decoder, file_to_bitstream, bitstream_to_file, build_model
+import markovify
+import os
+import time
+import logging
 # Create your views here.
 
 context = {
     'page_title' : 'File Management System',
 }
+
+# Set up basic logging
+logging.basicConfig(level=logging.INFO)  
+logger = logging.getLogger(__name__)
+
 #login
 def login_user(request):
     logout(request)
@@ -89,36 +106,151 @@ def posts_mgt(request):
 
 @login_required
 def manage_post(request, pk=None):
-    context['page_title'] = 'Manage Post'
-    context['post'] = {}
-    if not pk is None:
-        post = Post.objects.get(id = pk)
+    context = {'page_title': 'Manage Post', 'post': {}}
+
+    if pk is not None:
+        post = Post.objects.get(id=pk)
+
+        # Decode the binary data from base64, if the file data exists
+        if post.file_data:
+            # Load the Markov model (pre-built model)
+            model = build_model("markov_models/legal_corpus.json")
+            logger.info("Markov model loaded successfully for decoding.")
+
+            # Decode the file_data using the Decoder class
+            decoder = Decoder(model, post.file_data, logging=True)
+            decoder.solve()
+
+            # The output bitstream will be the decoded binary data
+            decoded_file_data = decoder.output  # Ensure correct decoding
+            context['decoded_file_data'] = decoded_file_data  # Pass the decoded binary data to the template
+
         context['post'] = post
-    return render(request,'manage_post.html',context)
+
+    return render(request, 'manage_post.html', context)
+
+@login_required
+def view_post(request, pk):
+    try:
+        # Fetch the post by its primary key (id)
+        logger.info(f"Fetching post with ID: {pk}")
+        post = get_object_or_404(Post, pk=pk)
+
+        # Check if post has file data
+        if post.file_data:
+            logger.info(f"Post {pk} contains file_data. Decoding process started.")
+
+            # Load the Markov model
+            model = build_model("markov_models/legal_corpus.json")
+            logger.info("Markov model loaded successfully.")
+
+            # Decoder class to decode the steganographic text to binary bitstream
+            decoder = Decoder(model, post.file_data, logging=True)
+            logger.info(f"Decoder initialized for post {pk}. Starting to solve...")
+
+            decoder.solve()
+            logger.info(f"Decoding completed for post {pk} using Decoder class.")
+
+            decoded_bitstream = decoder.output  # This will be the decoded bitstream
+
+            # Optionally, save the decoded file or preview
+            decoded_file_path = f"{post.title}_decoded.pdf"
+            bitstream_to_file(decoded_bitstream, decoded_file_path)
+            logger.info(f"Decoded bitstream saved as {decoded_file_path}")
+
+            # Return the decoded data for preview
+            response_data = {
+                'status': 'success',
+                'data': {
+                    'file_name': post.title,
+                    'binary_data': decoded_bitstream,  
+                    'description': post.description
+                }
+            }
+        else:
+            logger.warning(f"Post {pk} does not contain file_data.")
+            response_data = {'status': 'failed', 'msg': 'No file data available'}
+
+    except Exception as e:
+        logger.error(f"Error while processing post {pk}: {str(e)}", exc_info=True)
+        response_data = {
+            'status': 'failed',
+            'msg': str(e)
+        }
+
+    return JsonResponse(response_data)
 
 @login_required
 def save_post(request):
-    resp = {'status':'failed', 'msg':''}
+    resp = {'status': 'failed', 'msg': ''}
+
     if request.method == 'POST':
-        if not request.POST['id'] == '':
+        start_time = time.time()  # Start time to measure process duration
+        if request.POST.get('id') and not request.POST['id'] == '':
             post = Post.objects.get(id=request.POST['id'])
-            form = SavePost(request.POST,request.FILES,instance=post)
+            form = SavePost(request.POST, request.FILES, instance=post)
         else:
-            form = SavePost(request.POST,request.FILES)
+            form = SavePost(request.POST, request.FILES)
+
         if form.is_valid():
-            form.save()
-            messages.success(request,'File has been saved successfully.')
+            saved_post = form.save(commit=False)
+
+            if 'file_path' in request.FILES:
+                file = request.FILES['file_path']
+
+                # Save the file to the correct directory using default_storage
+                file_path = default_storage.save(f"uploads/{file.name}", ContentFile(file.read()))
+                full_file_path = os.path.join(settings.MEDIA_ROOT, file_path)
+
+                # Log the file save duration
+                logger.info(f"File saved at: {full_file_path}")
+                logger.info(f"Time taken to save file: {time.time() - start_time} seconds")
+
+                # Convert file to binary bitstream
+                bitstream_start = time.time()  # Start time for bitstream conversion
+                bitstream = file_to_bitstream(full_file_path)
+
+                # Log the bitstream conversion duration
+                logger.info(f"Time taken to convert file to bitstream: {time.time() - bitstream_start} seconds")
+
+                # Load the Markov model (pre-built model)
+                model = build_model("markov_models/legal_corpus.json")
+                logger.info("Markov model loaded successfully.")
+
+                # Encode the file to steganographic text
+                encode_start = time.time()  # Start time for encoding
+                encoder = Encoder(model, bitstream, logging=True)
+                encoder.generate()
+
+                # Ensure that the end key was injected
+                if encoder.finished:
+                    logger.info(f"End key was injected successfully.")
+                else:
+                    logger.warning(f"End key was not injected.")
+
+                # Log the encoding duration
+                logger.info(f"Time taken to encode bitstream: {time.time() - encode_start} seconds")
+
+                stega_text = encoder.output
+                saved_post.file_data = stega_text
+
+            # Save the post
+            saved_post.save()
+
+            # Log the total duration for the process
+            logger.info(f"Total time taken to process file: {time.time() - start_time} seconds")
+
+            messages.success(request, 'File has been saved successfully.')
             resp['status'] = 'success'
         else:
-            for fields in form:
-                for error in fields.errors:
-                    resp['msg'] += str( error +'<br/>')
-            form = SavePost(request.POST,request.FILES)
-            
+            for field in form:
+                for error in field.errors:
+                    resp['msg'] += str(error) + '<br/>'
+
     else:
         resp['msg'] = "No Data sent."
-    print(resp)
-    return HttpResponse(json.dumps(resp),content_type="application/json")
+
+    return HttpResponse(json.dumps(resp), content_type="application/json")
 
 @login_required
 def delete_post(request):
