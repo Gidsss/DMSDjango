@@ -108,77 +108,44 @@ def posts_mgt(request):
 def manage_post(request, pk=None):
     context = {'page_title': 'Manage Post', 'post': {}}
 
-    if pk is not None:
-        post = Post.objects.get(id=pk)
+    try:
+        if pk is not None:
+            # Fetch post or return 404 if not found
+            post = get_object_or_404(Post, id=pk)
 
-        # Decode the binary data from base64, if the file data exists
-        if post.file_data:
-            # Load the Markov model (pre-built model)
-            model = build_model("markov_models/legal_corpus.json")
-            logger.info("Markov model loaded successfully for decoding.")
+            # Decode the binary data if file data exists
+            if post.file_data:
+                # Load the Markov model (pre-built model)
+                model = build_model("markov_models/legal_corpus.json")
+                logger.info("Markov model loaded successfully for decoding.")
 
-            # Decode the file_data using the Decoder class
-            decoder = Decoder(model, post.file_data, logging=True)
-            decoder.solve()
+                # Start time for decoder
+                decode_start_time = time.time()
 
-            # The output bitstream will be the decoded binary data
-            decoded_file_data = decoder.output  # Ensure correct decoding
-            context['decoded_file_data'] = decoded_file_data  # Pass the decoded binary data to the template
+                # Decode the file_data using the Decoder class
+                decoder = Decoder(model, post.file_data, logging=True)
+                decoded_file_data = decoder.solve()
 
-        context['post'] = post
+                # Calculate the time taken for decoding
+                decode_duration = time.time() - decode_start_time
+                logger.info(f"Time taken to decode the file: {decode_duration:.6f} seconds")
+
+                # Log the end key and where it was injected
+                logger.info(f"End Key used in decoding: {decoder.endkey}")  
+                # logger.info(f"End Key was injected at index: {decoder.index()}")
+
+                # Pass the decoded binary data to the template
+                context['decoded_file_data'] = decoded_file_data
+            else:
+                logger.warning(f"No file data found for post ID {pk}.")
+            context['post'] = post
+        else:
+            logger.warning(f"No post ID provided.")
+    except Exception as e:
+        logger.error(f"Error managing post {pk}: {str(e)}", exc_info=True)
+        messages.error(request, 'An error occurred while processing the post.')
 
     return render(request, 'manage_post.html', context)
-
-@login_required
-def view_post(request, pk):
-    try:
-        # Fetch the post by its primary key (id)
-        logger.info(f"Fetching post with ID: {pk}")
-        post = get_object_or_404(Post, pk=pk)
-
-        # Check if post has file data
-        if post.file_data:
-            logger.info(f"Post {pk} contains file_data. Decoding process started.")
-
-            # Load the Markov model
-            model = build_model("markov_models/legal_corpus.json")
-            logger.info("Markov model loaded successfully.")
-
-            # Decoder class to decode the steganographic text to binary bitstream
-            decoder = Decoder(model, post.file_data, logging=True)
-            logger.info(f"Decoder initialized for post {pk}. Starting to solve...")
-
-            decoder.solve()
-            logger.info(f"Decoding completed for post {pk} using Decoder class.")
-
-            decoded_bitstream = decoder.output  # This will be the decoded bitstream
-
-            # Optionally, save the decoded file or preview
-            decoded_file_path = f"{post.title}_decoded.pdf"
-            bitstream_to_file(decoded_bitstream, decoded_file_path)
-            logger.info(f"Decoded bitstream saved as {decoded_file_path}")
-
-            # Return the decoded data for preview
-            response_data = {
-                'status': 'success',
-                'data': {
-                    'file_name': post.title,
-                    'binary_data': decoded_bitstream,  
-                    'description': post.description
-                }
-            }
-        else:
-            logger.warning(f"Post {pk} does not contain file_data.")
-            response_data = {'status': 'failed', 'msg': 'No file data available'}
-
-    except Exception as e:
-        logger.error(f"Error while processing post {pk}: {str(e)}", exc_info=True)
-        response_data = {
-            'status': 'failed',
-            'msg': str(e)
-        }
-
-    return JsonResponse(response_data)
 
 @login_required
 def save_post(request):
@@ -222,15 +189,13 @@ def save_post(request):
                 encoder = Encoder(model, bitstream, logging=True)
                 encoder.generate()
 
-                # Ensure that the end key was injected
-                if encoder.finished:
-                    logger.info(f"End key was injected successfully.")
-                else:
-                    logger.warning(f"End key was not injected.")
-
                 # Log the encoding duration
                 logger.info(f"Time taken to encode bitstream: {time.time() - encode_start} seconds")
 
+                # Log the position where the end key was injected
+                # logger.info(f"End Key was injected at index: {encoder.end_key_index}")
+                logger.info(f"End Key was injected into the token: '{encoder.output_tokens[encoder.end_key_index]}'")
+                
                 stega_text = encoder.output
                 saved_post.file_data = stega_text
 
