@@ -21,18 +21,24 @@
         <!-- File Upload Input -->
         <div class="form-group mb-3 ">
             <label for="file_path" class="control-label">File</label>
+
+            <!-- If it's a new post (no post.id), show file input -->
+            {% if not post.id %}
             <input type="file" class="form-control rounded-0" id="file_path" name="file_path" value=""
                 accept='image/*, video/*, audio/*, application/pdf, text/csv, text/plain, application/zip, .docs,.doc, application/ppt, .ppt'
-                {% if not post %} required {% endif %}>
+                required>
             <small class="text-muted"><i>Accept Only: image/*, video/*, audio/*, application/pdf, text/csv, text/plain,
                     application/zip, .docs,.doc, application/ppt, .ppt</i></small>
-            {% if post.file_path %}
+
+            <!-- If it's an existing post (post.id exists), only show the current file -->
+            {% else %}
             <div><small><span class="text-muted">Current File:</span> <a href="{{ post.file_path.url }}"
-                        target="_blank">{{ post.file_path|replaceBlank:"uploads/" }}</a></small> </div>
+                        target="_blank">{{ post.file_path|replaceBlank:"uploads/" }}</a></small></div>
             {% endif %}
         </div>
 
-        <!-- Decoded Binary Data (New Text Field) -->
+
+        <!-- Decoded Binary Data -->
         {% if post.file_data %}
         <div class="form-group mb-3 ">
             <label for="decoded_binary" class="control-label">Decoded Binary Data</label>
@@ -91,27 +97,6 @@
                     el.show('slow');
                     $("html, body, .modal ").scrollTop(0);
                     end_loader();
-                }
-            });
-        });
-
-        // Fetch binary data and populate the decoded binary text field dynamically when the modal is opened
-        $('.edit-data').click(function () {
-            var post_id = $(this).attr('data-id');
-            $.ajax({
-                url: '/view-post/' + post_id + '/', // Ensure this URL matches your view that fetches the post data
-                method: 'GET',
-                success: function (resp) {
-                    if (resp.status == 'success') {
-                        let decoded_binary = resp.data.binary_data;
-                        $('#decoded_binary').val(decoded_binary); // Populate the textarea with decoded binary data
-                    } else {
-                        alert('Failed to load file data.');
-                    }
-                },
-                error: function (err) {
-                    console.error(err);
-                    alert('An error occurred while fetching the file.');
                 }
             });
         });
