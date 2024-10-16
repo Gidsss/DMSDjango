@@ -1,14 +1,15 @@
 import os
+import time
 import markovify
 import random
 from math import ceil, log2
 
 
-def build_markov_json(filename: str, corpus_file: str):
+def build_markov_json(filename: str, corpus_file: str, state_size: int = 2):
 	""" Takes in a corpus txt file and constructs a markov model in json """
-	with open(corpus_file, "r") as f:
-		model = markovify.Text(f.read())
-
+	with open(corpus_file, "r", encoding="utf8") as f:
+		model = markovify.Text(f.read(), state_size=state_size)
+	os.makedirs("markov_models", exist_ok=True)
 	with open(f"markov_models/{filename}.json", "w") as f:
 		f.write(model.to_json())
 
@@ -19,11 +20,26 @@ def build_model(json_file: str):
 		return markovify.Text.from_json(f.read())
 
 
+def _string_to_bitstream(data_string):
+	byte_array = bytearray(data_string, "ascii")
+
+	# Convert each byte to a binary string.
+	bit_list = []
+	for byte in byte_array:
+		# Left pad the binary string with 0s to make it 8 bits long.
+		binary_string = bin(byte)[2:].zfill(8)
+		# Append the binary string to the bit list.
+		bit_list.extend([str(int(bit)) for bit in binary_string])
+
+	return "".join(bit_list)
+
+
 class Encoder:
 	"""
 	Encodes a bitstream using a Markov Model.
 	For basic usage, run `self.generate()` and get the generated output from `self.output_str`.
 	"""
+
 	def __init__(self, model: markovify.Text, bitstream: str, logging: bool):
 		"""
 		Initializes a Markov Encoder.
@@ -36,10 +52,14 @@ class Encoder:
 		self.model = model
 		self.bitstream = bitstream
 
-		self.entrypoints = [key[1] for key in model.chain.model.keys() if "___BEGIN__" in key][1:]
+		if self.model.state_size == 1:
+			self.entrypoints = [key for key in model.chain.model.get(("___BEGIN__",)).keys()]
+		else:
+			self.entrypoints = [key[-1] for key in model.chain.model.keys()
+								if key.count("___BEGIN__") == self.model.state_size - 1][1:]
 
 		self.current_gram = None
-		self.output = []
+		self.output_tokens = []
 		self.exhausts = 0
 		self.end_key = 0
 		self.exhausted = True
@@ -48,15 +68,16 @@ class Encoder:
 		self.logging = logging
 
 	@property
-	def output_str(self):
+	def output(self):
 		""" Returns the current state of the output string. """
-		return " ".join(self.output)
+		return " ".join(self.output_tokens)
 
 	def step(self):
 		""" Generates a new word for the output and appends it to the output string. """
 		if self.finished:
 			return
 
+		# Display limits for logging
 		char_limit = 20
 		matrix_limit = 10
 
@@ -78,7 +99,10 @@ class Encoder:
 				print()
 
 			# Construct gram
-			self.current_gram = ("___BEGIN__", next_token)
+			if self.model.state_size == 1:
+				self.current_gram = (next_token,)
+			else:
+				self.current_gram = (*["___BEGIN__"]*(self.model.state_size-1), next_token)
 
 		# Get next word
 		else:
@@ -119,25 +143,28 @@ class Encoder:
 			self.current_gram = tuple(next_gram[1:])
 
 		# Add token to output
-		self.output.append(next_token)
+		if type(next_token) == tuple:
+			self.output_tokens.extend(next_token)
+		else:
+			self.output_tokens.append(next_token)
 
 		if not self.bitstream:
 			self.end_key = len(removed)
 
 			# Inject end key into output
-			i = random.randint(0, len(self.output) - 1)
+			i = random.randint(0, len(self.output_tokens) - 1)
 			char_key = chr(self.end_key + 97)
-			self.output[i] += char_key
+			self.output_tokens[i] += char_key
 
 			if self.logging:
 				os.system("")
-				injected_word = self.output[i]
-				print(f"Output: {self.output_str}")
+				injected_word = self.output_tokens[i]
+				print(f"Output: {self.output}")
 				print(f"\tEnd Key: {self.end_key} ({char_key})")
 				print(f"\tInjection Point: \"{injected_word[:-1]}\" at index {i}")
-				print(f"\tInjection Preview: ... {' '.join(self.output[max(0, i - 2):i])} "
+				print(f"\tInjection Preview: ... {' '.join(self.output_tokens[max(0, i - 2):i])} "
 					  f"{f'|{injected_word}|'} "
-					  f"{' '.join(self.output[i + 1: min(len(self.output) - 1, i + 3)])} ...")
+					  f"{' '.join(self.output_tokens[i + 1: min(len(self.output_tokens) - 1, i + 3)])} ...")
 
 			self.finished = True
 
@@ -146,6 +173,8 @@ class Encoder:
 
 		while not self.finished:
 			self.step()
+
+		return self.output
 
 	def _consume_from_list(self, lst):
 		# Get max possible bit length based on length of list
@@ -194,6 +223,7 @@ class Decoder:
 	Decodes a steganographic text using a Markov Model.
 	For basic usage, run `self.solve()` and get the generated output from `self.output`.
 	"""
+
 	def __init__(self, model: markovify.Text, stega_text: str, logging: bool):
 		"""
 		Initializes a Markov Decoder. Run `self.solve()` and get the generated output from `self.output`.
@@ -206,7 +236,11 @@ class Decoder:
 		self.model = model
 		self.stega_text = stega_text.split(" ")
 
-		self.entrypoints = [key[1] for key in model.chain.model.keys() if "___BEGIN__" in key][1:]
+		if self.model.state_size == 1:
+			self.entrypoints = [key for key in model.chain.model.get(("___BEGIN__",)).keys()]
+		else:
+			self.entrypoints = [key[-1] for key in model.chain.model.keys()
+								if key.count("___BEGIN__") == self.model.state_size - 1][1:]
 		self.endkey = 0
 		self.current_gram = None
 		self.index = 0
@@ -218,6 +252,8 @@ class Decoder:
 
 	def step(self):
 		""" Consumes a word from the steganographic text and appends the appropriate bits to the output """
+
+		# Display limits for logging
 		matrix_limit = 10
 		char_limit = 20
 
@@ -244,8 +280,12 @@ class Decoder:
 					print(f"\tEncoded End Key: {self.endkey}")
 					print()
 
-			self.current_gram = ("___BEGIN__", token)
-			embedded_index = self.entrypoints.index(self.current_gram[1])
+			if self.model.state_size == 1:
+				self.current_gram = (token,)
+			else:
+				self.current_gram = (*["___BEGIN__"]*(self.model.state_size-1), token)
+
+			embedded_index = self.entrypoints.index(token)
 			bit_length = ceil(log2(len(self.entrypoints)))
 			if len(self.entrypoints) < 2 ** bit_length:
 				bit_length -= 1
@@ -333,6 +373,8 @@ class Decoder:
 		while not self.finished:
 			self.step()
 
+		return self.output
+
 	def _get_transitions(self, gram):
 		trans_matrix = self.model.chain.model[gram]
 		trans_matrix = sorted(trans_matrix.items(), key=lambda kv: (kv[1]), reverse=True)
@@ -354,3 +396,43 @@ class Decoder:
 			truncated_list = lst[:limit]
 			remaining_count = len(lst) - limit
 			return ", ".join(truncated_list) + f", and {remaining_count} more"
+
+
+# For quick testing
+if __name__ == '__main__':
+	print("Building models...")
+	model_state_1 = build_model("markov_models/model_state_1.json")
+	model_state_2 = build_model("markov_models/model_state_2.json")
+	model_state_3 = build_model("markov_models/model_state_3.json")
+
+	models = [model_state_1, model_state_2, model_state_3]
+
+	text = "acehappybirthday071603!"
+	bitstream = _string_to_bitstream(text)
+
+	encoders = [Encoder(model, bitstream, False) for model in models]
+	outputs = []
+
+	print(f"\nText to be Encoded: {text}")
+	for i, encoder in enumerate(encoders):
+		print(f"\n-- Encoding with State Size {i + 1} --")
+		a = time.perf_counter()
+		output = encoder.generate()
+		b = time.perf_counter()
+		outputs.append(output)
+		print(f"Output: {output}")
+		print(f"Statistics: ")
+		print(f"\t- Speed: {b - a: 0.4f} secs")
+		print(f"\t- Embedding Rate: {len(bitstream) * 100 / (len(output) * 8): 0.2f}%")
+
+	decoders = [Decoder(model, output, False) for model, output in zip(models, outputs)]
+	print("\nTesting decoding...")
+	for i, decoder in enumerate(decoders):
+		print(f"\n-- Decoding with State Size {i + 1} --")
+		a = time.perf_counter()
+		output = decoder.solve()
+		b = time.perf_counter()
+		print(f"Output: {output}")
+		print(f"Statistics: ")
+		print(f"\t- Speed: {b - a: 0.4f} secs")
+		print(f"\t- Valid: {output == bitstream}")

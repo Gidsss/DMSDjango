@@ -42,7 +42,8 @@
                         <div class="d-flex w-100">
                             <div class="col-auto flex-shrink-1 flex-grow-1">{{ message }}</div>
                             <div class="col-auto text-center">
-                                <button class="btn-close btn-sm text-sm" type="button" onclick="$(this).closest('.alert').remove()"></button>
+                                <button class="btn-close btn-sm text-sm" type="button"
+                                    onclick="$(this).closest('.alert').remove()"></button>
                             </div>
                         </div>
 
@@ -63,8 +64,7 @@
                 <div class="modal-body">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn  btn-sm btn-flat btn-primary rounded-0" id='submit' onclick="$('#uni_modal form').submit()">Save</button>
-                    <button type="button" class="btn btn-sm btn-flat btn-light border rounded-0" data-bs-dismiss="modal">Cancel</button>
+                    <div id="modal-footer-content"></div>
                 </div>
             </div>
         </div>
@@ -79,8 +79,10 @@
                     <div id="delete_content"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-flat btn-primary rounded-0" id='confirm' onclick="">Continue</button>
-                    <button type="button" class="btn btn-sm btn-flat btn-light border rounded-0" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-flat btn-primary rounded-0" id='confirm'
+                        onclick="">Continue</button>
+                    <button type="button" class="btn btn-sm btn-flat btn-light border rounded-0"
+                        data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -127,52 +129,69 @@
         loader.attr('id', 'pre-loader')
         loader.html('<div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>')
 
-        window.start_loader = function() {
+        window.start_loader = function () {
             $('body').removeClass('loading')
             if ($('#pre-loader').length > 0)
                 $('#pre-loader').remove();
             $('body').append(loader)
             $('body').addClass('loading')
         }
-        window.end_loader = function() {
+        window.end_loader = function () {
             if ($('#pre-loader').length > 0)
                 $('#pre-loader').remove();
             $('body').removeClass('loading')
         }
-        window.uni_modal = function($title = '', $url = '', $size = "") {
-            start_loader()
+        window.uni_modal = function ($title = '', $url = '', $size = "") {
+            start_loader();
             $.ajax({
                 url: $url,
                 error: err => {
-                    console.log()
-                    alert("An error occured")
+                    console.log(err);
+                    alert("An error occurred");
                 },
-                success: function(resp) {
+                success: function (resp) {
                     if (resp) {
-                        $('#uni_modal .modal-title').html($title)
-                        $('#uni_modal .modal-body').html(resp)
-                        if ($size != '') {
-                            $('#uni_modal .modal-dialog').addClass($size + '  modal-dialog-centered')
+                        $('#uni_modal .modal-title').html($title);
+                        $('#uni_modal .modal-body').html(resp);
+
+                        // Dynamically check if it's an edit or new post
+                        if ($('#post-form input[name="id"]').val() === "") {
+                            // If no ID, show Save button (new post)
+                            $('#modal-footer-content').html(`
+                        <button type="button" class="btn btn-primary" onclick="$('#post-form').submit()">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    `);
                         } else {
-                            $('#uni_modal .modal-dialog').removeAttr("class").addClass("modal-dialog modal-md modal-dialog-centered")
+                            // If ID exists, show Close button (editing post)
+                            $('#modal-footer-content').html(`
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    `);
                         }
+
+                        // Ensure modal size is handled
+                        if ($size != '') {
+                            $('#uni_modal .modal-dialog').addClass($size + '  modal-dialog-centered');
+                        } else {
+                            $('#uni_modal .modal-dialog').removeAttr("class").addClass("modal-dialog modal-md modal-dialog-centered");
+                        }
+
                         $('#uni_modal').modal({
                             backdrop: 'static',
                             keyboard: false,
                             focus: true
-                        })
-                        $('#uni_modal').modal('show')
-                        end_loader()
+                        });
+                        $('#uni_modal').modal('show');
+                        end_loader();
                     }
                 }
-            })
+            });
         }
-        window._conf = function($msg = '', $func = '', $params = []) {
+        window._conf = function ($msg = '', $func = '', $params = []) {
             $('#confirm_modal #confirm').attr('onclick', $func + "(" + $params.join(',') + ")")
             $('#confirm_modal .modal-body').html($msg)
             $('#confirm_modal').modal('show')
         }
-        $(function() {
+        $(function () {
             if ($('.redirect-msg').length > 0) {
                 setTimeout(() => {
                     $('.redirect-msg').hide('slideUp')

@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 from fms_django.settings import MEDIA_ROOT, MEDIA_URL
 import json
 from django.contrib import messages
@@ -11,11 +13,26 @@ from fmsApp.models import Post
 from cryptography.fernet import Fernet
 from django.conf import settings
 import base64
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from .models import Post
+import base64
+# from .stegomarkov_old import Encoder, Decoder, file_to_bitstream, bitstream_to_file, build_model
+from .stegomarkov import Encoder, Decoder, file_to_bitstream, bitstream_to_file, build_model
+import markovify
+import os
+import time
+import logging
 # Create your views here.
 
 context = {
     'page_title' : 'File Management System',
 }
+
+# Set up basic logging
+logging.basicConfig(level=logging.INFO)  
+logger = logging.getLogger(__name__)
+
 #login
 def login_user(request):
     logout(request)
@@ -89,36 +106,116 @@ def posts_mgt(request):
 
 @login_required
 def manage_post(request, pk=None):
-    context['page_title'] = 'Manage Post'
-    context['post'] = {}
-    if not pk is None:
-        post = Post.objects.get(id = pk)
-        context['post'] = post
-    return render(request,'manage_post.html',context)
+    context = {'page_title': 'Manage Post', 'post': {}}
+
+    try:
+        if pk is not None:
+            # Fetch post or return 404 if not found
+            post = get_object_or_404(Post, id=pk)
+
+            # Decode the binary data if file data exists
+            if post.file_data:
+                # Load the Markov model (pre-built model)
+                model = build_model("markov_models/legal_corpus.json")
+                logger.info("Markov model loaded successfully for decoding.")
+
+                # Start time for decoder
+                decode_start_time = time.time()
+
+                # Decode the file_data using the Decoder class
+                decoder = Decoder(model, post.file_data, logging=True)
+                decoded_file_data = decoder.solve()
+
+                # Calculate the time taken for decoding
+                decode_duration = time.time() - decode_start_time
+                logger.info(f"Time taken to decode the file: {decode_duration:.6f} seconds")
+
+                # Log the end key and where it was injected
+                logger.info(f"End Key used in decoding: {decoder.endkey}")  
+                # logger.info(f"End Key was injected at index: {decoder.index()}")
+
+                # Pass the decoded binary data to the template
+                context['decoded_file_data'] = decoded_file_data
+            else:
+                logger.warning(f"No file data found for post ID {pk}.")
+            context['post'] = post
+        else:
+            logger.warning(f"No post ID provided.")
+    except Exception as e:
+        logger.error(f"Error managing post {pk}: {str(e)}", exc_info=True)
+        messages.error(request, 'An error occurred while processing the post.')
+
+    return render(request, 'manage_post.html', context)
 
 @login_required
 def save_post(request):
-    resp = {'status':'failed', 'msg':''}
+    resp = {'status': 'failed', 'msg': ''}
+
     if request.method == 'POST':
-        if not request.POST['id'] == '':
+        start_time = time.time()  # Start time to measure process duration
+        if request.POST.get('id') and not request.POST['id'] == '':
             post = Post.objects.get(id=request.POST['id'])
-            form = SavePost(request.POST,request.FILES,instance=post)
+            form = SavePost(request.POST, request.FILES, instance=post)
         else:
-            form = SavePost(request.POST,request.FILES)
+            form = SavePost(request.POST, request.FILES)
+
         if form.is_valid():
-            form.save()
-            messages.success(request,'File has been saved successfully.')
+            saved_post = form.save(commit=False)
+
+            if 'file_path' in request.FILES:
+                file = request.FILES['file_path']
+
+                # Save the file to the correct directory using default_storage
+                file_path = default_storage.save(f"uploads/{file.name}", ContentFile(file.read()))
+                full_file_path = os.path.join(settings.MEDIA_ROOT, file_path)
+
+                # Log the file save duration
+                logger.info(f"File saved at: {full_file_path}")
+                logger.info(f"Time taken to save file: {time.time() - start_time} seconds")
+
+                # Convert file to binary bitstream
+                bitstream_start = time.time()  # Start time for bitstream conversion
+                bitstream = file_to_bitstream(full_file_path)
+
+                # Log the bitstream conversion duration
+                logger.info(f"Time taken to convert file to bitstream: {time.time() - bitstream_start} seconds")
+
+                # Load the Markov model (pre-built model)
+                model = build_model("markov_models/legal_corpus.json")
+                logger.info("Markov model loaded successfully.")
+
+                # Encode the file to steganographic text
+                encode_start = time.time()  # Start time for encoding
+                encoder = Encoder(model, bitstream, logging=True)
+                encoder.generate()
+
+                # Log the encoding duration
+                logger.info(f"Time taken to encode bitstream: {time.time() - encode_start} seconds")
+
+                # Log the position where the end key was injected
+                # logger.info(f"End Key was injected at index: {encoder.end_key_index}")
+                logger.info(f"End Key was injected into the token: '{encoder.output_tokens[encoder.end_key_index]}'")
+                
+                stega_text = encoder.output
+                saved_post.file_data = stega_text
+
+            # Save the post
+            saved_post.save()
+
+            # Log the total duration for the process
+            logger.info(f"Total time taken to process file: {time.time() - start_time} seconds")
+
+            messages.success(request, 'File has been saved successfully.')
             resp['status'] = 'success'
         else:
-            for fields in form:
-                for error in fields.errors:
-                    resp['msg'] += str( error +'<br/>')
-            form = SavePost(request.POST,request.FILES)
-            
+            for field in form:
+                for error in field.errors:
+                    resp['msg'] += str(error) + '<br/>'
+
     else:
         resp['msg'] = "No Data sent."
-    print(resp)
-    return HttpResponse(json.dumps(resp),content_type="application/json")
+
+    return HttpResponse(json.dumps(resp), content_type="application/json")
 
 @login_required
 def delete_post(request):
