@@ -25,9 +25,9 @@
             <!-- If it's a new post (no post.id), show file input -->
             {% if not post.id %}
             <input type="file" class="form-control rounded-0" id="file_path" name="file_path" value=""
-                accept='application/pdf, text/csv, text/plain,.docs,.doc, application/ppt, .ppt' required>
+                accept='application/pdf, text/csv, text/plain,.docs,.doc' required>
             <small class="text-muted"><i>Accept Only: application/pdf, text/csv, text/plain,
-                    .docs,.doc, application/ppt, ..pt</i></small>
+                    .docs,.doc</i></small>
 
             <!-- If it's an existing post (post.id exists), only show the current file -->
             {% else %}
