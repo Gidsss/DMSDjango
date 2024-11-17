@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from . import views
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
+from .views import progress_status  # Import the progress_status view
 
 urlpatterns = [
     path('redirect-admin', RedirectView.as_view(url="/admin"),name="redirect-admin"),
@@ -20,6 +21,9 @@ urlpatterns = [
     path('manage_post', views.manage_post, name='manage-post'),
     path('manage_post/<int:pk>', views.manage_post, name='manage-post'),
     path('save_post', views.save_post, name='save-post'),
+    path('progress-status/', progress_status, name='progress_status'),
+     path('add-post/', views.add_post, name='add-post'),
+    # path('decode-post/', views.decode_post, name='decode-post'),
     # path('view-post/<int:pk>/', views.view_post, name='view-post'),  # This is the URL for viewing post file data
     path('delet_post', views.delete_post, name='delete-post'),
     path(r'shareF/<str:id>', views.shareF, name='share-file-id'),

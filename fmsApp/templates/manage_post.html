@@ -25,10 +25,9 @@
             <!-- If it's a new post (no post.id), show file input -->
             {% if not post.id %}
             <input type="file" class="form-control rounded-0" id="file_path" name="file_path" value=""
-                accept='image/*, video/*, audio/*, application/pdf, text/csv, text/plain, application/zip, .docs,.doc, application/ppt, .ppt'
-                required>
-            <small class="text-muted"><i>Accept Only: image/*, video/*, audio/*, application/pdf, text/csv, text/plain,
-                    application/zip, .docs,.doc, application/ppt, .ppt</i></small>
+                accept='application/pdf, text/csv, text/plain,.docs,.doc, application/ppt, .ppt' required>
+            <small class="text-muted"><i>Accept Only: application/pdf, text/csv, text/plain,
+                    .docs,.doc, application/ppt, ..pt</i></small>
 
             <!-- If it's an existing post (post.id exists), only show the current file -->
             {% else %}
@@ -55,7 +54,7 @@
         $('#post-form').submit(function (e) {
             e.preventDefault();
             var _this = $(this);
-            $('.err-msg').remove();
+            $('.err-msg').remove(); // Remove any previous error messages
             var el = $('<div>');
             el.addClass("alert alert-danger err-msg");
             el.hide();
@@ -65,9 +64,8 @@
                 return false;
             }
 
-            start_loader();
+            start_loader('encode');
 
-            // AJAX submission
             $.ajax({
                 url: "{% url 'save-post' %}",
                 data: new FormData($(this)[0]),
@@ -84,18 +82,24 @@
                 },
                 success: function (resp) {
                     if (typeof resp == 'object' && resp.status == 'success') {
-                        el.removeClass("alert alert-danger err-msg");
-                        location.reload();
+                        // Display the success message dynamically
+                        var successMsg = $('<div class="alert alert-success text-center"></div>').text(resp.msg);
+                        $('#uni_modal .modal-body').prepend(successMsg);
+                        // Delay to allow users to see the success message
+                        setTimeout(() => {
+                            location.reload(); // Reload the page after a delay
+                        }, 1500);
                     } else if (resp.status == 'failed' && !!resp.msg) {
                         el.html(resp.msg);
+                        _this.prepend(el); // Show the error message
+                        el.show('slow');
                     } else {
                         el.text("An error occurred", 'error');
-                        end_loader();
+                        _this.prepend(el); // Show the error message
+                        el.show('slow');
                         console.err(resp);
                     }
-                    _this.prepend(el);
-                    el.show('slow');
-                    $("html, body, .modal ").scrollTop(0);
+                    $("html, body, .modal").scrollTop(0);
                     end_loader();
                 }
             });

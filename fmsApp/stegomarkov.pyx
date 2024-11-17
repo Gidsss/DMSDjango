@@ -36,27 +36,27 @@ cdef class Encoder:
     """
     cdef object model  # Markov model object
     cdef str bitstream  # Bitstream string
+    cdef int bitstream_length  # Length of the bitstream
     cdef list entrypoints  # List of entry points for the Markov model
     cdef bint logging  # Logging flag
     cdef object current_gram  # Current n-gram in Markov model processing
-    cdef list _output_tokens  # Output tokens list
+    cdef list output_tokens  # Output tokens list
     cdef bint exhausted  # Flag to check if exhausted
     cdef bint finished  # Flag to check if finished
     cdef int end_key  # End key for the encoded message
-    cdef int _end_key_index  # Index where the end key was injected
 
     def __init__(self, object model, str bitstream, bint logging):
         self.model = model
         self.bitstream = bitstream
+        self.bitstream_length = len(bitstream)
         self.logging = logging
         self.entrypoints = self._get_entrypoints()
 
         self.current_gram = None
-        self._output_tokens = []
+        self.output_tokens = []
         self.exhausted = True
         self.finished = False
         self.end_key = 0
-        self._end_key_index = -1
 
     def _get_entrypoints(self):
         """Get valid entry points from the Markov model."""
@@ -64,31 +64,27 @@ cdef class Encoder:
             return [key for key in self.model.chain.model.get(("___BEGIN__",)).keys()]
         else:
             return [key[-1] for key in self.model.chain.model.keys() if key.count("___BEGIN__") == self.model.state_size - 1][1:]
-    
-    @property
-    def output_tokens(self):
-        """Public property to access the index where the end key was injected."""
-        return self._output_tokens
-
-    @property
-    def end_key_index(self):
-        """Public property to access the index where the end key was injected."""
-        return self._end_key_index
 
     @property
     def output(self):
         """Returns the current state of the output string."""
-        return " ".join(self._output_tokens)
+        return " ".join(self.output_tokens)
+
+    @property
+    def finished(self):
+        return self.finished
 
     def step(self):
         """Generates a new word for the output and appends it to the output string."""
         if self.finished:
-            return
+            return 1
 
         if self.exhausted:
             self._choose_entrypoint()
         else:
             self._choose_next_token()
+
+        return (self.bitstream_length - len(self.bitstream)) / self.bitstream_length
 
     def _choose_entrypoint(self):
         """Choose a new starting point (entrypoint) for the Markov chain."""
@@ -97,9 +93,9 @@ cdef class Encoder:
         self.current_gram = (next_token,) if self.model.state_size == 1 else (*["___BEGIN__"] * (self.model.state_size - 1), next_token)
 
         if type(next_token) == tuple:
-            self._output_tokens.extend(next_token)
+            self.output_tokens.extend(next_token)
         else:
-            self._output_tokens.append(next_token)
+            self.output_tokens.append(next_token)
 
         if not self.bitstream:
             self._inject_end_key(removed)
@@ -118,18 +114,18 @@ cdef class Encoder:
         self.current_gram = tuple(next_gram[1:])
 
         if type(next_token) == tuple:
-            self._output_tokens.extend(next_token)
+            self.output_tokens.extend(next_token)
         else:
-            self._output_tokens.append(next_token)
+            self.output_tokens.append(next_token)
 
         if not self.bitstream:
             self._inject_end_key(removed)
 
     def _inject_end_key(self, removed):
         """Inject the end key to mark the end of encoding."""
-        self.end_key = len(removed)  # Keeping this for the length of removed bits
-        self._end_key_index = random.randint(0, len(self._output_tokens) - 1)  # Store the injected index
-        self._output_tokens[self._end_key_index] += chr(self.end_key + 97)  # Inject the end key at the random index
+        self.end_key = len(removed)
+        i = random.randint(0, len(self.output_tokens) - 1)
+        self.output_tokens[i] += chr(self.end_key + 97)
         self.finished = True
 
     def generate(self):
@@ -189,12 +185,12 @@ cdef class Decoder:
     cdef list entrypoints  # List of entry points for the Markov model
     cdef bint logging  # Logging flag
     cdef str output  # Decoded output
-    cdef int _endkey  # End key
+    cdef int endkey  # End key
 
     cdef object current_gram  # Current gram in the Markov model
     cdef bint exhausted  # Flag to check if exhausted
     cdef bint finished  # Flag to check if finished
-    cdef int _index  # Index for processing the stega_text
+    cdef int index  # Index for processing the stega_text
 
     def __init__(self, object model, str stega_text, bint logging):
         self.model = model
@@ -204,18 +200,17 @@ cdef class Decoder:
         self.current_gram = None
         self.exhausted = True
         self.finished = False
-        self._index = 0
+        self.index = 0
         self.output = ""
-        self._endkey = 0  
+        self.endkey = 0
 
     @property
-    def endkey(self):
-        """Public property to access the end key."""
-        return self._endkey
+    def output(self):
+        return self.output
 
-    def index(self):
-        """Public property to access the index."""
-        return self._index
+    @property
+    def finished(self):
+        return self.finished
 
     def _get_entrypoints(self):
         """Get valid entry points from the Markov model."""
@@ -228,30 +223,33 @@ cdef class Decoder:
         """Consumes a word from the steganographic text and appends the appropriate bits to the output."""
 
         # Finish if index is at the end of the stega text
-        if self._index >= len(self.stega_text) - 1 and not self.exhausted:
+        if self.index >= len(self.stega_text) - 1 and not self.exhausted:
             self.finished = True
-            return
+            return 1
 
         if self.exhausted:
             self._choose_entrypoint()
         else:
             self._choose_next_token()
 
+        return self.index / (len(self.stega_text) - 1)
+
+
     def _choose_entrypoint(self):
         """Choose a new starting point (entrypoint) for the Markov chain."""
         self.exhausted = False
-        token = self.stega_text[self._index]
+        token = self.stega_text[self.index]
 
         # Check for end key
         if token not in self.entrypoints:
-            self._endkey = ord(token[-1]) - 97  # Assign endkey to the internal attribute
+            self.endkey = ord(token[-1]) - 97
             token = token[:-1]
 
         embedded_index = self.entrypoints.index(token)
         bit_length = ceil(log2(len(self.entrypoints)))
         if len(self.entrypoints) < 2 ** bit_length:
             bit_length -= 1
-        bit_length = self._endkey if self._index == len(self.stega_text) - 1 else bit_length
+        bit_length = self.endkey if self.index == len(self.stega_text) - 1 else bit_length
         bit_string = bin(embedded_index)[2:].zfill(bit_length)
 
         self.current_gram = (token,) if self.model.state_size == 1 else (*["___BEGIN__"] * (self.model.state_size - 1), token)
@@ -262,9 +260,9 @@ cdef class Decoder:
     def _choose_next_token(self):
         """Choose the next token in the Markov chain."""
         transitions = self._get_transitions(self.current_gram)
-        at_end = self._index == len(self.stega_text) - 1
+        at_end = self.index == len(self.stega_text) - 1
 
-        next_token = self.stega_text[self._index + 1] if self._index < len(self.stega_text) - 1 else ""
+        next_token = self.stega_text[self.index + 1] if self.index < len(self.stega_text) - 1 else ""
 
         # Get max possible bit length based on length of list
         list_length = len(transitions)
@@ -276,16 +274,16 @@ cdef class Decoder:
         if "___END__" in transitions:
             self.exhausted = True
             self.current_gram = None
-            self._index += 1
+            self.index += 1
             return
         else:
-            next_token = "" if at_end else self.stega_text[self._index + 1]
+            next_token = "" if at_end else self.stega_text[self.index + 1]
 
         # Check for end key
         if next_token not in transitions and not at_end:
-            self._endkey = ord(next_token[-1]) - 97  # Assign endkey when found
+            self.endkey = ord(next_token[-1]) - 97
             next_token = next_token[:-1]
-        bit_length = self._endkey if self._index == len(self.stega_text) - 2 else bit_length
+        bit_length = self.endkey if self.index == len(self.stega_text) - 2 else bit_length
 
         if bit_length != 0:
             embedded_index = "N/A" if at_end else transitions.index(next_token)
@@ -302,7 +300,8 @@ cdef class Decoder:
         # Add bit string to output
         self.output += bit_string
 
-        self._index += 1
+        self.index += 1
+
 
     def solve(self):
         """Consumes the entire steganographic text and generates an output bitstream."""

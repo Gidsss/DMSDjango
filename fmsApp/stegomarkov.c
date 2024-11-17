@@ -1750,18 +1750,18 @@ struct __pyx_obj_6fmsApp_11stegomarkov_Encoder {
   PyObject_HEAD
   PyObject *model;
   PyObject *bitstream;
+  int bitstream_length;
   PyObject *entrypoints;
   int logging;
   PyObject *current_gram;
-  PyObject *_output_tokens;
+  PyObject *output_tokens;
   int exhausted;
   int finished;
   int end_key;
-  int _end_key_index;
 };
 
 
-/* "fmsApp/stegomarkov.pyx":182
+/* "fmsApp/stegomarkov.pyx":178
  * 
  * # Cython-optimized Decoder class
  * cdef class Decoder:             # <<<<<<<<<<<<<<
@@ -1775,11 +1775,11 @@ struct __pyx_obj_6fmsApp_11stegomarkov_Decoder {
   PyObject *entrypoints;
   int logging;
   PyObject *output;
-  int _endkey;
+  int endkey;
   PyObject *current_gram;
   int exhausted;
   int finished;
-  int _index;
+  int index;
 };
 
 
@@ -2341,27 +2341,17 @@ static CYTHON_INLINE int __Pyx_PySequence_ContainsTF(PyObject* item, PyObject* s
     return unlikely(result < 0) ? result : (result == (eq == Py_EQ));
 }
 
-/* SetItemInt.proto */
-#define __Pyx_SetItemInt(o, i, v, type, is_signed, to_py_func, is_list, wraparound, boundscheck)\
-    (__Pyx_fits_Py_ssize_t(i, type, is_signed) ?\
-    __Pyx_SetItemInt_Fast(o, (Py_ssize_t)i, v, is_list, wraparound, boundscheck) :\
-    (is_list ? (PyErr_SetString(PyExc_IndexError, "list assignment index out of range"), -1) :\
-               __Pyx_SetItemInt_Generic(o, to_py_func(i), v)))
-static int __Pyx_SetItemInt_Generic(PyObject *o, PyObject *j, PyObject *v);
-static CYTHON_INLINE int __Pyx_SetItemInt_Fast(PyObject *o, Py_ssize_t i, PyObject *v,
-                                               int is_list, int wraparound, int boundscheck);
-
-/* PyNumberPow2.proto */
-#define __Pyx_PyNumber_InPlacePowerOf2(a, b, c) __Pyx__PyNumber_PowerOf2(a, b, c, 1)
-#define __Pyx_PyNumber_PowerOf2(a, b, c) __Pyx__PyNumber_PowerOf2(a, b, c, 0)
-static PyObject* __Pyx__PyNumber_PowerOf2(PyObject *two, PyObject *exp, PyObject *none, int inplace);
-
 /* ObjectGetItem.proto */
 #if CYTHON_USE_TYPE_SLOTS
 static CYTHON_INLINE PyObject *__Pyx_PyObject_GetItem(PyObject *obj, PyObject *key);
 #else
 #define __Pyx_PyObject_GetItem(obj, key)  PyObject_GetItem(obj, key)
 #endif
+
+/* PyNumberPow2.proto */
+#define __Pyx_PyNumber_InPlacePowerOf2(a, b, c) __Pyx__PyNumber_PowerOf2(a, b, c, 1)
+#define __Pyx_PyNumber_PowerOf2(a, b, c) __Pyx__PyNumber_PowerOf2(a, b, c, 0)
+static PyObject* __Pyx__PyNumber_PowerOf2(PyObject *two, PyObject *exp, PyObject *none, int inplace);
 
 /* IncludeStructmemberH.proto */
 #include <structmember.h>
@@ -3025,7 +3015,7 @@ static const char __pyx_k_END[] = "___END__";
 static const char __pyx_k_N_A[] = "N/A";
 static const char __pyx_k__12[] = ".";
 static const char __pyx_k__14[] = "*";
-static const char __pyx_k__57[] = "?";
+static const char __pyx_k__56[] = "?";
 static const char __pyx_k_and[] = " and ";
 static const char __pyx_k_bin[] = "bin";
 static const char __pyx_k_chr[] = "chr";
@@ -3136,7 +3126,6 @@ static const char __pyx_k_staticmethod[] = "staticmethod";
 static const char __pyx_k_stringsource[] = "<stringsource>";
 static const char __pyx_k_trans_matrix[] = "trans_matrix";
 static const char __pyx_k_use_setstate[] = "use_setstate";
-static const char __pyx_k_Decoder_index[] = "Decoder.index";
 static const char __pyx_k_Decoder_solve[] = "Decoder.solve";
 static const char __pyx_k_class_getitem[] = "__class_getitem__";
 static const char __pyx_k_encoded_index[] = "encoded_index";
@@ -3180,11 +3169,11 @@ static const char __pyx_k_Encoder__consume_from_list[] = "Encoder._consume_from_
 static const char __pyx_k_Encoder__pretty_print_list[] = "Encoder._pretty_print_list";
 static const char __pyx_k_get_transitions_locals_lambda[] = "_get_transitions.<locals>.<lambda>";
 static const char __pyx_k_pretty_print_list_locals_lambda[] = "_pretty_print_list.<locals>.<lambda>";
-static const char __pyx_k_Incompatible_checksums_0x_x_vs_0[] = "Incompatible checksums (0x%x vs (0x5fb5542, 0x89e8fed, 0x3a1949f) = (_end_key_index, _output_tokens, bitstream, current_gram, end_key, entrypoints, exhausted, finished, logging, model))";
+static const char __pyx_k_Incompatible_checksums_0x_x_vs_0[] = "Incompatible checksums (0x%x vs (0x4ea1e69, 0x00ab748, 0x2cd6441) = (bitstream, bitstream_length, current_gram, end_key, entrypoints, exhausted, finished, logging, model, output_tokens))";
 static const char __pyx_k_bitstream_to_file_locals_genexpr[] = "bitstream_to_file.<locals>.genexpr";
 static const char __pyx_k_numpy__core_multiarray_failed_to[] = "numpy._core.multiarray failed to import";
 static const char __pyx_k_numpy__core_umath_failed_to_impo[] = "numpy._core.umath failed to import";
-static const char __pyx_k_Incompatible_checksums_0x_x_vs_0_2[] = "Incompatible checksums (0x%x vs (0xbf5fd1a, 0xceab81c, 0x132e9e8) = (_endkey, _index, current_gram, entrypoints, exhausted, finished, logging, model, output, stega_text))";
+static const char __pyx_k_Incompatible_checksums_0x_x_vs_0_2[] = "Incompatible checksums (0x%x vs (0x616f0f5, 0x93eadf1, 0x9390499) = (current_gram, endkey, entrypoints, exhausted, finished, index, logging, model, output, stega_text))";
 /* #### Code section: decls ### */
 static PyObject *__pyx_pf_6fmsApp_11stegomarkov_build_model(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_json_file); /* proto */
 static PyObject *__pyx_pf_6fmsApp_11stegomarkov_2file_to_bitstream(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_file_path); /* proto */
@@ -3192,9 +3181,8 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_17bitstream_to_file_genexpr(CYTH
 static PyObject *__pyx_pf_6fmsApp_11stegomarkov_4bitstream_to_file(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_bitstream, PyObject *__pyx_v_output_file); /* proto */
 static int __pyx_pf_6fmsApp_11stegomarkov_7Encoder___init__(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self, PyObject *__pyx_v_model, PyObject *__pyx_v_bitstream, int __pyx_v_logging); /* proto */
 static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_2_get_entrypoints(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_13output_tokens___get__(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_13end_key_index___get__(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6output___get__(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8finished___get__(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_4step(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6_choose_entrypoint(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self); /* proto */
@@ -3208,19 +3196,19 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
 static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_20__reduce_cython__(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_22__setstate_cython__(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_pf_6fmsApp_11stegomarkov_7Decoder___init__(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self, PyObject *__pyx_v_model, PyObject *__pyx_v_stega_text, int __pyx_v_logging); /* proto */
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6endkey___get__(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_2index(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6step(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_12solve(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6output___get__(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8finished___get__(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_2_get_entrypoints(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4step(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6_choose_entrypoint(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_next_token(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10solve(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
 static PyObject *__pyx_lambda_funcdef_lambda3(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_kv); /* proto */
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_get_transitions(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self, PyObject *__pyx_v_gram); /* proto */
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_12_get_transitions(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self, PyObject *__pyx_v_gram); /* proto */
 static PyObject *__pyx_lambda_funcdef_lambda4(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s); /* proto */
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(PyObject *__pyx_v_lst, PyObject *__pyx_v_limit); /* proto */
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__reduce_cython__(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_20__setstate_cython__(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_pretty_print_list(PyObject *__pyx_v_lst, PyObject *__pyx_v_limit); /* proto */
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16__reduce_cython__(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__setstate_cython__(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_6fmsApp_11stegomarkov_6__pyx_unpickle_Encoder(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_6fmsApp_11stegomarkov_8__pyx_unpickle_Decoder(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_6fmsApp_11stegomarkov_Encoder(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -3305,7 +3293,6 @@ typedef struct {
   PyObject *__pyx_n_s_Decoder__get_entrypoints;
   PyObject *__pyx_n_s_Decoder__get_transitions;
   PyObject *__pyx_n_s_Decoder__pretty_print_list;
-  PyObject *__pyx_n_s_Decoder_index;
   PyObject *__pyx_n_s_Decoder_solve;
   PyObject *__pyx_n_s_Decoder_step;
   PyObject *__pyx_n_s_END;
@@ -3331,7 +3318,7 @@ typedef struct {
   PyObject *__pyx_kp_u__12;
   PyObject *__pyx_n_s__14;
   PyObject *__pyx_kp_s__4;
-  PyObject *__pyx_n_s__57;
+  PyObject *__pyx_n_s__56;
   PyObject *__pyx_kp_s__6;
   PyObject *__pyx_kp_u__7;
   PyObject *__pyx_kp_s__8;
@@ -3478,12 +3465,12 @@ typedef struct {
   PyObject *__pyx_int_0;
   PyObject *__pyx_int_1;
   PyObject *__pyx_int_2;
-  PyObject *__pyx_int_20113896;
-  PyObject *__pyx_int_60920991;
-  PyObject *__pyx_int_100357442;
-  PyObject *__pyx_int_144609261;
-  PyObject *__pyx_int_200670490;
-  PyObject *__pyx_int_216709148;
+  PyObject *__pyx_int_702280;
+  PyObject *__pyx_int_47014977;
+  PyObject *__pyx_int_82452073;
+  PyObject *__pyx_int_102166773;
+  PyObject *__pyx_int_154731673;
+  PyObject *__pyx_int_155102705;
   PyObject *__pyx_int_neg_1;
   PyObject *__pyx_tuple_;
   PyObject *__pyx_slice__9;
@@ -3506,9 +3493,9 @@ typedef struct {
   PyObject *__pyx_tuple__36;
   PyObject *__pyx_tuple__38;
   PyObject *__pyx_tuple__40;
-  PyObject *__pyx_tuple__45;
-  PyObject *__pyx_tuple__47;
-  PyObject *__pyx_tuple__54;
+  PyObject *__pyx_tuple__44;
+  PyObject *__pyx_tuple__46;
+  PyObject *__pyx_tuple__53;
   PyObject *__pyx_codeobj__16;
   PyObject *__pyx_codeobj__18;
   PyObject *__pyx_codeobj__20;
@@ -3525,16 +3512,15 @@ typedef struct {
   PyObject *__pyx_codeobj__41;
   PyObject *__pyx_codeobj__42;
   PyObject *__pyx_codeobj__43;
-  PyObject *__pyx_codeobj__44;
-  PyObject *__pyx_codeobj__46;
+  PyObject *__pyx_codeobj__45;
+  PyObject *__pyx_codeobj__47;
   PyObject *__pyx_codeobj__48;
   PyObject *__pyx_codeobj__49;
   PyObject *__pyx_codeobj__50;
   PyObject *__pyx_codeobj__51;
   PyObject *__pyx_codeobj__52;
-  PyObject *__pyx_codeobj__53;
+  PyObject *__pyx_codeobj__54;
   PyObject *__pyx_codeobj__55;
-  PyObject *__pyx_codeobj__56;
 } __pyx_mstate;
 
 #if CYTHON_USE_MODULE_STATE
@@ -3608,7 +3594,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_Decoder__get_entrypoints);
   Py_CLEAR(clear_module_state->__pyx_n_s_Decoder__get_transitions);
   Py_CLEAR(clear_module_state->__pyx_n_s_Decoder__pretty_print_list);
-  Py_CLEAR(clear_module_state->__pyx_n_s_Decoder_index);
   Py_CLEAR(clear_module_state->__pyx_n_s_Decoder_solve);
   Py_CLEAR(clear_module_state->__pyx_n_s_Decoder_step);
   Py_CLEAR(clear_module_state->__pyx_n_s_END);
@@ -3634,7 +3619,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u__12);
   Py_CLEAR(clear_module_state->__pyx_n_s__14);
   Py_CLEAR(clear_module_state->__pyx_kp_s__4);
-  Py_CLEAR(clear_module_state->__pyx_n_s__57);
+  Py_CLEAR(clear_module_state->__pyx_n_s__56);
   Py_CLEAR(clear_module_state->__pyx_kp_s__6);
   Py_CLEAR(clear_module_state->__pyx_kp_u__7);
   Py_CLEAR(clear_module_state->__pyx_kp_s__8);
@@ -3781,12 +3766,12 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_int_0);
   Py_CLEAR(clear_module_state->__pyx_int_1);
   Py_CLEAR(clear_module_state->__pyx_int_2);
-  Py_CLEAR(clear_module_state->__pyx_int_20113896);
-  Py_CLEAR(clear_module_state->__pyx_int_60920991);
-  Py_CLEAR(clear_module_state->__pyx_int_100357442);
-  Py_CLEAR(clear_module_state->__pyx_int_144609261);
-  Py_CLEAR(clear_module_state->__pyx_int_200670490);
-  Py_CLEAR(clear_module_state->__pyx_int_216709148);
+  Py_CLEAR(clear_module_state->__pyx_int_702280);
+  Py_CLEAR(clear_module_state->__pyx_int_47014977);
+  Py_CLEAR(clear_module_state->__pyx_int_82452073);
+  Py_CLEAR(clear_module_state->__pyx_int_102166773);
+  Py_CLEAR(clear_module_state->__pyx_int_154731673);
+  Py_CLEAR(clear_module_state->__pyx_int_155102705);
   Py_CLEAR(clear_module_state->__pyx_int_neg_1);
   Py_CLEAR(clear_module_state->__pyx_tuple_);
   Py_CLEAR(clear_module_state->__pyx_slice__9);
@@ -3809,9 +3794,9 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_tuple__36);
   Py_CLEAR(clear_module_state->__pyx_tuple__38);
   Py_CLEAR(clear_module_state->__pyx_tuple__40);
-  Py_CLEAR(clear_module_state->__pyx_tuple__45);
-  Py_CLEAR(clear_module_state->__pyx_tuple__47);
-  Py_CLEAR(clear_module_state->__pyx_tuple__54);
+  Py_CLEAR(clear_module_state->__pyx_tuple__44);
+  Py_CLEAR(clear_module_state->__pyx_tuple__46);
+  Py_CLEAR(clear_module_state->__pyx_tuple__53);
   Py_CLEAR(clear_module_state->__pyx_codeobj__16);
   Py_CLEAR(clear_module_state->__pyx_codeobj__18);
   Py_CLEAR(clear_module_state->__pyx_codeobj__20);
@@ -3828,16 +3813,15 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_codeobj__41);
   Py_CLEAR(clear_module_state->__pyx_codeobj__42);
   Py_CLEAR(clear_module_state->__pyx_codeobj__43);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__44);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__46);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__45);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__47);
   Py_CLEAR(clear_module_state->__pyx_codeobj__48);
   Py_CLEAR(clear_module_state->__pyx_codeobj__49);
   Py_CLEAR(clear_module_state->__pyx_codeobj__50);
   Py_CLEAR(clear_module_state->__pyx_codeobj__51);
   Py_CLEAR(clear_module_state->__pyx_codeobj__52);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__53);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__54);
   Py_CLEAR(clear_module_state->__pyx_codeobj__55);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__56);
   return 0;
 }
 #endif
@@ -3889,7 +3873,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_Decoder__get_entrypoints);
   Py_VISIT(traverse_module_state->__pyx_n_s_Decoder__get_transitions);
   Py_VISIT(traverse_module_state->__pyx_n_s_Decoder__pretty_print_list);
-  Py_VISIT(traverse_module_state->__pyx_n_s_Decoder_index);
   Py_VISIT(traverse_module_state->__pyx_n_s_Decoder_solve);
   Py_VISIT(traverse_module_state->__pyx_n_s_Decoder_step);
   Py_VISIT(traverse_module_state->__pyx_n_s_END);
@@ -3915,7 +3898,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u__12);
   Py_VISIT(traverse_module_state->__pyx_n_s__14);
   Py_VISIT(traverse_module_state->__pyx_kp_s__4);
-  Py_VISIT(traverse_module_state->__pyx_n_s__57);
+  Py_VISIT(traverse_module_state->__pyx_n_s__56);
   Py_VISIT(traverse_module_state->__pyx_kp_s__6);
   Py_VISIT(traverse_module_state->__pyx_kp_u__7);
   Py_VISIT(traverse_module_state->__pyx_kp_s__8);
@@ -4062,12 +4045,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_int_0);
   Py_VISIT(traverse_module_state->__pyx_int_1);
   Py_VISIT(traverse_module_state->__pyx_int_2);
-  Py_VISIT(traverse_module_state->__pyx_int_20113896);
-  Py_VISIT(traverse_module_state->__pyx_int_60920991);
-  Py_VISIT(traverse_module_state->__pyx_int_100357442);
-  Py_VISIT(traverse_module_state->__pyx_int_144609261);
-  Py_VISIT(traverse_module_state->__pyx_int_200670490);
-  Py_VISIT(traverse_module_state->__pyx_int_216709148);
+  Py_VISIT(traverse_module_state->__pyx_int_702280);
+  Py_VISIT(traverse_module_state->__pyx_int_47014977);
+  Py_VISIT(traverse_module_state->__pyx_int_82452073);
+  Py_VISIT(traverse_module_state->__pyx_int_102166773);
+  Py_VISIT(traverse_module_state->__pyx_int_154731673);
+  Py_VISIT(traverse_module_state->__pyx_int_155102705);
   Py_VISIT(traverse_module_state->__pyx_int_neg_1);
   Py_VISIT(traverse_module_state->__pyx_tuple_);
   Py_VISIT(traverse_module_state->__pyx_slice__9);
@@ -4090,9 +4073,9 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_tuple__36);
   Py_VISIT(traverse_module_state->__pyx_tuple__38);
   Py_VISIT(traverse_module_state->__pyx_tuple__40);
-  Py_VISIT(traverse_module_state->__pyx_tuple__45);
-  Py_VISIT(traverse_module_state->__pyx_tuple__47);
-  Py_VISIT(traverse_module_state->__pyx_tuple__54);
+  Py_VISIT(traverse_module_state->__pyx_tuple__44);
+  Py_VISIT(traverse_module_state->__pyx_tuple__46);
+  Py_VISIT(traverse_module_state->__pyx_tuple__53);
   Py_VISIT(traverse_module_state->__pyx_codeobj__16);
   Py_VISIT(traverse_module_state->__pyx_codeobj__18);
   Py_VISIT(traverse_module_state->__pyx_codeobj__20);
@@ -4109,16 +4092,15 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_codeobj__41);
   Py_VISIT(traverse_module_state->__pyx_codeobj__42);
   Py_VISIT(traverse_module_state->__pyx_codeobj__43);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__44);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__46);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__45);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__47);
   Py_VISIT(traverse_module_state->__pyx_codeobj__48);
   Py_VISIT(traverse_module_state->__pyx_codeobj__49);
   Py_VISIT(traverse_module_state->__pyx_codeobj__50);
   Py_VISIT(traverse_module_state->__pyx_codeobj__51);
   Py_VISIT(traverse_module_state->__pyx_codeobj__52);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__53);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__54);
   Py_VISIT(traverse_module_state->__pyx_codeobj__55);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__56);
   return 0;
 }
 #endif
@@ -4198,7 +4180,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_Decoder__get_entrypoints __pyx_mstate_global->__pyx_n_s_Decoder__get_entrypoints
 #define __pyx_n_s_Decoder__get_transitions __pyx_mstate_global->__pyx_n_s_Decoder__get_transitions
 #define __pyx_n_s_Decoder__pretty_print_list __pyx_mstate_global->__pyx_n_s_Decoder__pretty_print_list
-#define __pyx_n_s_Decoder_index __pyx_mstate_global->__pyx_n_s_Decoder_index
 #define __pyx_n_s_Decoder_solve __pyx_mstate_global->__pyx_n_s_Decoder_solve
 #define __pyx_n_s_Decoder_step __pyx_mstate_global->__pyx_n_s_Decoder_step
 #define __pyx_n_s_END __pyx_mstate_global->__pyx_n_s_END
@@ -4224,7 +4205,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u__12 __pyx_mstate_global->__pyx_kp_u__12
 #define __pyx_n_s__14 __pyx_mstate_global->__pyx_n_s__14
 #define __pyx_kp_s__4 __pyx_mstate_global->__pyx_kp_s__4
-#define __pyx_n_s__57 __pyx_mstate_global->__pyx_n_s__57
+#define __pyx_n_s__56 __pyx_mstate_global->__pyx_n_s__56
 #define __pyx_kp_s__6 __pyx_mstate_global->__pyx_kp_s__6
 #define __pyx_kp_u__7 __pyx_mstate_global->__pyx_kp_u__7
 #define __pyx_kp_s__8 __pyx_mstate_global->__pyx_kp_s__8
@@ -4371,12 +4352,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_int_0 __pyx_mstate_global->__pyx_int_0
 #define __pyx_int_1 __pyx_mstate_global->__pyx_int_1
 #define __pyx_int_2 __pyx_mstate_global->__pyx_int_2
-#define __pyx_int_20113896 __pyx_mstate_global->__pyx_int_20113896
-#define __pyx_int_60920991 __pyx_mstate_global->__pyx_int_60920991
-#define __pyx_int_100357442 __pyx_mstate_global->__pyx_int_100357442
-#define __pyx_int_144609261 __pyx_mstate_global->__pyx_int_144609261
-#define __pyx_int_200670490 __pyx_mstate_global->__pyx_int_200670490
-#define __pyx_int_216709148 __pyx_mstate_global->__pyx_int_216709148
+#define __pyx_int_702280 __pyx_mstate_global->__pyx_int_702280
+#define __pyx_int_47014977 __pyx_mstate_global->__pyx_int_47014977
+#define __pyx_int_82452073 __pyx_mstate_global->__pyx_int_82452073
+#define __pyx_int_102166773 __pyx_mstate_global->__pyx_int_102166773
+#define __pyx_int_154731673 __pyx_mstate_global->__pyx_int_154731673
+#define __pyx_int_155102705 __pyx_mstate_global->__pyx_int_155102705
 #define __pyx_int_neg_1 __pyx_mstate_global->__pyx_int_neg_1
 #define __pyx_tuple_ __pyx_mstate_global->__pyx_tuple_
 #define __pyx_slice__9 __pyx_mstate_global->__pyx_slice__9
@@ -4399,9 +4380,9 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_tuple__36 __pyx_mstate_global->__pyx_tuple__36
 #define __pyx_tuple__38 __pyx_mstate_global->__pyx_tuple__38
 #define __pyx_tuple__40 __pyx_mstate_global->__pyx_tuple__40
-#define __pyx_tuple__45 __pyx_mstate_global->__pyx_tuple__45
-#define __pyx_tuple__47 __pyx_mstate_global->__pyx_tuple__47
-#define __pyx_tuple__54 __pyx_mstate_global->__pyx_tuple__54
+#define __pyx_tuple__44 __pyx_mstate_global->__pyx_tuple__44
+#define __pyx_tuple__46 __pyx_mstate_global->__pyx_tuple__46
+#define __pyx_tuple__53 __pyx_mstate_global->__pyx_tuple__53
 #define __pyx_codeobj__16 __pyx_mstate_global->__pyx_codeobj__16
 #define __pyx_codeobj__18 __pyx_mstate_global->__pyx_codeobj__18
 #define __pyx_codeobj__20 __pyx_mstate_global->__pyx_codeobj__20
@@ -4418,16 +4399,15 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_codeobj__41 __pyx_mstate_global->__pyx_codeobj__41
 #define __pyx_codeobj__42 __pyx_mstate_global->__pyx_codeobj__42
 #define __pyx_codeobj__43 __pyx_mstate_global->__pyx_codeobj__43
-#define __pyx_codeobj__44 __pyx_mstate_global->__pyx_codeobj__44
-#define __pyx_codeobj__46 __pyx_mstate_global->__pyx_codeobj__46
+#define __pyx_codeobj__45 __pyx_mstate_global->__pyx_codeobj__45
+#define __pyx_codeobj__47 __pyx_mstate_global->__pyx_codeobj__47
 #define __pyx_codeobj__48 __pyx_mstate_global->__pyx_codeobj__48
 #define __pyx_codeobj__49 __pyx_mstate_global->__pyx_codeobj__49
 #define __pyx_codeobj__50 __pyx_mstate_global->__pyx_codeobj__50
 #define __pyx_codeobj__51 __pyx_mstate_global->__pyx_codeobj__51
 #define __pyx_codeobj__52 __pyx_mstate_global->__pyx_codeobj__52
-#define __pyx_codeobj__53 __pyx_mstate_global->__pyx_codeobj__53
+#define __pyx_codeobj__54 __pyx_mstate_global->__pyx_codeobj__54
 #define __pyx_codeobj__55 __pyx_mstate_global->__pyx_codeobj__55
-#define __pyx_codeobj__56 __pyx_mstate_global->__pyx_codeobj__56
 /* #### Code section: module_code ### */
 
 /* "C:/Python 3.12/Lib/site-packages/numpy/__init__.cython-30.pxd":286
@@ -7470,7 +7450,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_4bitstream_to_file(CYTHON_UNUSED
 }
 
 /* "fmsApp/stegomarkov.pyx":48
- *     cdef int _end_key_index  # Index where the end key was injected
+ *     cdef int end_key  # End key for the encoded message
  * 
  *     def __init__(self, object model, str bitstream, bint logging):             # <<<<<<<<<<<<<<
  *         self.model = model
@@ -7594,10 +7574,11 @@ static int __pyx_pw_6fmsApp_11stegomarkov_7Encoder_1__init__(PyObject *__pyx_v_s
 static int __pyx_pf_6fmsApp_11stegomarkov_7Encoder___init__(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self, PyObject *__pyx_v_model, PyObject *__pyx_v_bitstream, int __pyx_v_logging) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
+  Py_ssize_t __pyx_t_1;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  unsigned int __pyx_t_4;
+  PyObject *__pyx_t_4 = NULL;
+  unsigned int __pyx_t_5;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -7608,7 +7589,7 @@ static int __pyx_pf_6fmsApp_11stegomarkov_7Encoder___init__(struct __pyx_obj_6fm
  *     def __init__(self, object model, str bitstream, bint logging):
  *         self.model = model             # <<<<<<<<<<<<<<
  *         self.bitstream = bitstream
- *         self.logging = logging
+ *         self.bitstream_length = len(bitstream)
  */
   __Pyx_INCREF(__pyx_v_model);
   __Pyx_GIVEREF(__pyx_v_model);
@@ -7620,8 +7601,8 @@ static int __pyx_pf_6fmsApp_11stegomarkov_7Encoder___init__(struct __pyx_obj_6fm
  *     def __init__(self, object model, str bitstream, bint logging):
  *         self.model = model
  *         self.bitstream = bitstream             # <<<<<<<<<<<<<<
+ *         self.bitstream_length = len(bitstream)
  *         self.logging = logging
- *         self.entrypoints = self._get_entrypoints()
  */
   __Pyx_INCREF(__pyx_v_bitstream);
   __Pyx_GIVEREF(__pyx_v_bitstream);
@@ -7632,55 +7613,65 @@ static int __pyx_pf_6fmsApp_11stegomarkov_7Encoder___init__(struct __pyx_obj_6fm
   /* "fmsApp/stegomarkov.pyx":51
  *         self.model = model
  *         self.bitstream = bitstream
+ *         self.bitstream_length = len(bitstream)             # <<<<<<<<<<<<<<
+ *         self.logging = logging
+ *         self.entrypoints = self._get_entrypoints()
+ */
+  __pyx_t_1 = PyObject_Length(__pyx_v_bitstream); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_v_self->bitstream_length = __pyx_t_1;
+
+  /* "fmsApp/stegomarkov.pyx":52
+ *         self.bitstream = bitstream
+ *         self.bitstream_length = len(bitstream)
  *         self.logging = logging             # <<<<<<<<<<<<<<
  *         self.entrypoints = self._get_entrypoints()
  * 
  */
   __pyx_v_self->logging = __pyx_v_logging;
 
-  /* "fmsApp/stegomarkov.pyx":52
- *         self.bitstream = bitstream
+  /* "fmsApp/stegomarkov.pyx":53
+ *         self.bitstream_length = len(bitstream)
  *         self.logging = logging
  *         self.entrypoints = self._get_entrypoints()             # <<<<<<<<<<<<<<
  * 
  *         self.current_gram = None
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_entrypoints); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = NULL;
-  __pyx_t_4 = 0;
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_entrypoints); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = NULL;
+  __pyx_t_5 = 0;
   #if CYTHON_UNPACK_METHODS
-  if (likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_3);
+  if (likely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_4)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_4);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-      __pyx_t_4 = 1;
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+      __pyx_t_5 = 1;
     }
   }
   #endif
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
-    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    PyObject *__pyx_callargs[2] = {__pyx_t_4, NULL};
+    __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(0, 52, __pyx_L1_error)
-  __Pyx_GIVEREF(__pyx_t_1);
+  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_2))) __PYX_ERR(0, 53, __pyx_L1_error)
+  __Pyx_GIVEREF(__pyx_t_2);
   __Pyx_GOTREF(__pyx_v_self->entrypoints);
   __Pyx_DECREF(__pyx_v_self->entrypoints);
-  __pyx_v_self->entrypoints = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
+  __pyx_v_self->entrypoints = ((PyObject*)__pyx_t_2);
+  __pyx_t_2 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":54
+  /* "fmsApp/stegomarkov.pyx":55
  *         self.entrypoints = self._get_entrypoints()
  * 
  *         self.current_gram = None             # <<<<<<<<<<<<<<
- *         self._output_tokens = []
+ *         self.output_tokens = []
  *         self.exhausted = True
  */
   __Pyx_INCREF(Py_None);
@@ -7689,59 +7680,50 @@ static int __pyx_pf_6fmsApp_11stegomarkov_7Encoder___init__(struct __pyx_obj_6fm
   __Pyx_DECREF(__pyx_v_self->current_gram);
   __pyx_v_self->current_gram = Py_None;
 
-  /* "fmsApp/stegomarkov.pyx":55
+  /* "fmsApp/stegomarkov.pyx":56
  * 
  *         self.current_gram = None
- *         self._output_tokens = []             # <<<<<<<<<<<<<<
+ *         self.output_tokens = []             # <<<<<<<<<<<<<<
  *         self.exhausted = True
  *         self.finished = False
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 55, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __Pyx_GOTREF(__pyx_v_self->_output_tokens);
-  __Pyx_DECREF(__pyx_v_self->_output_tokens);
-  __pyx_v_self->_output_tokens = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
+  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __Pyx_GOTREF(__pyx_v_self->output_tokens);
+  __Pyx_DECREF(__pyx_v_self->output_tokens);
+  __pyx_v_self->output_tokens = ((PyObject*)__pyx_t_2);
+  __pyx_t_2 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":56
+  /* "fmsApp/stegomarkov.pyx":57
  *         self.current_gram = None
- *         self._output_tokens = []
+ *         self.output_tokens = []
  *         self.exhausted = True             # <<<<<<<<<<<<<<
  *         self.finished = False
  *         self.end_key = 0
  */
   __pyx_v_self->exhausted = 1;
 
-  /* "fmsApp/stegomarkov.pyx":57
- *         self._output_tokens = []
+  /* "fmsApp/stegomarkov.pyx":58
+ *         self.output_tokens = []
  *         self.exhausted = True
  *         self.finished = False             # <<<<<<<<<<<<<<
  *         self.end_key = 0
- *         self._end_key_index = -1
+ * 
  */
   __pyx_v_self->finished = 0;
 
-  /* "fmsApp/stegomarkov.pyx":58
+  /* "fmsApp/stegomarkov.pyx":59
  *         self.exhausted = True
  *         self.finished = False
  *         self.end_key = 0             # <<<<<<<<<<<<<<
- *         self._end_key_index = -1
- * 
- */
-  __pyx_v_self->end_key = 0;
-
-  /* "fmsApp/stegomarkov.pyx":59
- *         self.finished = False
- *         self.end_key = 0
- *         self._end_key_index = -1             # <<<<<<<<<<<<<<
  * 
  *     def _get_entrypoints(self):
  */
-  __pyx_v_self->_end_key_index = -1;
+  __pyx_v_self->end_key = 0;
 
   /* "fmsApp/stegomarkov.pyx":48
- *     cdef int _end_key_index  # Index where the end key was injected
+ *     cdef int end_key  # End key for the encoded message
  * 
  *     def __init__(self, object model, str bitstream, bint logging):             # <<<<<<<<<<<<<<
  *         self.model = model
@@ -7752,9 +7734,9 @@ static int __pyx_pf_6fmsApp_11stegomarkov_7Encoder___init__(struct __pyx_obj_6fm
   __pyx_r = 0;
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_AddTraceback("fmsApp.stegomarkov.Encoder.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
@@ -7763,7 +7745,7 @@ static int __pyx_pf_6fmsApp_11stegomarkov_7Encoder___init__(struct __pyx_obj_6fm
 }
 
 /* "fmsApp/stegomarkov.pyx":61
- *         self._end_key_index = -1
+ *         self.end_key = 0
  * 
  *     def _get_entrypoints(self):             # <<<<<<<<<<<<<<
  *         """Get valid entry points from the Markov model."""
@@ -8021,7 +8003,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_2_get_entrypoints(struc
   }
 
   /* "fmsApp/stegomarkov.pyx":61
- *         self._end_key_index = -1
+ *         self.end_key = 0
  * 
  *     def _get_entrypoints(self):             # <<<<<<<<<<<<<<
  *         """Get valid entry points from the Markov model."""
@@ -8047,126 +8029,6 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_2_get_entrypoints(struc
 
 /* "fmsApp/stegomarkov.pyx":68
  *             return [key[-1] for key in self.model.chain.model.keys() if key.count("___BEGIN__") == self.model.state_size - 1][1:]
- * 
- *     @property             # <<<<<<<<<<<<<<
- *     def output_tokens(self):
- *         """Public property to access the index where the end key was injected."""
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Encoder_13output_tokens_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Encoder_13output_tokens_1__get__(PyObject *__pyx_v_self) {
-  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
-  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Encoder_13output_tokens___get__(((struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *)__pyx_v_self));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_13output_tokens___get__(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self) {
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__get__", 1);
-
-  /* "fmsApp/stegomarkov.pyx":71
- *     def output_tokens(self):
- *         """Public property to access the index where the end key was injected."""
- *         return self._output_tokens             # <<<<<<<<<<<<<<
- * 
- *     @property
- */
-  __Pyx_XDECREF(__pyx_r);
-  __Pyx_INCREF(__pyx_v_self->_output_tokens);
-  __pyx_r = __pyx_v_self->_output_tokens;
-  goto __pyx_L0;
-
-  /* "fmsApp/stegomarkov.pyx":68
- *             return [key[-1] for key in self.model.chain.model.keys() if key.count("___BEGIN__") == self.model.state_size - 1][1:]
- * 
- *     @property             # <<<<<<<<<<<<<<
- *     def output_tokens(self):
- *         """Public property to access the index where the end key was injected."""
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "fmsApp/stegomarkov.pyx":73
- *         return self._output_tokens
- * 
- *     @property             # <<<<<<<<<<<<<<
- *     def end_key_index(self):
- *         """Public property to access the index where the end key was injected."""
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Encoder_13end_key_index_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Encoder_13end_key_index_1__get__(PyObject *__pyx_v_self) {
-  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
-  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Encoder_13end_key_index___get__(((struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *)__pyx_v_self));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_13end_key_index___get__(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self) {
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("__get__", 1);
-
-  /* "fmsApp/stegomarkov.pyx":76
- *     def end_key_index(self):
- *         """Public property to access the index where the end key was injected."""
- *         return self._end_key_index             # <<<<<<<<<<<<<<
- * 
- *     @property
- */
-  __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_end_key_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_r = __pyx_t_1;
-  __pyx_t_1 = 0;
-  goto __pyx_L0;
-
-  /* "fmsApp/stegomarkov.pyx":73
- *         return self._output_tokens
- * 
- *     @property             # <<<<<<<<<<<<<<
- *     def end_key_index(self):
- *         """Public property to access the index where the end key was injected."""
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("fmsApp.stegomarkov.Encoder.end_key_index.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "fmsApp/stegomarkov.pyx":78
- *         return self._end_key_index
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def output(self):
@@ -8198,25 +8060,25 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6output___get__(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 1);
 
-  /* "fmsApp/stegomarkov.pyx":81
+  /* "fmsApp/stegomarkov.pyx":71
  *     def output(self):
  *         """Returns the current state of the output string."""
- *         return " ".join(self._output_tokens)             # <<<<<<<<<<<<<<
+ *         return " ".join(self.output_tokens)             # <<<<<<<<<<<<<<
  * 
- *     def step(self):
+ *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_v_self->_output_tokens;
+  __pyx_t_1 = __pyx_v_self->output_tokens;
   __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyString_Join(__pyx_kp_s__6, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 81, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyString_Join(__pyx_kp_s__6, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "fmsApp/stegomarkov.pyx":78
- *         return self._end_key_index
+  /* "fmsApp/stegomarkov.pyx":68
+ *             return [key[-1] for key in self.model.chain.model.keys() if key.count("___BEGIN__") == self.model.state_size - 1][1:]
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def output(self):
@@ -8235,8 +8097,73 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6output___get__(struct 
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":83
- *         return " ".join(self._output_tokens)
+/* "fmsApp/stegomarkov.pyx":73
+ *         return " ".join(self.output_tokens)
+ * 
+ *     @property             # <<<<<<<<<<<<<<
+ *     def finished(self):
+ *         return self.finished
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Encoder_8finished_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Encoder_8finished_1__get__(PyObject *__pyx_v_self) {
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
+  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Encoder_8finished___get__(((struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8finished___get__(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__get__", 1);
+
+  /* "fmsApp/stegomarkov.pyx":75
+ *     @property
+ *     def finished(self):
+ *         return self.finished             # <<<<<<<<<<<<<<
+ * 
+ *     def step(self):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->finished); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "fmsApp/stegomarkov.pyx":73
+ *         return " ".join(self.output_tokens)
+ * 
+ *     @property             # <<<<<<<<<<<<<<
+ *     def finished(self):
+ *         return self.finished
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("fmsApp.stegomarkov.Encoder.finished.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "fmsApp/stegomarkov.pyx":77
+ *         return self.finished
  * 
  *     def step(self):             # <<<<<<<<<<<<<<
  *         """Generates a new word for the output and appends it to the output string."""
@@ -8292,42 +8219,45 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_4step(struct __pyx_obj_
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
   unsigned int __pyx_t_4;
+  Py_ssize_t __pyx_t_5;
+  Py_ssize_t __pyx_t_6;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("step", 1);
 
-  /* "fmsApp/stegomarkov.pyx":85
+  /* "fmsApp/stegomarkov.pyx":79
  *     def step(self):
  *         """Generates a new word for the output and appends it to the output string."""
  *         if self.finished:             # <<<<<<<<<<<<<<
- *             return
+ *             return 1
  * 
  */
   if (__pyx_v_self->finished) {
 
-    /* "fmsApp/stegomarkov.pyx":86
+    /* "fmsApp/stegomarkov.pyx":80
  *         """Generates a new word for the output and appends it to the output string."""
  *         if self.finished:
- *             return             # <<<<<<<<<<<<<<
+ *             return 1             # <<<<<<<<<<<<<<
  * 
  *         if self.exhausted:
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+    __Pyx_INCREF(__pyx_int_1);
+    __pyx_r = __pyx_int_1;
     goto __pyx_L0;
 
-    /* "fmsApp/stegomarkov.pyx":85
+    /* "fmsApp/stegomarkov.pyx":79
  *     def step(self):
  *         """Generates a new word for the output and appends it to the output string."""
  *         if self.finished:             # <<<<<<<<<<<<<<
- *             return
+ *             return 1
  * 
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":88
- *             return
+  /* "fmsApp/stegomarkov.pyx":82
+ *             return 1
  * 
  *         if self.exhausted:             # <<<<<<<<<<<<<<
  *             self._choose_entrypoint()
@@ -8335,14 +8265,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_4step(struct __pyx_obj_
  */
   if (__pyx_v_self->exhausted) {
 
-    /* "fmsApp/stegomarkov.pyx":89
+    /* "fmsApp/stegomarkov.pyx":83
  * 
  *         if self.exhausted:
  *             self._choose_entrypoint()             # <<<<<<<<<<<<<<
  *         else:
  *             self._choose_next_token()
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_choose_entrypoint); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_choose_entrypoint); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 83, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_3 = NULL;
     __pyx_t_4 = 0;
@@ -8362,14 +8292,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_4step(struct __pyx_obj_
       PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":88
- *             return
+    /* "fmsApp/stegomarkov.pyx":82
+ *             return 1
  * 
  *         if self.exhausted:             # <<<<<<<<<<<<<<
  *             self._choose_entrypoint()
@@ -8378,15 +8308,15 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_4step(struct __pyx_obj_
     goto __pyx_L4;
   }
 
-  /* "fmsApp/stegomarkov.pyx":91
+  /* "fmsApp/stegomarkov.pyx":85
  *             self._choose_entrypoint()
  *         else:
  *             self._choose_next_token()             # <<<<<<<<<<<<<<
  * 
- *     def _choose_entrypoint(self):
+ *         return (self.bitstream_length - len(self.bitstream)) / self.bitstream_length
  */
   /*else*/ {
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_choose_next_token); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 91, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_choose_next_token); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 85, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_3 = NULL;
     __pyx_t_4 = 0;
@@ -8406,7 +8336,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_4step(struct __pyx_obj_
       PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
@@ -8414,8 +8344,31 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_4step(struct __pyx_obj_
   }
   __pyx_L4:;
 
-  /* "fmsApp/stegomarkov.pyx":83
- *         return " ".join(self._output_tokens)
+  /* "fmsApp/stegomarkov.pyx":87
+ *             self._choose_next_token()
+ * 
+ *         return (self.bitstream_length - len(self.bitstream)) / self.bitstream_length             # <<<<<<<<<<<<<<
+ * 
+ *     def _choose_entrypoint(self):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_v_self->bitstream;
+  __Pyx_INCREF(__pyx_t_1);
+  __pyx_t_5 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 87, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_6 = (__pyx_v_self->bitstream_length - __pyx_t_5);
+  if (unlikely(__pyx_v_self->bitstream_length == 0)) {
+    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
+    __PYX_ERR(0, 87, __pyx_L1_error)
+  }
+  __pyx_t_1 = PyFloat_FromDouble((((double)__pyx_t_6) / ((double)__pyx_v_self->bitstream_length))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "fmsApp/stegomarkov.pyx":77
+ *         return self.finished
  * 
  *     def step(self):             # <<<<<<<<<<<<<<
  *         """Generates a new word for the output and appends it to the output string."""
@@ -8423,8 +8376,6 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_4step(struct __pyx_obj_
  */
 
   /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
@@ -8437,8 +8388,8 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_4step(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":93
- *             self._choose_next_token()
+/* "fmsApp/stegomarkov.pyx":89
+ *         return (self.bitstream_length - len(self.bitstream)) / self.bitstream_length
  * 
  *     def _choose_entrypoint(self):             # <<<<<<<<<<<<<<
  *         """Choose a new starting point (entrypoint) for the Markov chain."""
@@ -8510,7 +8461,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6_choose_entrypoint(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_choose_entrypoint", 1);
 
-  /* "fmsApp/stegomarkov.pyx":95
+  /* "fmsApp/stegomarkov.pyx":91
  *     def _choose_entrypoint(self):
  *         """Choose a new starting point (entrypoint) for the Markov chain."""
  *         self.exhausted = False             # <<<<<<<<<<<<<<
@@ -8519,14 +8470,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6_choose_entrypoint(str
  */
   __pyx_v_self->exhausted = 0;
 
-  /* "fmsApp/stegomarkov.pyx":96
+  /* "fmsApp/stegomarkov.pyx":92
  *         """Choose a new starting point (entrypoint) for the Markov chain."""
  *         self.exhausted = False
  *         next_token, removed, bit_length, encoded_index = self._consume_from_list(self.entrypoints)             # <<<<<<<<<<<<<<
  *         self.current_gram = (next_token,) if self.model.state_size == 1 else (*["___BEGIN__"] * (self.model.state_size - 1), next_token)
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_consume_from_list); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_consume_from_list); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -8546,7 +8497,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6_choose_entrypoint(str
     PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_v_self->entrypoints};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 96, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
@@ -8556,7 +8507,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6_choose_entrypoint(str
     if (unlikely(size != 4)) {
       if (size > 4) __Pyx_RaiseTooManyValuesError(4);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 96, __pyx_L1_error)
+      __PYX_ERR(0, 92, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -8579,7 +8530,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6_choose_entrypoint(str
       Py_ssize_t i;
       PyObject** temps[4] = {&__pyx_t_2,&__pyx_t_3,&__pyx_t_5,&__pyx_t_6};
       for (i=0; i < 4; i++) {
-        PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 96, __pyx_L1_error)
+        PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 92, __pyx_L1_error)
         __Pyx_GOTREF(item);
         *(temps[i]) = item;
       }
@@ -8589,7 +8540,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6_choose_entrypoint(str
   } else {
     Py_ssize_t index = -1;
     PyObject** temps[4] = {&__pyx_t_2,&__pyx_t_3,&__pyx_t_5,&__pyx_t_6};
-    __pyx_t_7 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 96, __pyx_L1_error)
+    __pyx_t_7 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_8 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_7);
@@ -8598,7 +8549,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6_choose_entrypoint(str
       __Pyx_GOTREF(item);
       *(temps[index]) = item;
     }
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 4) < 0) __PYX_ERR(0, 96, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 4) < 0) __PYX_ERR(0, 92, __pyx_L1_error)
     __pyx_t_8 = NULL;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     goto __pyx_L4_unpacking_done;
@@ -8606,7 +8557,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6_choose_entrypoint(str
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_8 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 96, __pyx_L1_error)
+    __PYX_ERR(0, 92, __pyx_L1_error)
     __pyx_L4_unpacking_done:;
   }
   __pyx_v_next_token = __pyx_t_2;
@@ -8618,37 +8569,37 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6_choose_entrypoint(str
   __pyx_v_encoded_index = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":97
+  /* "fmsApp/stegomarkov.pyx":93
  *         self.exhausted = False
  *         next_token, removed, bit_length, encoded_index = self._consume_from_list(self.entrypoints)
  *         self.current_gram = (next_token,) if self.model.state_size == 1 else (*["___BEGIN__"] * (self.model.state_size - 1), next_token)             # <<<<<<<<<<<<<<
  * 
  *         if type(next_token) == tuple:
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_state_size); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 97, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_state_size); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_9 = (__Pyx_PyInt_BoolEqObjC(__pyx_t_6, __pyx_int_1, 1, 0)); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 97, __pyx_L1_error)
+  __pyx_t_9 = (__Pyx_PyInt_BoolEqObjC(__pyx_t_6, __pyx_int_1, 1, 0)); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   if (__pyx_t_9) {
-    __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 97, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 93, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_v_next_token);
     __Pyx_GIVEREF(__pyx_v_next_token);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_v_next_token)) __PYX_ERR(0, 97, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_v_next_token)) __PYX_ERR(0, 93, __pyx_L1_error);
     __pyx_t_1 = __pyx_t_6;
     __pyx_t_6 = 0;
   } else {
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_state_size); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 97, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_state_size); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 93, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_3 = __Pyx_PyInt_SubtractObjC(__pyx_t_5, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 97, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_SubtractObjC(__pyx_t_5, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 93, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyList_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 97, __pyx_L1_error)
+    __pyx_t_5 = PyList_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 93, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_INCREF(__pyx_n_s_BEGIN);
     __Pyx_GIVEREF(__pyx_n_s_BEGIN);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_5, 0, __pyx_n_s_BEGIN)) __PYX_ERR(0, 97, __pyx_L1_error);
-    { PyObject* __pyx_temp = PyNumber_InPlaceMultiply(__pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_temp)) __PYX_ERR(0, 97, __pyx_L1_error)
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_5, 0, __pyx_n_s_BEGIN)) __PYX_ERR(0, 93, __pyx_L1_error);
+    { PyObject* __pyx_temp = PyNumber_InPlaceMultiply(__pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_temp)) __PYX_ERR(0, 93, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_temp);
       __Pyx_DECREF(__pyx_t_5);
       __pyx_t_5 = __pyx_temp;
@@ -8656,11 +8607,11 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6_choose_entrypoint(str
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_6 = __pyx_t_5;
     __pyx_t_5 = 0;
-    if (__Pyx_ListComp_Append(__pyx_t_6, __pyx_v_next_token) < 0) __PYX_ERR(0, 97, __pyx_L1_error)
+    if (__Pyx_ListComp_Append(__pyx_t_6, __pyx_v_next_token) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
     {
       PyObject *__pyx_temp = PyList_AsTuple(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_6);
-      __pyx_t_6 = __pyx_temp; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 97, __pyx_L1_error)
+      __pyx_t_6 = __pyx_temp; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 93, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
     }
     __pyx_t_1 = __pyx_t_6;
@@ -8672,76 +8623,76 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6_choose_entrypoint(str
   __pyx_v_self->current_gram = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":99
+  /* "fmsApp/stegomarkov.pyx":95
  *         self.current_gram = (next_token,) if self.model.state_size == 1 else (*["___BEGIN__"] * (self.model.state_size - 1), next_token)
  * 
  *         if type(next_token) == tuple:             # <<<<<<<<<<<<<<
- *             self._output_tokens.extend(next_token)
+ *             self.output_tokens.extend(next_token)
  *         else:
  */
-  __pyx_t_1 = PyObject_RichCompare(((PyObject *)Py_TYPE(__pyx_v_next_token)), ((PyObject *)(&PyTuple_Type)), Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
-  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(((PyObject *)Py_TYPE(__pyx_v_next_token)), ((PyObject *)(&PyTuple_Type)), Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_9) {
 
-    /* "fmsApp/stegomarkov.pyx":100
+    /* "fmsApp/stegomarkov.pyx":96
  * 
  *         if type(next_token) == tuple:
- *             self._output_tokens.extend(next_token)             # <<<<<<<<<<<<<<
+ *             self.output_tokens.extend(next_token)             # <<<<<<<<<<<<<<
  *         else:
- *             self._output_tokens.append(next_token)
+ *             self.output_tokens.append(next_token)
  */
-    if (unlikely(__pyx_v_self->_output_tokens == Py_None)) {
+    if (unlikely(__pyx_v_self->output_tokens == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "extend");
-      __PYX_ERR(0, 100, __pyx_L1_error)
+      __PYX_ERR(0, 96, __pyx_L1_error)
     }
-    __pyx_t_10 = __Pyx_PyList_Extend(__pyx_v_self->_output_tokens, __pyx_v_next_token); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 100, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyList_Extend(__pyx_v_self->output_tokens, __pyx_v_next_token); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 96, __pyx_L1_error)
 
-    /* "fmsApp/stegomarkov.pyx":99
+    /* "fmsApp/stegomarkov.pyx":95
  *         self.current_gram = (next_token,) if self.model.state_size == 1 else (*["___BEGIN__"] * (self.model.state_size - 1), next_token)
  * 
  *         if type(next_token) == tuple:             # <<<<<<<<<<<<<<
- *             self._output_tokens.extend(next_token)
+ *             self.output_tokens.extend(next_token)
  *         else:
  */
     goto __pyx_L5;
   }
 
-  /* "fmsApp/stegomarkov.pyx":102
- *             self._output_tokens.extend(next_token)
+  /* "fmsApp/stegomarkov.pyx":98
+ *             self.output_tokens.extend(next_token)
  *         else:
- *             self._output_tokens.append(next_token)             # <<<<<<<<<<<<<<
+ *             self.output_tokens.append(next_token)             # <<<<<<<<<<<<<<
  * 
  *         if not self.bitstream:
  */
   /*else*/ {
-    if (unlikely(__pyx_v_self->_output_tokens == Py_None)) {
+    if (unlikely(__pyx_v_self->output_tokens == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "append");
-      __PYX_ERR(0, 102, __pyx_L1_error)
+      __PYX_ERR(0, 98, __pyx_L1_error)
     }
-    __pyx_t_10 = __Pyx_PyList_Append(__pyx_v_self->_output_tokens, __pyx_v_next_token); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyList_Append(__pyx_v_self->output_tokens, __pyx_v_next_token); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 98, __pyx_L1_error)
   }
   __pyx_L5:;
 
-  /* "fmsApp/stegomarkov.pyx":104
- *             self._output_tokens.append(next_token)
+  /* "fmsApp/stegomarkov.pyx":100
+ *             self.output_tokens.append(next_token)
  * 
  *         if not self.bitstream:             # <<<<<<<<<<<<<<
  *             self._inject_end_key(removed)
  * 
  */
-  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_self->bitstream); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_self->bitstream); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 100, __pyx_L1_error)
   __pyx_t_11 = (!__pyx_t_9);
   if (__pyx_t_11) {
 
-    /* "fmsApp/stegomarkov.pyx":105
+    /* "fmsApp/stegomarkov.pyx":101
  * 
  *         if not self.bitstream:
  *             self._inject_end_key(removed)             # <<<<<<<<<<<<<<
  * 
  *     def _choose_next_token(self):
  */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_inject_end_key); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 105, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_inject_end_key); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_5 = NULL;
     __pyx_t_4 = 0;
@@ -8761,14 +8712,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6_choose_entrypoint(str
       PyObject *__pyx_callargs[2] = {__pyx_t_5, __pyx_v_removed};
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":104
- *             self._output_tokens.append(next_token)
+    /* "fmsApp/stegomarkov.pyx":100
+ *             self.output_tokens.append(next_token)
  * 
  *         if not self.bitstream:             # <<<<<<<<<<<<<<
  *             self._inject_end_key(removed)
@@ -8776,8 +8727,8 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6_choose_entrypoint(str
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":93
- *             self._choose_next_token()
+  /* "fmsApp/stegomarkov.pyx":89
+ *         return (self.bitstream_length - len(self.bitstream)) / self.bitstream_length
  * 
  *     def _choose_entrypoint(self):             # <<<<<<<<<<<<<<
  *         """Choose a new starting point (entrypoint) for the Markov chain."""
@@ -8806,7 +8757,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_6_choose_entrypoint(str
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":107
+/* "fmsApp/stegomarkov.pyx":103
  *             self._inject_end_key(removed)
  * 
  *     def _choose_next_token(self):             # <<<<<<<<<<<<<<
@@ -8881,14 +8832,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_choose_next_token", 1);
 
-  /* "fmsApp/stegomarkov.pyx":109
+  /* "fmsApp/stegomarkov.pyx":105
  *     def _choose_next_token(self):
  *         """Choose the next token in the Markov chain."""
  *         transitions = self._get_transitions(self.current_gram)             # <<<<<<<<<<<<<<
  *         if "___END__" in transitions:
  *             self.exhausted = True
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_transitions); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_transitions); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -8908,24 +8859,24 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
     PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_v_self->current_gram};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_transitions = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":110
+  /* "fmsApp/stegomarkov.pyx":106
  *         """Choose the next token in the Markov chain."""
  *         transitions = self._get_transitions(self.current_gram)
  *         if "___END__" in transitions:             # <<<<<<<<<<<<<<
  *             self.exhausted = True
  *             return
  */
-  __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_END, __pyx_v_transitions, Py_EQ)); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_END, __pyx_v_transitions, Py_EQ)); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 106, __pyx_L1_error)
   if (__pyx_t_5) {
 
-    /* "fmsApp/stegomarkov.pyx":111
+    /* "fmsApp/stegomarkov.pyx":107
  *         transitions = self._get_transitions(self.current_gram)
  *         if "___END__" in transitions:
  *             self.exhausted = True             # <<<<<<<<<<<<<<
@@ -8934,7 +8885,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
  */
     __pyx_v_self->exhausted = 1;
 
-    /* "fmsApp/stegomarkov.pyx":112
+    /* "fmsApp/stegomarkov.pyx":108
  *         if "___END__" in transitions:
  *             self.exhausted = True
  *             return             # <<<<<<<<<<<<<<
@@ -8945,7 +8896,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "fmsApp/stegomarkov.pyx":110
+    /* "fmsApp/stegomarkov.pyx":106
  *         """Choose the next token in the Markov chain."""
  *         transitions = self._get_transitions(self.current_gram)
  *         if "___END__" in transitions:             # <<<<<<<<<<<<<<
@@ -8954,14 +8905,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":113
+  /* "fmsApp/stegomarkov.pyx":109
  *             self.exhausted = True
  *             return
  *         next_token, removed, bit_length, encoded_index = self._consume_from_list(transitions)             # <<<<<<<<<<<<<<
  * 
  *         # Construct next gram
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_consume_from_list); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_consume_from_list); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -8981,7 +8932,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
     PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_v_transitions};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
@@ -8991,7 +8942,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
     if (unlikely(size != 4)) {
       if (size > 4) __Pyx_RaiseTooManyValuesError(4);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 113, __pyx_L1_error)
+      __PYX_ERR(0, 109, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -9014,7 +8965,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
       Py_ssize_t i;
       PyObject** temps[4] = {&__pyx_t_2,&__pyx_t_3,&__pyx_t_6,&__pyx_t_7};
       for (i=0; i < 4; i++) {
-        PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 113, __pyx_L1_error)
+        PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_GOTREF(item);
         *(temps[i]) = item;
       }
@@ -9024,7 +8975,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
   } else {
     Py_ssize_t index = -1;
     PyObject** temps[4] = {&__pyx_t_2,&__pyx_t_3,&__pyx_t_6,&__pyx_t_7};
-    __pyx_t_8 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 113, __pyx_L1_error)
+    __pyx_t_8 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_9 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_8);
@@ -9033,7 +8984,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
       __Pyx_GOTREF(item);
       *(temps[index]) = item;
     }
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 4) < 0) __PYX_ERR(0, 113, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 4) < 0) __PYX_ERR(0, 109, __pyx_L1_error)
     __pyx_t_9 = NULL;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     goto __pyx_L5_unpacking_done;
@@ -9041,7 +8992,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __pyx_t_9 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 113, __pyx_L1_error)
+    __PYX_ERR(0, 109, __pyx_L1_error)
     __pyx_L5_unpacking_done:;
   }
   __pyx_v_next_token = __pyx_t_2;
@@ -9053,37 +9004,37 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
   __pyx_v_encoded_index = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":116
+  /* "fmsApp/stegomarkov.pyx":112
  * 
  *         # Construct next gram
  *         next_gram = list(self.current_gram)             # <<<<<<<<<<<<<<
  *         next_gram.append(next_token)
  *         self.current_gram = tuple(next_gram[1:])
  */
-  __pyx_t_1 = PySequence_List(__pyx_v_self->current_gram); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_t_1 = PySequence_List(__pyx_v_self->current_gram); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_next_gram = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":117
+  /* "fmsApp/stegomarkov.pyx":113
  *         # Construct next gram
  *         next_gram = list(self.current_gram)
  *         next_gram.append(next_token)             # <<<<<<<<<<<<<<
  *         self.current_gram = tuple(next_gram[1:])
  * 
  */
-  __pyx_t_10 = __Pyx_PyList_Append(__pyx_v_next_gram, __pyx_v_next_token); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyList_Append(__pyx_v_next_gram, __pyx_v_next_token); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 113, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":118
+  /* "fmsApp/stegomarkov.pyx":114
  *         next_gram = list(self.current_gram)
  *         next_gram.append(next_token)
  *         self.current_gram = tuple(next_gram[1:])             # <<<<<<<<<<<<<<
  * 
  *         if type(next_token) == tuple:
  */
-  __pyx_t_1 = __Pyx_PyList_GetSlice(__pyx_v_next_gram, 1, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyList_GetSlice(__pyx_v_next_gram, 1, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_7 = PyList_AsTuple(((PyObject*)__pyx_t_1)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 118, __pyx_L1_error)
+  __pyx_t_7 = PyList_AsTuple(((PyObject*)__pyx_t_1)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 114, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_GIVEREF(__pyx_t_7);
@@ -9092,76 +9043,76 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
   __pyx_v_self->current_gram = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":120
+  /* "fmsApp/stegomarkov.pyx":116
  *         self.current_gram = tuple(next_gram[1:])
  * 
  *         if type(next_token) == tuple:             # <<<<<<<<<<<<<<
- *             self._output_tokens.extend(next_token)
+ *             self.output_tokens.extend(next_token)
  *         else:
  */
-  __pyx_t_7 = PyObject_RichCompare(((PyObject *)Py_TYPE(__pyx_v_next_token)), ((PyObject *)(&PyTuple_Type)), Py_EQ); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 120, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 120, __pyx_L1_error)
+  __pyx_t_7 = PyObject_RichCompare(((PyObject *)Py_TYPE(__pyx_v_next_token)), ((PyObject *)(&PyTuple_Type)), Py_EQ); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   if (__pyx_t_5) {
 
-    /* "fmsApp/stegomarkov.pyx":121
+    /* "fmsApp/stegomarkov.pyx":117
  * 
  *         if type(next_token) == tuple:
- *             self._output_tokens.extend(next_token)             # <<<<<<<<<<<<<<
+ *             self.output_tokens.extend(next_token)             # <<<<<<<<<<<<<<
  *         else:
- *             self._output_tokens.append(next_token)
+ *             self.output_tokens.append(next_token)
  */
-    if (unlikely(__pyx_v_self->_output_tokens == Py_None)) {
+    if (unlikely(__pyx_v_self->output_tokens == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "extend");
-      __PYX_ERR(0, 121, __pyx_L1_error)
+      __PYX_ERR(0, 117, __pyx_L1_error)
     }
-    __pyx_t_10 = __Pyx_PyList_Extend(__pyx_v_self->_output_tokens, __pyx_v_next_token); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 121, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyList_Extend(__pyx_v_self->output_tokens, __pyx_v_next_token); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 117, __pyx_L1_error)
 
-    /* "fmsApp/stegomarkov.pyx":120
+    /* "fmsApp/stegomarkov.pyx":116
  *         self.current_gram = tuple(next_gram[1:])
  * 
  *         if type(next_token) == tuple:             # <<<<<<<<<<<<<<
- *             self._output_tokens.extend(next_token)
+ *             self.output_tokens.extend(next_token)
  *         else:
  */
     goto __pyx_L6;
   }
 
-  /* "fmsApp/stegomarkov.pyx":123
- *             self._output_tokens.extend(next_token)
+  /* "fmsApp/stegomarkov.pyx":119
+ *             self.output_tokens.extend(next_token)
  *         else:
- *             self._output_tokens.append(next_token)             # <<<<<<<<<<<<<<
+ *             self.output_tokens.append(next_token)             # <<<<<<<<<<<<<<
  * 
  *         if not self.bitstream:
  */
   /*else*/ {
-    if (unlikely(__pyx_v_self->_output_tokens == Py_None)) {
+    if (unlikely(__pyx_v_self->output_tokens == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "append");
-      __PYX_ERR(0, 123, __pyx_L1_error)
+      __PYX_ERR(0, 119, __pyx_L1_error)
     }
-    __pyx_t_10 = __Pyx_PyList_Append(__pyx_v_self->_output_tokens, __pyx_v_next_token); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 123, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyList_Append(__pyx_v_self->output_tokens, __pyx_v_next_token); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 119, __pyx_L1_error)
   }
   __pyx_L6:;
 
-  /* "fmsApp/stegomarkov.pyx":125
- *             self._output_tokens.append(next_token)
+  /* "fmsApp/stegomarkov.pyx":121
+ *             self.output_tokens.append(next_token)
  * 
  *         if not self.bitstream:             # <<<<<<<<<<<<<<
  *             self._inject_end_key(removed)
  * 
  */
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_self->bitstream); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_self->bitstream); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 121, __pyx_L1_error)
   __pyx_t_11 = (!__pyx_t_5);
   if (__pyx_t_11) {
 
-    /* "fmsApp/stegomarkov.pyx":126
+    /* "fmsApp/stegomarkov.pyx":122
  * 
  *         if not self.bitstream:
  *             self._inject_end_key(removed)             # <<<<<<<<<<<<<<
  * 
  *     def _inject_end_key(self, removed):
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_inject_end_key); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_inject_end_key); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_6 = NULL;
     __pyx_t_4 = 0;
@@ -9181,14 +9132,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
       PyObject *__pyx_callargs[2] = {__pyx_t_6, __pyx_v_removed};
       __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 126, __pyx_L1_error)
+      if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 122, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":125
- *             self._output_tokens.append(next_token)
+    /* "fmsApp/stegomarkov.pyx":121
+ *             self.output_tokens.append(next_token)
  * 
  *         if not self.bitstream:             # <<<<<<<<<<<<<<
  *             self._inject_end_key(removed)
@@ -9196,7 +9147,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":107
+  /* "fmsApp/stegomarkov.pyx":103
  *             self._inject_end_key(removed)
  * 
  *     def _choose_next_token(self):             # <<<<<<<<<<<<<<
@@ -9228,12 +9179,12 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_8_choose_next_token(str
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":128
+/* "fmsApp/stegomarkov.pyx":124
  *             self._inject_end_key(removed)
  * 
  *     def _inject_end_key(self, removed):             # <<<<<<<<<<<<<<
  *         """Inject the end key to mark the end of encoding."""
- *         self.end_key = len(removed)  # Keeping this for the length of removed bits
+ *         self.end_key = len(removed)
  */
 
 /* Python wrapper */
@@ -9290,12 +9241,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 128, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 124, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_inject_end_key") < 0)) __PYX_ERR(0, 128, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_inject_end_key") < 0)) __PYX_ERR(0, 124, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -9306,7 +9257,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_inject_end_key", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 128, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_inject_end_key", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 124, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -9334,6 +9285,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 }
 
 static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_10_inject_end_key(struct __pyx_obj_6fmsApp_11stegomarkov_Encoder *__pyx_v_self, PyObject *__pyx_v_removed) {
+  PyObject *__pyx_v_i = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
@@ -9342,44 +9294,43 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_10_inject_end_key(struc
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
   unsigned int __pyx_t_6;
-  int __pyx_t_7;
-  PyObject *__pyx_t_8 = NULL;
+  PyObject *__pyx_t_7 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_inject_end_key", 1);
 
-  /* "fmsApp/stegomarkov.pyx":130
+  /* "fmsApp/stegomarkov.pyx":126
  *     def _inject_end_key(self, removed):
  *         """Inject the end key to mark the end of encoding."""
- *         self.end_key = len(removed)  # Keeping this for the length of removed bits             # <<<<<<<<<<<<<<
- *         self._end_key_index = random.randint(0, len(self._output_tokens) - 1)  # Store the injected index
- *         self._output_tokens[self._end_key_index] += chr(self.end_key + 97)  # Inject the end key at the random index
+ *         self.end_key = len(removed)             # <<<<<<<<<<<<<<
+ *         i = random.randint(0, len(self.output_tokens) - 1)
+ *         self.output_tokens[i] += chr(self.end_key + 97)
  */
-  __pyx_t_1 = PyObject_Length(__pyx_v_removed); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_t_1 = PyObject_Length(__pyx_v_removed); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 126, __pyx_L1_error)
   __pyx_v_self->end_key = __pyx_t_1;
 
-  /* "fmsApp/stegomarkov.pyx":131
+  /* "fmsApp/stegomarkov.pyx":127
  *         """Inject the end key to mark the end of encoding."""
- *         self.end_key = len(removed)  # Keeping this for the length of removed bits
- *         self._end_key_index = random.randint(0, len(self._output_tokens) - 1)  # Store the injected index             # <<<<<<<<<<<<<<
- *         self._output_tokens[self._end_key_index] += chr(self.end_key + 97)  # Inject the end key at the random index
+ *         self.end_key = len(removed)
+ *         i = random.randint(0, len(self.output_tokens) - 1)             # <<<<<<<<<<<<<<
+ *         self.output_tokens[i] += chr(self.end_key + 97)
  *         self.finished = True
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_random); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_random); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_randint); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_randint); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __pyx_v_self->_output_tokens;
+  __pyx_t_3 = __pyx_v_self->output_tokens;
   __Pyx_INCREF(__pyx_t_3);
   if (unlikely(__pyx_t_3 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 131, __pyx_L1_error)
+    __PYX_ERR(0, 127, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_PyList_GET_SIZE(__pyx_t_3); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyList_GET_SIZE(__pyx_t_3); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyInt_FromSsize_t((__pyx_t_1 - 1)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_3 = PyInt_FromSsize_t((__pyx_t_1 - 1)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -9400,66 +9351,67 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_10_inject_end_key(struc
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 2+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
-  __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 131, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_self->_end_key_index = __pyx_t_7;
+  __pyx_v_i = __pyx_t_2;
+  __pyx_t_2 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":132
- *         self.end_key = len(removed)  # Keeping this for the length of removed bits
- *         self._end_key_index = random.randint(0, len(self._output_tokens) - 1)  # Store the injected index
- *         self._output_tokens[self._end_key_index] += chr(self.end_key + 97)  # Inject the end key at the random index             # <<<<<<<<<<<<<<
+  /* "fmsApp/stegomarkov.pyx":128
+ *         self.end_key = len(removed)
+ *         i = random.randint(0, len(self.output_tokens) - 1)
+ *         self.output_tokens[i] += chr(self.end_key + 97)             # <<<<<<<<<<<<<<
  *         self.finished = True
  * 
  */
-  if (unlikely(__pyx_v_self->_output_tokens == Py_None)) {
+  if (unlikely(__pyx_v_self->output_tokens == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 132, __pyx_L1_error)
+    __PYX_ERR(0, 128, __pyx_L1_error)
   }
-  __Pyx_INCREF(__pyx_v_self->_output_tokens);
-  __pyx_t_8 = __pyx_v_self->_output_tokens;
-  __pyx_t_7 = __pyx_v_self->_end_key_index;
-  if (unlikely(__pyx_t_8 == Py_None)) {
+  __Pyx_INCREF(__pyx_v_self->output_tokens);
+  __pyx_t_7 = __pyx_v_self->output_tokens;
+  __Pyx_INCREF(__pyx_v_i);
+  __pyx_t_2 = __pyx_v_i;
+  if (unlikely(__pyx_t_7 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 132, __pyx_L1_error)
+    __PYX_ERR(0, 128, __pyx_L1_error)
   }
-  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_t_8, __pyx_t_7, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyInt_From_long((__pyx_v_self->end_key + 97)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_t_7, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_chr, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_long((__pyx_v_self->end_key + 97)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_chr, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = PyNumber_InPlaceAdd(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyNumber_InPlaceAdd(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 132, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(__pyx_t_8 == Py_None)) {
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (unlikely(__pyx_t_7 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 132, __pyx_L1_error)
+    __PYX_ERR(0, 128, __pyx_L1_error)
   }
-  if (unlikely((__Pyx_SetItemInt(__pyx_t_8, __pyx_t_7, __pyx_t_4, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0))) __PYX_ERR(0, 132, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  if (unlikely((PyObject_SetItem(__pyx_t_7, __pyx_t_2, __pyx_t_3) < 0))) __PYX_ERR(0, 128, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":133
- *         self._end_key_index = random.randint(0, len(self._output_tokens) - 1)  # Store the injected index
- *         self._output_tokens[self._end_key_index] += chr(self.end_key + 97)  # Inject the end key at the random index
+  /* "fmsApp/stegomarkov.pyx":129
+ *         i = random.randint(0, len(self.output_tokens) - 1)
+ *         self.output_tokens[i] += chr(self.end_key + 97)
  *         self.finished = True             # <<<<<<<<<<<<<<
  * 
  *     def generate(self):
  */
   __pyx_v_self->finished = 1;
 
-  /* "fmsApp/stegomarkov.pyx":128
+  /* "fmsApp/stegomarkov.pyx":124
  *             self._inject_end_key(removed)
  * 
  *     def _inject_end_key(self, removed):             # <<<<<<<<<<<<<<
  *         """Inject the end key to mark the end of encoding."""
- *         self.end_key = len(removed)  # Keeping this for the length of removed bits
+ *         self.end_key = len(removed)
  */
 
   /* function exit code */
@@ -9470,16 +9422,17 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_10_inject_end_key(struc
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_XDECREF(__pyx_t_7);
   __Pyx_AddTraceback("fmsApp.stegomarkov.Encoder._inject_end_key", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_i);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":135
+/* "fmsApp/stegomarkov.pyx":131
  *         self.finished = True
  * 
  *     def generate(self):             # <<<<<<<<<<<<<<
@@ -9542,7 +9495,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_12generate(struct __pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("generate", 1);
 
-  /* "fmsApp/stegomarkov.pyx":137
+  /* "fmsApp/stegomarkov.pyx":133
  *     def generate(self):
  *         """Consumes the entire bitstream and generates the output for it."""
  *         while not self.finished:             # <<<<<<<<<<<<<<
@@ -9553,14 +9506,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_12generate(struct __pyx
     __pyx_t_1 = (!__pyx_v_self->finished);
     if (!__pyx_t_1) break;
 
-    /* "fmsApp/stegomarkov.pyx":138
+    /* "fmsApp/stegomarkov.pyx":134
  *         """Consumes the entire bitstream and generates the output for it."""
  *         while not self.finished:
  *             self.step()             # <<<<<<<<<<<<<<
  * 
  *         return self.output
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_step); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_step); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     __pyx_t_5 = 0;
@@ -9580,14 +9533,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_12generate(struct __pyx
       PyObject *__pyx_callargs[2] = {__pyx_t_4, NULL};
       __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 134, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
 
-  /* "fmsApp/stegomarkov.pyx":140
+  /* "fmsApp/stegomarkov.pyx":136
  *             self.step()
  * 
  *         return self.output             # <<<<<<<<<<<<<<
@@ -9595,13 +9548,13 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_12generate(struct __pyx
  *     def _consume_from_list(self, lst):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_output); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_output); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "fmsApp/stegomarkov.pyx":135
+  /* "fmsApp/stegomarkov.pyx":131
  *         self.finished = True
  * 
  *     def generate(self):             # <<<<<<<<<<<<<<
@@ -9622,7 +9575,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_12generate(struct __pyx
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":142
+/* "fmsApp/stegomarkov.pyx":138
  *         return self.output
  * 
  *     def _consume_from_list(self, lst):             # <<<<<<<<<<<<<<
@@ -9684,12 +9637,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 142, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 138, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_consume_from_list") < 0)) __PYX_ERR(0, 142, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_consume_from_list") < 0)) __PYX_ERR(0, 138, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -9700,7 +9653,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_consume_from_list", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 142, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_consume_from_list", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 138, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -9751,28 +9704,28 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_14_consume_from_list(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_consume_from_list", 1);
 
-  /* "fmsApp/stegomarkov.pyx":144
+  /* "fmsApp/stegomarkov.pyx":140
  *     def _consume_from_list(self, lst):
  *         """Consume bits from the bitstream and choose an item from the list based on the bits."""
  *         list_length = len(lst)             # <<<<<<<<<<<<<<
  *         bit_length = ceil(log2(list_length))
  *         if list_length < 2 ** bit_length:
  */
-  __pyx_t_1 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 144, __pyx_L1_error)
+  __pyx_t_1 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 140, __pyx_L1_error)
   __pyx_v_list_length = __pyx_t_1;
 
-  /* "fmsApp/stegomarkov.pyx":145
+  /* "fmsApp/stegomarkov.pyx":141
  *         """Consume bits from the bitstream and choose an item from the list based on the bits."""
  *         list_length = len(lst)
  *         bit_length = ceil(log2(list_length))             # <<<<<<<<<<<<<<
  *         if list_length < 2 ** bit_length:
  *             bit_length -= 1
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ceil); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ceil); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_log2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_log2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = PyInt_FromSsize_t(__pyx_v_list_length); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_6 = PyInt_FromSsize_t(__pyx_v_list_length); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_7 = NULL;
   __pyx_t_8 = 0;
@@ -9793,7 +9746,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_14_consume_from_list(st
     __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 145, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
@@ -9816,44 +9769,44 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_14_consume_from_list(st
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __pyx_v_bit_length = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":146
+  /* "fmsApp/stegomarkov.pyx":142
  *         list_length = len(lst)
  *         bit_length = ceil(log2(list_length))
  *         if list_length < 2 ** bit_length:             # <<<<<<<<<<<<<<
  *             bit_length -= 1
  * 
  */
-  __pyx_t_2 = PyInt_FromSsize_t(__pyx_v_list_length); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_2 = PyInt_FromSsize_t(__pyx_v_list_length); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyNumber_PowerOf2(__pyx_int_2, __pyx_v_bit_length, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyNumber_PowerOf2(__pyx_int_2, __pyx_v_bit_length, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_LT); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_4 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_LT); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (__pyx_t_9) {
 
-    /* "fmsApp/stegomarkov.pyx":147
+    /* "fmsApp/stegomarkov.pyx":143
  *         bit_length = ceil(log2(list_length))
  *         if list_length < 2 ** bit_length:
  *             bit_length -= 1             # <<<<<<<<<<<<<<
  * 
  *         encoded_index = 0 if bit_length == 0 else int(self.bitstream[:bit_length], 2)
  */
-    __pyx_t_4 = __Pyx_PyInt_SubtractObjC(__pyx_v_bit_length, __pyx_int_1, 1, 1, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyInt_SubtractObjC(__pyx_v_bit_length, __pyx_int_1, 1, 1, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF_SET(__pyx_v_bit_length, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":146
+    /* "fmsApp/stegomarkov.pyx":142
  *         list_length = len(lst)
  *         bit_length = ceil(log2(list_length))
  *         if list_length < 2 ** bit_length:             # <<<<<<<<<<<<<<
@@ -9862,21 +9815,21 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_14_consume_from_list(st
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":149
+  /* "fmsApp/stegomarkov.pyx":145
  *             bit_length -= 1
  * 
  *         encoded_index = 0 if bit_length == 0 else int(self.bitstream[:bit_length], 2)             # <<<<<<<<<<<<<<
  *         next_token = lst[encoded_index]
  *         removed = self.bitstream[:bit_length]
  */
-  __pyx_t_9 = (__Pyx_PyInt_BoolEqObjC(__pyx_v_bit_length, __pyx_int_0, 0, 0)); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 149, __pyx_L1_error)
+  __pyx_t_9 = (__Pyx_PyInt_BoolEqObjC(__pyx_v_bit_length, __pyx_int_0, 0, 0)); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 145, __pyx_L1_error)
   if (__pyx_t_9) {
     __Pyx_INCREF(__pyx_int_0);
     __pyx_t_4 = __pyx_int_0;
   } else {
     if (unlikely(__pyx_v_self->bitstream == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 149, __pyx_L1_error)
+      __PYX_ERR(0, 145, __pyx_L1_error)
     }
     __Pyx_INCREF(__pyx_v_bit_length);
     __pyx_t_3 = __pyx_v_bit_length;
@@ -9884,21 +9837,21 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_14_consume_from_list(st
     if (__pyx_t_10) {
       __pyx_t_1 = PY_SSIZE_T_MAX;
     } else {
-      __pyx_t_11 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_11 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 149, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_11 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 145, __pyx_L1_error)
       __pyx_t_1 = __pyx_t_11;
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PySequence_GetSlice(__pyx_v_self->bitstream, 0, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
+    __pyx_t_3 = PySequence_GetSlice(__pyx_v_self->bitstream, 0, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_3);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error);
     __Pyx_INCREF(__pyx_int_2);
     __Pyx_GIVEREF(__pyx_int_2);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_int_2)) __PYX_ERR(0, 149, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_int_2)) __PYX_ERR(0, 145, __pyx_L1_error);
     __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)(&PyInt_Type)), __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)(&PyInt_Type)), __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_4 = __pyx_t_3;
@@ -9907,19 +9860,19 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_14_consume_from_list(st
   __pyx_v_encoded_index = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":150
+  /* "fmsApp/stegomarkov.pyx":146
  * 
  *         encoded_index = 0 if bit_length == 0 else int(self.bitstream[:bit_length], 2)
  *         next_token = lst[encoded_index]             # <<<<<<<<<<<<<<
  *         removed = self.bitstream[:bit_length]
  *         self.bitstream = self.bitstream[bit_length:]
  */
-  __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_v_lst, __pyx_v_encoded_index); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_v_lst, __pyx_v_encoded_index); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_v_next_token = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":151
+  /* "fmsApp/stegomarkov.pyx":147
  *         encoded_index = 0 if bit_length == 0 else int(self.bitstream[:bit_length], 2)
  *         next_token = lst[encoded_index]
  *         removed = self.bitstream[:bit_length]             # <<<<<<<<<<<<<<
@@ -9928,7 +9881,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_14_consume_from_list(st
  */
   if (unlikely(__pyx_v_self->bitstream == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 151, __pyx_L1_error)
+    __PYX_ERR(0, 147, __pyx_L1_error)
   }
   __Pyx_INCREF(__pyx_v_bit_length);
   __pyx_t_4 = __pyx_v_bit_length;
@@ -9936,16 +9889,16 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_14_consume_from_list(st
   if (__pyx_t_9) {
     __pyx_t_1 = PY_SSIZE_T_MAX;
   } else {
-    __pyx_t_11 = __Pyx_PyIndex_AsSsize_t(__pyx_t_4); if (unlikely((__pyx_t_11 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyIndex_AsSsize_t(__pyx_t_4); if (unlikely((__pyx_t_11 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 147, __pyx_L1_error)
     __pyx_t_1 = __pyx_t_11;
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PySequence_GetSlice(__pyx_v_self->bitstream, 0, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 151, __pyx_L1_error)
+  __pyx_t_4 = PySequence_GetSlice(__pyx_v_self->bitstream, 0, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_v_removed = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":152
+  /* "fmsApp/stegomarkov.pyx":148
  *         next_token = lst[encoded_index]
  *         removed = self.bitstream[:bit_length]
  *         self.bitstream = self.bitstream[bit_length:]             # <<<<<<<<<<<<<<
@@ -9954,7 +9907,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_14_consume_from_list(st
  */
   if (unlikely(__pyx_v_self->bitstream == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 152, __pyx_L1_error)
+    __PYX_ERR(0, 148, __pyx_L1_error)
   }
   __Pyx_INCREF(__pyx_v_bit_length);
   __pyx_t_4 = __pyx_v_bit_length;
@@ -9962,11 +9915,11 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_14_consume_from_list(st
   if (__pyx_t_9) {
     __pyx_t_1 = 0;
   } else {
-    __pyx_t_11 = __Pyx_PyIndex_AsSsize_t(__pyx_t_4); if (unlikely((__pyx_t_11 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 152, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyIndex_AsSsize_t(__pyx_t_4); if (unlikely((__pyx_t_11 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 148, __pyx_L1_error)
     __pyx_t_1 = __pyx_t_11;
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PySequence_GetSlice(__pyx_v_self->bitstream, __pyx_t_1, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_4 = PySequence_GetSlice(__pyx_v_self->bitstream, __pyx_t_1, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_4);
   __Pyx_GOTREF(__pyx_v_self->bitstream);
@@ -9974,7 +9927,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_14_consume_from_list(st
   __pyx_v_self->bitstream = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":154
+  /* "fmsApp/stegomarkov.pyx":150
  *         self.bitstream = self.bitstream[bit_length:]
  * 
  *         return next_token, removed, bit_length, encoded_index             # <<<<<<<<<<<<<<
@@ -9982,25 +9935,25 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_14_consume_from_list(st
  *     def _get_transitions(self, gram):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = PyTuple_New(4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_v_next_token);
   __Pyx_GIVEREF(__pyx_v_next_token);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_next_token)) __PYX_ERR(0, 154, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_next_token)) __PYX_ERR(0, 150, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_removed);
   __Pyx_GIVEREF(__pyx_v_removed);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_v_removed)) __PYX_ERR(0, 154, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_v_removed)) __PYX_ERR(0, 150, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_bit_length);
   __Pyx_GIVEREF(__pyx_v_bit_length);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_v_bit_length)) __PYX_ERR(0, 154, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_v_bit_length)) __PYX_ERR(0, 150, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_encoded_index);
   __Pyx_GIVEREF(__pyx_v_encoded_index);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 3, __pyx_v_encoded_index)) __PYX_ERR(0, 154, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 3, __pyx_v_encoded_index)) __PYX_ERR(0, 150, __pyx_L1_error);
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "fmsApp/stegomarkov.pyx":142
+  /* "fmsApp/stegomarkov.pyx":138
  *         return self.output
  * 
  *     def _consume_from_list(self, lst):             # <<<<<<<<<<<<<<
@@ -10028,7 +9981,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_14_consume_from_list(st
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":156
+/* "fmsApp/stegomarkov.pyx":152
  *         return next_token, removed, bit_length, encoded_index
  * 
  *     def _get_transitions(self, gram):             # <<<<<<<<<<<<<<
@@ -10090,12 +10043,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 156, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 152, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_get_transitions") < 0)) __PYX_ERR(0, 156, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_get_transitions") < 0)) __PYX_ERR(0, 152, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -10106,7 +10059,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_get_transitions", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 156, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_get_transitions", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 152, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -10133,7 +10086,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":159
+/* "fmsApp/stegomarkov.pyx":155
  *         """Get possible transitions for the current gram in the Markov chain."""
  *         trans_matrix = self.model.chain.model[gram]
  *         trans_matrix = sorted(trans_matrix.items(), key=lambda kv: (kv[1]), reverse=True)             # <<<<<<<<<<<<<<
@@ -10194,12 +10147,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 159, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 155, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "lambda1") < 0)) __PYX_ERR(0, 159, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "lambda1") < 0)) __PYX_ERR(0, 155, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -10210,7 +10163,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("lambda1", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 159, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("lambda1", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 155, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -10246,7 +10199,7 @@ static PyObject *__pyx_lambda_funcdef_lambda1(CYTHON_UNUSED PyObject *__pyx_self
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("lambda1", 1);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_kv, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_kv, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -10263,7 +10216,7 @@ static PyObject *__pyx_lambda_funcdef_lambda1(CYTHON_UNUSED PyObject *__pyx_self
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":156
+/* "fmsApp/stegomarkov.pyx":152
  *         return next_token, removed, bit_length, encoded_index
  * 
  *     def _get_transitions(self, gram):             # <<<<<<<<<<<<<<
@@ -10288,32 +10241,32 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_16_get_transitions(stru
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_get_transitions", 1);
 
-  /* "fmsApp/stegomarkov.pyx":158
+  /* "fmsApp/stegomarkov.pyx":154
  *     def _get_transitions(self, gram):
  *         """Get possible transitions for the current gram in the Markov chain."""
  *         trans_matrix = self.model.chain.model[gram]             # <<<<<<<<<<<<<<
  *         trans_matrix = sorted(trans_matrix.items(), key=lambda kv: (kv[1]), reverse=True)
  *         transitions = [i[0] for i in trans_matrix]
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_chain); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_chain); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_model); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_model); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_v_gram); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_v_gram); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_trans_matrix = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":159
+  /* "fmsApp/stegomarkov.pyx":155
  *         """Get possible transitions for the current gram in the Markov chain."""
  *         trans_matrix = self.model.chain.model[gram]
  *         trans_matrix = sorted(trans_matrix.items(), key=lambda kv: (kv[1]), reverse=True)             # <<<<<<<<<<<<<<
  *         transitions = [i[0] for i in trans_matrix]
  *         return transitions
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_trans_matrix, __pyx_n_s_items); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_trans_matrix, __pyx_n_s_items); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 155, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -10333,30 +10286,30 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_16_get_transitions(stru
     PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 155, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_16_get_transitions_lambda1, 0, __pyx_n_s_get_transitions_locals_lambda, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_16_get_transitions_lambda1, 0, __pyx_n_s_get_transitions_locals_lambda, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 155, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_key, __pyx_t_3) < 0) __PYX_ERR(0, 159, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_key, __pyx_t_3) < 0) __PYX_ERR(0, 155, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 159, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_sorted, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_sorted, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 155, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF_SET(__pyx_v_trans_matrix, __pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":160
+  /* "fmsApp/stegomarkov.pyx":156
  *         trans_matrix = self.model.chain.model[gram]
  *         trans_matrix = sorted(trans_matrix.items(), key=lambda kv: (kv[1]), reverse=True)
  *         transitions = [i[0] for i in trans_matrix]             # <<<<<<<<<<<<<<
@@ -10364,16 +10317,16 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_16_get_transitions(stru
  * 
  */
   { /* enter inner scope */
-    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 160, __pyx_L5_error)
+    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 156, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (likely(PyList_CheckExact(__pyx_v_trans_matrix)) || PyTuple_CheckExact(__pyx_v_trans_matrix)) {
       __pyx_t_1 = __pyx_v_trans_matrix; __Pyx_INCREF(__pyx_t_1);
       __pyx_t_5 = 0;
       __pyx_t_6 = NULL;
     } else {
-      __pyx_t_5 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_trans_matrix); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L5_error)
+      __pyx_t_5 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_trans_matrix); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 156, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 160, __pyx_L5_error)
+      __pyx_t_6 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 156, __pyx_L5_error)
     }
     for (;;) {
       if (likely(!__pyx_t_6)) {
@@ -10381,28 +10334,28 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_16_get_transitions(stru
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 160, __pyx_L5_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 156, __pyx_L5_error)
             #endif
             if (__pyx_t_5 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 160, __pyx_L5_error)
+          __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 156, __pyx_L5_error)
           #else
-          __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L5_error)
+          __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 156, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_2);
           #endif
         } else {
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_1);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 160, __pyx_L5_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 156, __pyx_L5_error)
             #endif
             if (__pyx_t_5 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 160, __pyx_L5_error)
+          __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 156, __pyx_L5_error)
           #else
-          __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L5_error)
+          __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 156, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_2);
           #endif
         }
@@ -10412,7 +10365,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_16_get_transitions(stru
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 160, __pyx_L5_error)
+            else __PYX_ERR(0, 156, __pyx_L5_error)
           }
           break;
         }
@@ -10420,9 +10373,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_16_get_transitions(stru
       }
       __Pyx_XDECREF_SET(__pyx_8genexpr4__pyx_v_i, __pyx_t_2);
       __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_GetItemInt(__pyx_8genexpr4__pyx_v_i, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L5_error)
+      __pyx_t_2 = __Pyx_GetItemInt(__pyx_8genexpr4__pyx_v_i, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 156, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_2);
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_2))) __PYX_ERR(0, 160, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_2))) __PYX_ERR(0, 156, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -10436,7 +10389,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_16_get_transitions(stru
   __pyx_v_transitions = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":161
+  /* "fmsApp/stegomarkov.pyx":157
  *         trans_matrix = sorted(trans_matrix.items(), key=lambda kv: (kv[1]), reverse=True)
  *         transitions = [i[0] for i in trans_matrix]
  *         return transitions             # <<<<<<<<<<<<<<
@@ -10448,7 +10401,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_16_get_transitions(stru
   __pyx_r = __pyx_v_transitions;
   goto __pyx_L0;
 
-  /* "fmsApp/stegomarkov.pyx":156
+  /* "fmsApp/stegomarkov.pyx":152
  *         return next_token, removed, bit_length, encoded_index
  * 
  *     def _get_transitions(self, gram):             # <<<<<<<<<<<<<<
@@ -10472,7 +10425,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_16_get_transitions(stru
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":163
+/* "fmsApp/stegomarkov.pyx":159
  *         return transitions
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
@@ -10537,7 +10490,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 163, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 159, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -10545,14 +10498,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 163, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 159, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("_pretty_print_list", 1, 2, 2, 1); __PYX_ERR(0, 163, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_pretty_print_list", 1, 2, 2, 1); __PYX_ERR(0, 159, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_pretty_print_list") < 0)) __PYX_ERR(0, 163, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_pretty_print_list") < 0)) __PYX_ERR(0, 159, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -10565,7 +10518,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_pretty_print_list", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 163, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_pretty_print_list", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 159, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -10592,7 +10545,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":166
+/* "fmsApp/stegomarkov.pyx":162
  *     def _pretty_print_list(lst, limit):
  *         """Pretty print a list, showing only up to `limit` items."""
  *         lst = list(map(lambda s: f"'{s}'", lst))             # <<<<<<<<<<<<<<
@@ -10653,12 +10606,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 166, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "lambda2") < 0)) __PYX_ERR(0, 166, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "lambda2") < 0)) __PYX_ERR(0, 162, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -10669,7 +10622,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("lambda2", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 166, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("lambda2", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 162, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -10708,7 +10661,7 @@ static PyObject *__pyx_lambda_funcdef_lambda2(CYTHON_UNUSED PyObject *__pyx_self
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("lambda2", 1);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = 0;
   __pyx_t_3 = 127;
@@ -10716,7 +10669,7 @@ static PyObject *__pyx_lambda_funcdef_lambda2(CYTHON_UNUSED PyObject *__pyx_self
   __pyx_t_2 += 1;
   __Pyx_GIVEREF(__pyx_kp_u__7);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u__7);
-  __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_v_s, __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_v_s, __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) : __pyx_t_3;
   __pyx_t_2 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_4);
@@ -10727,7 +10680,7 @@ static PyObject *__pyx_lambda_funcdef_lambda2(CYTHON_UNUSED PyObject *__pyx_self
   __pyx_t_2 += 1;
   __Pyx_GIVEREF(__pyx_kp_u__7);
   PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_kp_u__7);
-  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_4;
@@ -10746,7 +10699,7 @@ static PyObject *__pyx_lambda_funcdef_lambda2(CYTHON_UNUSED PyObject *__pyx_self
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":163
+/* "fmsApp/stegomarkov.pyx":159
  *         return transitions
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
@@ -10772,44 +10725,44 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
   __Pyx_RefNannySetupContext("_pretty_print_list", 0);
   __Pyx_INCREF(__pyx_v_lst);
 
-  /* "fmsApp/stegomarkov.pyx":166
+  /* "fmsApp/stegomarkov.pyx":162
  *     def _pretty_print_list(lst, limit):
  *         """Pretty print a list, showing only up to `limit` items."""
  *         lst = list(map(lambda s: f"'{s}'", lst))             # <<<<<<<<<<<<<<
  *         if not lst:
  *             return "None"
  */
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list_lambda2, 0, __pyx_n_s_pretty_print_list_locals_lambda, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list_lambda2, 0, __pyx_n_s_pretty_print_list_locals_lambda, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 162, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_lst);
   __Pyx_GIVEREF(__pyx_v_lst);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_lst)) __PYX_ERR(0, 166, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_lst)) __PYX_ERR(0, 162, __pyx_L1_error);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_map, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_map, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PySequence_ListKeepNew(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PySequence_ListKeepNew(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF_SET(__pyx_v_lst, __pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":167
+  /* "fmsApp/stegomarkov.pyx":163
  *         """Pretty print a list, showing only up to `limit` items."""
  *         lst = list(map(lambda s: f"'{s}'", lst))
  *         if not lst:             # <<<<<<<<<<<<<<
  *             return "None"
  *         elif len(lst) == 1:
  */
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_lst); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 167, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_lst); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 163, __pyx_L1_error)
   __pyx_t_4 = (!__pyx_t_3);
   if (__pyx_t_4) {
 
-    /* "fmsApp/stegomarkov.pyx":168
+    /* "fmsApp/stegomarkov.pyx":164
  *         lst = list(map(lambda s: f"'{s}'", lst))
  *         if not lst:
  *             return "None"             # <<<<<<<<<<<<<<
@@ -10821,7 +10774,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
     __pyx_r = __pyx_n_s_None;
     goto __pyx_L0;
 
-    /* "fmsApp/stegomarkov.pyx":167
+    /* "fmsApp/stegomarkov.pyx":163
  *         """Pretty print a list, showing only up to `limit` items."""
  *         lst = list(map(lambda s: f"'{s}'", lst))
  *         if not lst:             # <<<<<<<<<<<<<<
@@ -10830,18 +10783,18 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":169
+  /* "fmsApp/stegomarkov.pyx":165
  *         if not lst:
  *             return "None"
  *         elif len(lst) == 1:             # <<<<<<<<<<<<<<
  *             return lst[0]
  *         elif len(lst) == 2:
  */
-  __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 169, __pyx_L1_error)
+  __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 165, __pyx_L1_error)
   __pyx_t_4 = (__pyx_t_5 == 1);
   if (__pyx_t_4) {
 
-    /* "fmsApp/stegomarkov.pyx":170
+    /* "fmsApp/stegomarkov.pyx":166
  *             return "None"
  *         elif len(lst) == 1:
  *             return lst[0]             # <<<<<<<<<<<<<<
@@ -10849,13 +10802,13 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
  *             return f"{lst[0]} and {lst[1]}"
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_lst, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 170, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_lst, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_r = __pyx_t_2;
     __pyx_t_2 = 0;
     goto __pyx_L0;
 
-    /* "fmsApp/stegomarkov.pyx":169
+    /* "fmsApp/stegomarkov.pyx":165
  *         if not lst:
  *             return "None"
  *         elif len(lst) == 1:             # <<<<<<<<<<<<<<
@@ -10864,18 +10817,18 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":171
+  /* "fmsApp/stegomarkov.pyx":167
  *         elif len(lst) == 1:
  *             return lst[0]
  *         elif len(lst) == 2:             # <<<<<<<<<<<<<<
  *             return f"{lst[0]} and {lst[1]}"
  *         elif len(lst) <= limit:
  */
-  __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 171, __pyx_L1_error)
+  __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 167, __pyx_L1_error)
   __pyx_t_4 = (__pyx_t_5 == 2);
   if (__pyx_t_4) {
 
-    /* "fmsApp/stegomarkov.pyx":172
+    /* "fmsApp/stegomarkov.pyx":168
  *             return lst[0]
  *         elif len(lst) == 2:
  *             return f"{lst[0]} and {lst[1]}"             # <<<<<<<<<<<<<<
@@ -10883,13 +10836,13 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
  *             return ", ".join(lst[:-1]) + ", and " + lst[-1]
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 168, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_5 = 0;
     __pyx_t_6 = 127;
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_lst, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_lst, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = __Pyx_PyObject_FormatSimple(__pyx_t_1, __pyx_empty_unicode); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 172, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_FormatSimple(__pyx_t_1, __pyx_empty_unicode); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 168, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) : __pyx_t_6;
@@ -10901,9 +10854,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
     __pyx_t_5 += 5;
     __Pyx_GIVEREF(__pyx_kp_u_and);
     PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_kp_u_and);
-    __pyx_t_7 = __Pyx_GetItemInt(__pyx_v_lst, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 172, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_GetItemInt(__pyx_v_lst, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 168, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_7, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_7, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) : __pyx_t_6;
@@ -10911,14 +10864,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
     __Pyx_GIVEREF(__pyx_t_1);
     PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyUnicode_Join(__pyx_t_2, 3, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyUnicode_Join(__pyx_t_2, 3, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "fmsApp/stegomarkov.pyx":171
+    /* "fmsApp/stegomarkov.pyx":167
  *         elif len(lst) == 1:
  *             return lst[0]
  *         elif len(lst) == 2:             # <<<<<<<<<<<<<<
@@ -10927,23 +10880,23 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":173
+  /* "fmsApp/stegomarkov.pyx":169
  *         elif len(lst) == 2:
  *             return f"{lst[0]} and {lst[1]}"
  *         elif len(lst) <= limit:             # <<<<<<<<<<<<<<
  *             return ", ".join(lst[:-1]) + ", and " + lst[-1]
  *         else:
  */
-  __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 173, __pyx_L1_error)
-  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 169, __pyx_L1_error)
+  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_v_limit, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_v_limit, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "fmsApp/stegomarkov.pyx":174
+    /* "fmsApp/stegomarkov.pyx":170
  *             return f"{lst[0]} and {lst[1]}"
  *         elif len(lst) <= limit:
  *             return ", ".join(lst[:-1]) + ", and " + lst[-1]             # <<<<<<<<<<<<<<
@@ -10951,17 +10904,17 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
  *             truncated_list = lst[:limit]
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_v_lst, 0, -1L, NULL, NULL, &__pyx_slice__9, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_v_lst, 0, -1L, NULL, NULL, &__pyx_slice__9, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyString_Join(__pyx_kp_s__8, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyString_Join(__pyx_kp_s__8, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_kp_s_and_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_kp_s_and_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_lst, -1L, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_lst, -1L, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = PyNumber_Add(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_7 = PyNumber_Add(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -10969,7 +10922,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
     __pyx_t_7 = 0;
     goto __pyx_L0;
 
-    /* "fmsApp/stegomarkov.pyx":173
+    /* "fmsApp/stegomarkov.pyx":169
  *         elif len(lst) == 2:
  *             return f"{lst[0]} and {lst[1]}"
  *         elif len(lst) <= limit:             # <<<<<<<<<<<<<<
@@ -10978,7 +10931,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":176
+  /* "fmsApp/stegomarkov.pyx":172
  *             return ", ".join(lst[:-1]) + ", and " + lst[-1]
  *         else:
  *             truncated_list = lst[:limit]             # <<<<<<<<<<<<<<
@@ -10986,28 +10939,28 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
  *             return ", ".join(truncated_list) + f", and {remaining_count} more"
  */
   /*else*/ {
-    __pyx_t_7 = __Pyx_PyObject_GetSlice(__pyx_v_lst, 0, 0, NULL, &__pyx_v_limit, NULL, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 176, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetSlice(__pyx_v_lst, 0, 0, NULL, &__pyx_v_limit, NULL, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 172, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_v_truncated_list = __pyx_t_7;
     __pyx_t_7 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":177
+    /* "fmsApp/stegomarkov.pyx":173
  *         else:
  *             truncated_list = lst[:limit]
  *             remaining_count = len(lst) - limit             # <<<<<<<<<<<<<<
  *             return ", ".join(truncated_list) + f", and {remaining_count} more"
  * 
  */
-    __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 177, __pyx_L1_error)
-    __pyx_t_7 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 173, __pyx_L1_error)
+    __pyx_t_7 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 173, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_1 = PyNumber_Subtract(__pyx_t_7, __pyx_v_limit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Subtract(__pyx_t_7, __pyx_v_limit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_remaining_count = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":178
+    /* "fmsApp/stegomarkov.pyx":174
  *             truncated_list = lst[:limit]
  *             remaining_count = len(lst) - limit
  *             return ", ".join(truncated_list) + f", and {remaining_count} more"             # <<<<<<<<<<<<<<
@@ -11015,9 +10968,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
  * 
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyString_Join(__pyx_kp_s__8, __pyx_v_truncated_list); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyString_Join(__pyx_kp_s__8, __pyx_v_truncated_list); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 178, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 174, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_5 = 0;
     __pyx_t_6 = 127;
@@ -11025,7 +10978,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
     __pyx_t_5 += 6;
     __Pyx_GIVEREF(__pyx_kp_u_and_2);
     PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_kp_u_and_2);
-    __pyx_t_2 = __Pyx_PyObject_FormatSimple(__pyx_v_remaining_count, __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_FormatSimple(__pyx_v_remaining_count, __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) : __pyx_t_6;
     __pyx_t_5 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_2);
@@ -11036,10 +10989,10 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
     __pyx_t_5 += 5;
     __Pyx_GIVEREF(__pyx_kp_u_more);
     PyTuple_SET_ITEM(__pyx_t_7, 2, __pyx_kp_u_more);
-    __pyx_t_2 = __Pyx_PyUnicode_Join(__pyx_t_7, 3, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyUnicode_Join(__pyx_t_7, 3, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = PyNumber_Add(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 178, __pyx_L1_error)
+    __pyx_t_7 = PyNumber_Add(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 174, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -11048,7 +11001,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_18_pretty_print_list(Py
     goto __pyx_L0;
   }
 
-  /* "fmsApp/stegomarkov.pyx":163
+  /* "fmsApp/stegomarkov.pyx":159
  *         return transitions
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
@@ -11141,11 +11094,11 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_20__reduce_cython__(str
   /* "(tree fragment)":5
  *     cdef object _dict
  *     cdef bint use_setstate
- *     state = (self._end_key_index, self._output_tokens, self.bitstream, self.current_gram, self.end_key, self.entrypoints, self.exhausted, self.finished, self.logging, self.model)             # <<<<<<<<<<<<<<
+ *     state = (self.bitstream, self.bitstream_length, self.current_gram, self.end_key, self.entrypoints, self.exhausted, self.finished, self.logging, self.model, self.output_tokens)             # <<<<<<<<<<<<<<
  *     _dict = getattr(self, '__dict__', None)
  *     if _dict is not None:
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_end_key_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 5, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->bitstream_length); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->end_key); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -11157,31 +11110,31 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_20__reduce_cython__(str
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = PyTuple_New(10); if (unlikely(!__pyx_t_6)) __PYX_ERR(2, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1)) __PYX_ERR(2, 5, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_v_self->_output_tokens);
-  __Pyx_GIVEREF(__pyx_v_self->_output_tokens);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_v_self->_output_tokens)) __PYX_ERR(2, 5, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self->bitstream);
   __Pyx_GIVEREF(__pyx_v_self->bitstream);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_v_self->bitstream)) __PYX_ERR(2, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_v_self->bitstream)) __PYX_ERR(2, 5, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_1);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_1)) __PYX_ERR(2, 5, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self->current_gram);
   __Pyx_GIVEREF(__pyx_v_self->current_gram);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 3, __pyx_v_self->current_gram)) __PYX_ERR(2, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_v_self->current_gram)) __PYX_ERR(2, 5, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 4, __pyx_t_2)) __PYX_ERR(2, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 3, __pyx_t_2)) __PYX_ERR(2, 5, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self->entrypoints);
   __Pyx_GIVEREF(__pyx_v_self->entrypoints);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 5, __pyx_v_self->entrypoints)) __PYX_ERR(2, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 4, __pyx_v_self->entrypoints)) __PYX_ERR(2, 5, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_3);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 6, __pyx_t_3)) __PYX_ERR(2, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 5, __pyx_t_3)) __PYX_ERR(2, 5, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 7, __pyx_t_4)) __PYX_ERR(2, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 6, __pyx_t_4)) __PYX_ERR(2, 5, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_5);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 8, __pyx_t_5)) __PYX_ERR(2, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 7, __pyx_t_5)) __PYX_ERR(2, 5, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self->model);
   __Pyx_GIVEREF(__pyx_v_self->model);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 9, __pyx_v_self->model)) __PYX_ERR(2, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 8, __pyx_v_self->model)) __PYX_ERR(2, 5, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_v_self->output_tokens);
+  __Pyx_GIVEREF(__pyx_v_self->output_tokens);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 9, __pyx_v_self->output_tokens)) __PYX_ERR(2, 5, __pyx_L1_error);
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
@@ -11192,7 +11145,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_20__reduce_cython__(str
 
   /* "(tree fragment)":6
  *     cdef bint use_setstate
- *     state = (self._end_key_index, self._output_tokens, self.bitstream, self.current_gram, self.end_key, self.entrypoints, self.exhausted, self.finished, self.logging, self.model)
+ *     state = (self.bitstream, self.bitstream_length, self.current_gram, self.end_key, self.entrypoints, self.exhausted, self.finished, self.logging, self.model, self.output_tokens)
  *     _dict = getattr(self, '__dict__', None)             # <<<<<<<<<<<<<<
  *     if _dict is not None:
  *         state += (_dict,)
@@ -11203,7 +11156,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_20__reduce_cython__(str
   __pyx_t_6 = 0;
 
   /* "(tree fragment)":7
- *     state = (self._end_key_index, self._output_tokens, self.bitstream, self.current_gram, self.end_key, self.entrypoints, self.exhausted, self.finished, self.logging, self.model)
+ *     state = (self.bitstream, self.bitstream_length, self.current_gram, self.end_key, self.entrypoints, self.exhausted, self.finished, self.logging, self.model, self.output_tokens)
  *     _dict = getattr(self, '__dict__', None)
  *     if _dict is not None:             # <<<<<<<<<<<<<<
  *         state += (_dict,)
@@ -11235,12 +11188,12 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_20__reduce_cython__(str
  *         state += (_dict,)
  *         use_setstate = True             # <<<<<<<<<<<<<<
  *     else:
- *         use_setstate = self._output_tokens is not None or self.bitstream is not None or self.current_gram is not None or self.entrypoints is not None or self.model is not None
+ *         use_setstate = self.bitstream is not None or self.current_gram is not None or self.entrypoints is not None or self.model is not None or self.output_tokens is not None
  */
     __pyx_v_use_setstate = 1;
 
     /* "(tree fragment)":7
- *     state = (self._end_key_index, self._output_tokens, self.bitstream, self.current_gram, self.end_key, self.entrypoints, self.exhausted, self.finished, self.logging, self.model)
+ *     state = (self.bitstream, self.bitstream_length, self.current_gram, self.end_key, self.entrypoints, self.exhausted, self.finished, self.logging, self.model, self.output_tokens)
  *     _dict = getattr(self, '__dict__', None)
  *     if _dict is not None:             # <<<<<<<<<<<<<<
  *         state += (_dict,)
@@ -11252,17 +11205,11 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_20__reduce_cython__(str
   /* "(tree fragment)":11
  *         use_setstate = True
  *     else:
- *         use_setstate = self._output_tokens is not None or self.bitstream is not None or self.current_gram is not None or self.entrypoints is not None or self.model is not None             # <<<<<<<<<<<<<<
+ *         use_setstate = self.bitstream is not None or self.current_gram is not None or self.entrypoints is not None or self.model is not None or self.output_tokens is not None             # <<<<<<<<<<<<<<
  *     if use_setstate:
- *         return __pyx_unpickle_Encoder, (type(self), 0x5fb5542, None), state
+ *         return __pyx_unpickle_Encoder, (type(self), 0x4ea1e69, None), state
  */
   /*else*/ {
-    __pyx_t_8 = (__pyx_v_self->_output_tokens != ((PyObject*)Py_None));
-    if (!__pyx_t_8) {
-    } else {
-      __pyx_t_7 = __pyx_t_8;
-      goto __pyx_L4_bool_binop_done;
-    }
     __pyx_t_8 = (__pyx_v_self->bitstream != ((PyObject*)Py_None));
     if (!__pyx_t_8) {
     } else {
@@ -11282,6 +11229,12 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_20__reduce_cython__(str
       goto __pyx_L4_bool_binop_done;
     }
     __pyx_t_8 = (__pyx_v_self->model != Py_None);
+    if (!__pyx_t_8) {
+    } else {
+      __pyx_t_7 = __pyx_t_8;
+      goto __pyx_L4_bool_binop_done;
+    }
+    __pyx_t_8 = (__pyx_v_self->output_tokens != ((PyObject*)Py_None));
     __pyx_t_7 = __pyx_t_8;
     __pyx_L4_bool_binop_done:;
     __pyx_v_use_setstate = __pyx_t_7;
@@ -11290,19 +11243,19 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_20__reduce_cython__(str
 
   /* "(tree fragment)":12
  *     else:
- *         use_setstate = self._output_tokens is not None or self.bitstream is not None or self.current_gram is not None or self.entrypoints is not None or self.model is not None
+ *         use_setstate = self.bitstream is not None or self.current_gram is not None or self.entrypoints is not None or self.model is not None or self.output_tokens is not None
  *     if use_setstate:             # <<<<<<<<<<<<<<
- *         return __pyx_unpickle_Encoder, (type(self), 0x5fb5542, None), state
+ *         return __pyx_unpickle_Encoder, (type(self), 0x4ea1e69, None), state
  *     else:
  */
   if (__pyx_v_use_setstate) {
 
     /* "(tree fragment)":13
- *         use_setstate = self._output_tokens is not None or self.bitstream is not None or self.current_gram is not None or self.entrypoints is not None or self.model is not None
+ *         use_setstate = self.bitstream is not None or self.current_gram is not None or self.entrypoints is not None or self.model is not None or self.output_tokens is not None
  *     if use_setstate:
- *         return __pyx_unpickle_Encoder, (type(self), 0x5fb5542, None), state             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_Encoder, (type(self), 0x4ea1e69, None), state             # <<<<<<<<<<<<<<
  *     else:
- *         return __pyx_unpickle_Encoder, (type(self), 0x5fb5542, state)
+ *         return __pyx_unpickle_Encoder, (type(self), 0x4ea1e69, state)
  */
     __Pyx_XDECREF(__pyx_r);
     __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_pyx_unpickle_Encoder); if (unlikely(!__pyx_t_5)) __PYX_ERR(2, 13, __pyx_L1_error)
@@ -11312,9 +11265,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_20__reduce_cython__(str
     __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
     __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))))) __PYX_ERR(2, 13, __pyx_L1_error);
-    __Pyx_INCREF(__pyx_int_100357442);
-    __Pyx_GIVEREF(__pyx_int_100357442);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_int_100357442)) __PYX_ERR(2, 13, __pyx_L1_error);
+    __Pyx_INCREF(__pyx_int_82452073);
+    __Pyx_GIVEREF(__pyx_int_82452073);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_int_82452073)) __PYX_ERR(2, 13, __pyx_L1_error);
     __Pyx_INCREF(Py_None);
     __Pyx_GIVEREF(Py_None);
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 2, Py_None)) __PYX_ERR(2, 13, __pyx_L1_error);
@@ -11335,17 +11288,17 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_20__reduce_cython__(str
 
     /* "(tree fragment)":12
  *     else:
- *         use_setstate = self._output_tokens is not None or self.bitstream is not None or self.current_gram is not None or self.entrypoints is not None or self.model is not None
+ *         use_setstate = self.bitstream is not None or self.current_gram is not None or self.entrypoints is not None or self.model is not None or self.output_tokens is not None
  *     if use_setstate:             # <<<<<<<<<<<<<<
- *         return __pyx_unpickle_Encoder, (type(self), 0x5fb5542, None), state
+ *         return __pyx_unpickle_Encoder, (type(self), 0x4ea1e69, None), state
  *     else:
  */
   }
 
   /* "(tree fragment)":15
- *         return __pyx_unpickle_Encoder, (type(self), 0x5fb5542, None), state
+ *         return __pyx_unpickle_Encoder, (type(self), 0x4ea1e69, None), state
  *     else:
- *         return __pyx_unpickle_Encoder, (type(self), 0x5fb5542, state)             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_Encoder, (type(self), 0x4ea1e69, state)             # <<<<<<<<<<<<<<
  * def __setstate_cython__(self, __pyx_state):
  *     __pyx_unpickle_Encoder__set_state(self, __pyx_state)
  */
@@ -11358,9 +11311,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_20__reduce_cython__(str
     __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
     __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))))) __PYX_ERR(2, 15, __pyx_L1_error);
-    __Pyx_INCREF(__pyx_int_100357442);
-    __Pyx_GIVEREF(__pyx_int_100357442);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_int_100357442)) __PYX_ERR(2, 15, __pyx_L1_error);
+    __Pyx_INCREF(__pyx_int_82452073);
+    __Pyx_GIVEREF(__pyx_int_82452073);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_int_82452073)) __PYX_ERR(2, 15, __pyx_L1_error);
     __Pyx_INCREF(__pyx_v_state);
     __Pyx_GIVEREF(__pyx_v_state);
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_v_state)) __PYX_ERR(2, 15, __pyx_L1_error);
@@ -11403,7 +11356,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_20__reduce_cython__(str
 
 /* "(tree fragment)":16
  *     else:
- *         return __pyx_unpickle_Encoder, (type(self), 0x5fb5542, state)
+ *         return __pyx_unpickle_Encoder, (type(self), 0x4ea1e69, state)
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     __pyx_unpickle_Encoder__set_state(self, __pyx_state)
  */
@@ -11514,7 +11467,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_22__setstate_cython__(s
   __Pyx_RefNannySetupContext("__setstate_cython__", 1);
 
   /* "(tree fragment)":17
- *         return __pyx_unpickle_Encoder, (type(self), 0x5fb5542, state)
+ *         return __pyx_unpickle_Encoder, (type(self), 0x4ea1e69, state)
  * def __setstate_cython__(self, __pyx_state):
  *     __pyx_unpickle_Encoder__set_state(self, __pyx_state)             # <<<<<<<<<<<<<<
  */
@@ -11525,7 +11478,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_22__setstate_cython__(s
 
   /* "(tree fragment)":16
  *     else:
- *         return __pyx_unpickle_Encoder, (type(self), 0x5fb5542, state)
+ *         return __pyx_unpickle_Encoder, (type(self), 0x4ea1e69, state)
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     __pyx_unpickle_Encoder__set_state(self, __pyx_state)
  */
@@ -11543,8 +11496,8 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Encoder_22__setstate_cython__(s
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":199
- *     cdef int _index  # Index for processing the stega_text
+/* "fmsApp/stegomarkov.pyx":195
+ *     cdef int index  # Index for processing the stega_text
  * 
  *     def __init__(self, object model, str stega_text, bint logging):             # <<<<<<<<<<<<<<
  *         self.model = model
@@ -11593,7 +11546,7 @@ static int __pyx_pw_6fmsApp_11stegomarkov_7Decoder_1__init__(PyObject *__pyx_v_s
           (void)__Pyx_Arg_NewRef_VARARGS(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 199, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 195, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -11601,9 +11554,9 @@ static int __pyx_pw_6fmsApp_11stegomarkov_7Decoder_1__init__(PyObject *__pyx_v_s
           (void)__Pyx_Arg_NewRef_VARARGS(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 199, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 195, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(0, 199, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(0, 195, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -11611,14 +11564,14 @@ static int __pyx_pw_6fmsApp_11stegomarkov_7Decoder_1__init__(PyObject *__pyx_v_s
           (void)__Pyx_Arg_NewRef_VARARGS(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 199, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 195, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(0, 199, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(0, 195, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 199, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 195, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 3)) {
       goto __pyx_L5_argtuple_error;
@@ -11629,11 +11582,11 @@ static int __pyx_pw_6fmsApp_11stegomarkov_7Decoder_1__init__(PyObject *__pyx_v_s
     }
     __pyx_v_model = values[0];
     __pyx_v_stega_text = ((PyObject*)values[1]);
-    __pyx_v_logging = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_logging == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 199, __pyx_L3_error)
+    __pyx_v_logging = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_logging == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 195, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 199, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 195, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -11647,7 +11600,7 @@ static int __pyx_pw_6fmsApp_11stegomarkov_7Decoder_1__init__(PyObject *__pyx_v_s
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_stega_text), (&PyString_Type), 1, "stega_text", 1))) __PYX_ERR(0, 199, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_stega_text), (&PyString_Type), 1, "stega_text", 1))) __PYX_ERR(0, 195, __pyx_L1_error)
   __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder___init__(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self), __pyx_v_model, __pyx_v_stega_text, __pyx_v_logging);
 
   /* function exit code */
@@ -11677,7 +11630,7 @@ static int __pyx_pf_6fmsApp_11stegomarkov_7Decoder___init__(struct __pyx_obj_6fm
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 1);
 
-  /* "fmsApp/stegomarkov.pyx":200
+  /* "fmsApp/stegomarkov.pyx":196
  * 
  *     def __init__(self, object model, str stega_text, bint logging):
  *         self.model = model             # <<<<<<<<<<<<<<
@@ -11690,23 +11643,23 @@ static int __pyx_pf_6fmsApp_11stegomarkov_7Decoder___init__(struct __pyx_obj_6fm
   __Pyx_DECREF(__pyx_v_self->model);
   __pyx_v_self->model = __pyx_v_model;
 
-  /* "fmsApp/stegomarkov.pyx":201
+  /* "fmsApp/stegomarkov.pyx":197
  *     def __init__(self, object model, str stega_text, bint logging):
  *         self.model = model
  *         self.stega_text = stega_text.split(" ")             # <<<<<<<<<<<<<<
  *         self.logging = logging
  *         self.entrypoints = self._get_entrypoints()
  */
-  __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyString_Type_split, __pyx_v_stega_text, __pyx_kp_s__6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 201, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyString_Type_split, __pyx_v_stega_text, __pyx_kp_s__6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(0, 201, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->stega_text);
   __Pyx_DECREF(__pyx_v_self->stega_text);
   __pyx_v_self->stega_text = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":202
+  /* "fmsApp/stegomarkov.pyx":198
  *         self.model = model
  *         self.stega_text = stega_text.split(" ")
  *         self.logging = logging             # <<<<<<<<<<<<<<
@@ -11715,14 +11668,14 @@ static int __pyx_pf_6fmsApp_11stegomarkov_7Decoder___init__(struct __pyx_obj_6fm
  */
   __pyx_v_self->logging = __pyx_v_logging;
 
-  /* "fmsApp/stegomarkov.pyx":203
+  /* "fmsApp/stegomarkov.pyx":199
  *         self.stega_text = stega_text.split(" ")
  *         self.logging = logging
  *         self.entrypoints = self._get_entrypoints()             # <<<<<<<<<<<<<<
  *         self.current_gram = None
  *         self.exhausted = True
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_entrypoints); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_entrypoints); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 199, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -11742,18 +11695,18 @@ static int __pyx_pf_6fmsApp_11stegomarkov_7Decoder___init__(struct __pyx_obj_6fm
     PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 199, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(0, 203, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(0, 199, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->entrypoints);
   __Pyx_DECREF(__pyx_v_self->entrypoints);
   __pyx_v_self->entrypoints = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":204
+  /* "fmsApp/stegomarkov.pyx":200
  *         self.logging = logging
  *         self.entrypoints = self._get_entrypoints()
  *         self.current_gram = None             # <<<<<<<<<<<<<<
@@ -11766,38 +11719,38 @@ static int __pyx_pf_6fmsApp_11stegomarkov_7Decoder___init__(struct __pyx_obj_6fm
   __Pyx_DECREF(__pyx_v_self->current_gram);
   __pyx_v_self->current_gram = Py_None;
 
-  /* "fmsApp/stegomarkov.pyx":205
+  /* "fmsApp/stegomarkov.pyx":201
  *         self.entrypoints = self._get_entrypoints()
  *         self.current_gram = None
  *         self.exhausted = True             # <<<<<<<<<<<<<<
  *         self.finished = False
- *         self._index = 0
+ *         self.index = 0
  */
   __pyx_v_self->exhausted = 1;
 
-  /* "fmsApp/stegomarkov.pyx":206
+  /* "fmsApp/stegomarkov.pyx":202
  *         self.current_gram = None
  *         self.exhausted = True
  *         self.finished = False             # <<<<<<<<<<<<<<
- *         self._index = 0
+ *         self.index = 0
  *         self.output = ""
  */
   __pyx_v_self->finished = 0;
 
-  /* "fmsApp/stegomarkov.pyx":207
+  /* "fmsApp/stegomarkov.pyx":203
  *         self.exhausted = True
  *         self.finished = False
- *         self._index = 0             # <<<<<<<<<<<<<<
+ *         self.index = 0             # <<<<<<<<<<<<<<
  *         self.output = ""
- *         self._endkey = 0
+ *         self.endkey = 0
  */
-  __pyx_v_self->_index = 0;
+  __pyx_v_self->index = 0;
 
-  /* "fmsApp/stegomarkov.pyx":208
+  /* "fmsApp/stegomarkov.pyx":204
  *         self.finished = False
- *         self._index = 0
+ *         self.index = 0
  *         self.output = ""             # <<<<<<<<<<<<<<
- *         self._endkey = 0
+ *         self.endkey = 0
  * 
  */
   __Pyx_INCREF(__pyx_kp_s__4);
@@ -11806,17 +11759,17 @@ static int __pyx_pf_6fmsApp_11stegomarkov_7Decoder___init__(struct __pyx_obj_6fm
   __Pyx_DECREF(__pyx_v_self->output);
   __pyx_v_self->output = __pyx_kp_s__4;
 
-  /* "fmsApp/stegomarkov.pyx":209
- *         self._index = 0
+  /* "fmsApp/stegomarkov.pyx":205
+ *         self.index = 0
  *         self.output = ""
- *         self._endkey = 0             # <<<<<<<<<<<<<<
+ *         self.endkey = 0             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-  __pyx_v_self->_endkey = 0;
+  __pyx_v_self->endkey = 0;
 
-  /* "fmsApp/stegomarkov.pyx":199
- *     cdef int _index  # Index for processing the stega_text
+  /* "fmsApp/stegomarkov.pyx":195
+ *     cdef int index  # Index for processing the stega_text
  * 
  *     def __init__(self, object model, str stega_text, bint logging):             # <<<<<<<<<<<<<<
  *         self.model = model
@@ -11837,30 +11790,85 @@ static int __pyx_pf_6fmsApp_11stegomarkov_7Decoder___init__(struct __pyx_obj_6fm
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":211
- *         self._endkey = 0
+/* "fmsApp/stegomarkov.pyx":207
+ *         self.endkey = 0
  * 
  *     @property             # <<<<<<<<<<<<<<
- *     def endkey(self):
- *         """Public property to access the end key."""
+ *     def output(self):
+ *         return self.output
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_6endkey_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_6endkey_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_6output_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_6output_1__get__(PyObject *__pyx_v_self) {
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
-  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_6endkey___get__(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
+  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_6output___get__(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6endkey___get__(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6output___get__(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__", 1);
+
+  /* "fmsApp/stegomarkov.pyx":209
+ *     @property
+ *     def output(self):
+ *         return self.output             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v_self->output);
+  __pyx_r = __pyx_v_self->output;
+  goto __pyx_L0;
+
+  /* "fmsApp/stegomarkov.pyx":207
+ *         self.endkey = 0
+ * 
+ *     @property             # <<<<<<<<<<<<<<
+ *     def output(self):
+ *         return self.output
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "fmsApp/stegomarkov.pyx":211
+ *         return self.output
+ * 
+ *     @property             # <<<<<<<<<<<<<<
+ *     def finished(self):
+ *         return self.finished
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_8finished_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_8finished_1__get__(PyObject *__pyx_v_self) {
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
+  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_8finished___get__(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8finished___get__(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -11869,32 +11877,32 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6endkey___get__(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 1);
 
-  /* "fmsApp/stegomarkov.pyx":214
- *     def endkey(self):
- *         """Public property to access the end key."""
- *         return self._endkey             # <<<<<<<<<<<<<<
+  /* "fmsApp/stegomarkov.pyx":213
+ *     @property
+ *     def finished(self):
+ *         return self.finished             # <<<<<<<<<<<<<<
  * 
- *     def index(self):
+ *     def _get_entrypoints(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_endkey); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->finished); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 213, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
   /* "fmsApp/stegomarkov.pyx":211
- *         self._endkey = 0
+ *         return self.output
  * 
  *     @property             # <<<<<<<<<<<<<<
- *     def endkey(self):
- *         """Public property to access the end key."""
+ *     def finished(self):
+ *         return self.finished
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("fmsApp.stegomarkov.Decoder.endkey.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fmsApp.stegomarkov.Decoder.finished.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -11902,100 +11910,8 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6endkey___get__(struct 
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":216
- *         return self._endkey
- * 
- *     def index(self):             # <<<<<<<<<<<<<<
- *         """Public property to access the index."""
- *         return self._index
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_3index(PyObject *__pyx_v_self, 
-#if CYTHON_METH_FASTCALL
-PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
-#else
-PyObject *__pyx_args, PyObject *__pyx_kwds
-#endif
-); /*proto*/
-PyDoc_STRVAR(__pyx_doc_6fmsApp_11stegomarkov_7Decoder_2index, "Public property to access the index.");
-static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_3index = {"index", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_3index, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_2index};
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_3index(PyObject *__pyx_v_self, 
-#if CYTHON_METH_FASTCALL
-PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
-#else
-PyObject *__pyx_args, PyObject *__pyx_kwds
-#endif
-) {
-  #if !CYTHON_METH_FASTCALL
-  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
-  #endif
-  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("index (wrapper)", 0);
-  #if !CYTHON_METH_FASTCALL
-  #if CYTHON_ASSUME_SAFE_MACROS
-  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
-  #else
-  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
-  #endif
-  #endif
-  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
-  if (unlikely(__pyx_nargs > 0)) {
-    __Pyx_RaiseArgtupleInvalid("index", 1, 0, 0, __pyx_nargs); return NULL;}
-  if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_FASTCALL(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "index", 0))) return NULL;
-  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_2index(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_2index(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("index", 1);
-
-  /* "fmsApp/stegomarkov.pyx":218
- *     def index(self):
- *         """Public property to access the index."""
- *         return self._index             # <<<<<<<<<<<<<<
- * 
- *     def _get_entrypoints(self):
- */
-  __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_r = __pyx_t_1;
-  __pyx_t_1 = 0;
-  goto __pyx_L0;
-
-  /* "fmsApp/stegomarkov.pyx":216
- *         return self._endkey
- * 
- *     def index(self):             # <<<<<<<<<<<<<<
- *         """Public property to access the index."""
- *         return self._index
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("fmsApp.stegomarkov.Decoder.index", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "fmsApp/stegomarkov.pyx":220
- *         return self._index
+/* "fmsApp/stegomarkov.pyx":215
+ *         return self.finished
  * 
  *     def _get_entrypoints(self):             # <<<<<<<<<<<<<<
  *         """Get valid entry points from the Markov model."""
@@ -12003,16 +11919,16 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_2index(struct __pyx_obj
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_5_get_entrypoints(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_3_get_entrypoints(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints, "Get valid entry points from the Markov model.");
-static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_5_get_entrypoints = {"_get_entrypoints", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_5_get_entrypoints, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints};
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_5_get_entrypoints(PyObject *__pyx_v_self, 
+PyDoc_STRVAR(__pyx_doc_6fmsApp_11stegomarkov_7Decoder_2_get_entrypoints, "Get valid entry points from the Markov model.");
+static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_3_get_entrypoints = {"_get_entrypoints", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_3_get_entrypoints, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_2_get_entrypoints};
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_3_get_entrypoints(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -12037,14 +11953,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   if (unlikely(__pyx_nargs > 0)) {
     __Pyx_RaiseArgtupleInvalid("_get_entrypoints", 1, 0, 0, __pyx_nargs); return NULL;}
   if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_FASTCALL(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "_get_entrypoints", 0))) return NULL;
-  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
+  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_2_get_entrypoints(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_2_get_entrypoints(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
   PyObject *__pyx_8genexpr5__pyx_v_key = NULL;
   PyObject *__pyx_8genexpr6__pyx_v_key = NULL;
   PyObject *__pyx_r = NULL;
@@ -12065,20 +11981,20 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_get_entrypoints", 1);
 
-  /* "fmsApp/stegomarkov.pyx":222
+  /* "fmsApp/stegomarkov.pyx":217
  *     def _get_entrypoints(self):
  *         """Get valid entry points from the Markov model."""
  *         if self.model.state_size == 1:             # <<<<<<<<<<<<<<
  *             return [key for key in self.model.chain.model.get(("___BEGIN__",)).keys()]
  *         else:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_state_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_state_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PyInt_BoolEqObjC(__pyx_t_1, __pyx_int_1, 1, 0)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyInt_BoolEqObjC(__pyx_t_1, __pyx_int_1, 1, 0)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 217, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "fmsApp/stegomarkov.pyx":223
+    /* "fmsApp/stegomarkov.pyx":218
  *         """Get valid entry points from the Markov model."""
  *         if self.model.state_size == 1:
  *             return [key for key in self.model.chain.model.get(("___BEGIN__",)).keys()]             # <<<<<<<<<<<<<<
@@ -12087,15 +12003,15 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(struc
  */
     __Pyx_XDECREF(__pyx_r);
     { /* enter inner scope */
-      __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 223, __pyx_L6_error)
+      __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L6_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_4 = 0;
-      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_chain); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 223, __pyx_L6_error)
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_chain); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 218, __pyx_L6_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_model); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 223, __pyx_L6_error)
+      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_model); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 218, __pyx_L6_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_get); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 223, __pyx_L6_error)
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_get); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 218, __pyx_L6_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_t_9 = NULL;
@@ -12116,15 +12032,15 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(struc
         PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_tuple__5};
         __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_8, __pyx_callargs+1-__pyx_t_10, 1+__pyx_t_10);
         __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-        if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 223, __pyx_L6_error)
+        if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 218, __pyx_L6_error)
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       }
       if (unlikely(__pyx_t_7 == Py_None)) {
         PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "keys");
-        __PYX_ERR(0, 223, __pyx_L6_error)
+        __PYX_ERR(0, 218, __pyx_L6_error)
       }
-      __pyx_t_8 = __Pyx_dict_iterator(__pyx_t_7, 0, __pyx_n_s_keys, (&__pyx_t_5), (&__pyx_t_6)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 223, __pyx_L6_error)
+      __pyx_t_8 = __Pyx_dict_iterator(__pyx_t_7, 0, __pyx_n_s_keys, (&__pyx_t_5), (&__pyx_t_6)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 218, __pyx_L6_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_XDECREF(__pyx_t_3);
@@ -12133,11 +12049,11 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(struc
       while (1) {
         __pyx_t_11 = __Pyx_dict_iter_next(__pyx_t_3, __pyx_t_5, &__pyx_t_4, &__pyx_t_8, NULL, NULL, __pyx_t_6);
         if (unlikely(__pyx_t_11 == 0)) break;
-        if (unlikely(__pyx_t_11 == -1)) __PYX_ERR(0, 223, __pyx_L6_error)
+        if (unlikely(__pyx_t_11 == -1)) __PYX_ERR(0, 218, __pyx_L6_error)
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_XDECREF_SET(__pyx_8genexpr5__pyx_v_key, __pyx_t_8);
         __pyx_t_8 = 0;
-        if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_8genexpr5__pyx_v_key))) __PYX_ERR(0, 223, __pyx_L6_error)
+        if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_8genexpr5__pyx_v_key))) __PYX_ERR(0, 218, __pyx_L6_error)
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_XDECREF(__pyx_8genexpr5__pyx_v_key); __pyx_8genexpr5__pyx_v_key = 0;
@@ -12151,7 +12067,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(struc
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "fmsApp/stegomarkov.pyx":222
+    /* "fmsApp/stegomarkov.pyx":217
  *     def _get_entrypoints(self):
  *         """Get valid entry points from the Markov model."""
  *         if self.model.state_size == 1:             # <<<<<<<<<<<<<<
@@ -12160,7 +12076,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(struc
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":225
+  /* "fmsApp/stegomarkov.pyx":220
  *             return [key for key in self.model.chain.model.get(("___BEGIN__",)).keys()]
  *         else:
  *             return [key[-1] for key in self.model.chain.model.keys() if key.count("___BEGIN__") == self.model.state_size - 1][1:]             # <<<<<<<<<<<<<<
@@ -12170,19 +12086,19 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(struc
   /*else*/ {
     __Pyx_XDECREF(__pyx_r);
     { /* enter inner scope */
-      __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 225, __pyx_L12_error)
+      __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L12_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_5 = 0;
-      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_chain); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 225, __pyx_L12_error)
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_chain); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 220, __pyx_L12_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_model); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 225, __pyx_L12_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_model); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 220, __pyx_L12_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       if (unlikely(__pyx_t_7 == Py_None)) {
         PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "keys");
-        __PYX_ERR(0, 225, __pyx_L12_error)
+        __PYX_ERR(0, 220, __pyx_L12_error)
       }
-      __pyx_t_8 = __Pyx_dict_iterator(__pyx_t_7, 0, __pyx_n_s_keys, (&__pyx_t_4), (&__pyx_t_6)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 225, __pyx_L12_error)
+      __pyx_t_8 = __Pyx_dict_iterator(__pyx_t_7, 0, __pyx_n_s_keys, (&__pyx_t_4), (&__pyx_t_6)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 220, __pyx_L12_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_XDECREF(__pyx_t_3);
@@ -12191,11 +12107,11 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(struc
       while (1) {
         __pyx_t_11 = __Pyx_dict_iter_next(__pyx_t_3, __pyx_t_4, &__pyx_t_5, &__pyx_t_8, NULL, NULL, __pyx_t_6);
         if (unlikely(__pyx_t_11 == 0)) break;
-        if (unlikely(__pyx_t_11 == -1)) __PYX_ERR(0, 225, __pyx_L12_error)
+        if (unlikely(__pyx_t_11 == -1)) __PYX_ERR(0, 220, __pyx_L12_error)
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_XDECREF_SET(__pyx_8genexpr6__pyx_v_key, __pyx_t_8);
         __pyx_t_8 = 0;
-        __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_8genexpr6__pyx_v_key, __pyx_n_s_count); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 225, __pyx_L12_error)
+        __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_8genexpr6__pyx_v_key, __pyx_n_s_count); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 220, __pyx_L12_error)
         __Pyx_GOTREF(__pyx_t_7);
         __pyx_t_9 = NULL;
         __pyx_t_10 = 0;
@@ -12215,24 +12131,24 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(struc
           PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_n_s_BEGIN};
           __pyx_t_8 = __Pyx_PyObject_FastCall(__pyx_t_7, __pyx_callargs+1-__pyx_t_10, 1+__pyx_t_10);
           __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-          if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 225, __pyx_L12_error)
+          if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 220, __pyx_L12_error)
           __Pyx_GOTREF(__pyx_t_8);
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         }
-        __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_state_size); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 225, __pyx_L12_error)
+        __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_state_size); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 220, __pyx_L12_error)
         __Pyx_GOTREF(__pyx_t_7);
-        __pyx_t_9 = __Pyx_PyInt_SubtractObjC(__pyx_t_7, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 225, __pyx_L12_error)
+        __pyx_t_9 = __Pyx_PyInt_SubtractObjC(__pyx_t_7, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 220, __pyx_L12_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-        __pyx_t_7 = PyObject_RichCompare(__pyx_t_8, __pyx_t_9, Py_EQ); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 225, __pyx_L12_error)
+        __pyx_t_7 = PyObject_RichCompare(__pyx_t_8, __pyx_t_9, Py_EQ); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 220, __pyx_L12_error)
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 225, __pyx_L12_error)
+        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 220, __pyx_L12_error)
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         if (__pyx_t_2) {
-          __pyx_t_7 = __Pyx_GetItemInt(__pyx_8genexpr6__pyx_v_key, -1L, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 225, __pyx_L12_error)
+          __pyx_t_7 = __Pyx_GetItemInt(__pyx_8genexpr6__pyx_v_key, -1L, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 220, __pyx_L12_error)
           __Pyx_GOTREF(__pyx_t_7);
-          if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_7))) __PYX_ERR(0, 225, __pyx_L12_error)
+          if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_7))) __PYX_ERR(0, 220, __pyx_L12_error)
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         }
       }
@@ -12244,7 +12160,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(struc
       goto __pyx_L1_error;
       __pyx_L16_exit_scope:;
     } /* exit inner scope */
-    __pyx_t_3 = __Pyx_PyList_GetSlice(__pyx_t_1, 1, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 225, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyList_GetSlice(__pyx_t_1, 1, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 220, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_r = __pyx_t_3;
@@ -12252,8 +12168,8 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(struc
     goto __pyx_L0;
   }
 
-  /* "fmsApp/stegomarkov.pyx":220
- *         return self._index
+  /* "fmsApp/stegomarkov.pyx":215
+ *         return self.finished
  * 
  *     def _get_entrypoints(self):             # <<<<<<<<<<<<<<
  *         """Get valid entry points from the Markov model."""
@@ -12277,7 +12193,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(struc
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":227
+/* "fmsApp/stegomarkov.pyx":222
  *             return [key[-1] for key in self.model.chain.model.keys() if key.count("___BEGIN__") == self.model.state_size - 1][1:]
  * 
  *     def step(self):             # <<<<<<<<<<<<<<
@@ -12286,16 +12202,16 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints(struc
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_7step(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_5step(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_6fmsApp_11stegomarkov_7Decoder_6step, "Consumes a word from the steganographic text and appends the appropriate bits to the output.");
-static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_7step = {"step", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_7step, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_6step};
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_7step(PyObject *__pyx_v_self, 
+PyDoc_STRVAR(__pyx_doc_6fmsApp_11stegomarkov_7Decoder_4step, "Consumes a word from the steganographic text and appends the appropriate bits to the output.");
+static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_5step = {"step", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_5step, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_4step};
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_5step(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -12320,14 +12236,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   if (unlikely(__pyx_nargs > 0)) {
     __Pyx_RaiseArgtupleInvalid("step", 1, 0, 0, __pyx_nargs); return NULL;}
   if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_FASTCALL(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "step", 0))) return NULL;
-  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_6step(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
+  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_4step(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6step(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_4step(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -12337,27 +12253,28 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6step(struct __pyx_obj_
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
   unsigned int __pyx_t_7;
+  Py_ssize_t __pyx_t_8;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("step", 1);
 
-  /* "fmsApp/stegomarkov.pyx":231
+  /* "fmsApp/stegomarkov.pyx":226
  * 
  *         # Finish if index is at the end of the stega text
- *         if self._index >= len(self.stega_text) - 1 and not self.exhausted:             # <<<<<<<<<<<<<<
+ *         if self.index >= len(self.stega_text) - 1 and not self.exhausted:             # <<<<<<<<<<<<<<
  *             self.finished = True
- *             return
+ *             return 1
  */
   __pyx_t_2 = __pyx_v_self->stega_text;
   __Pyx_INCREF(__pyx_t_2);
   if (unlikely(__pyx_t_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 231, __pyx_L1_error)
+    __PYX_ERR(0, 226, __pyx_L1_error)
   }
-  __pyx_t_3 = __Pyx_PyList_GET_SIZE(__pyx_t_2); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 231, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyList_GET_SIZE(__pyx_t_2); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 226, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = (__pyx_v_self->_index >= (__pyx_t_3 - 1));
+  __pyx_t_4 = (__pyx_v_self->index >= (__pyx_t_3 - 1));
   if (__pyx_t_4) {
   } else {
     __pyx_t_1 = __pyx_t_4;
@@ -12368,37 +12285,38 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6step(struct __pyx_obj_
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "fmsApp/stegomarkov.pyx":232
+    /* "fmsApp/stegomarkov.pyx":227
  *         # Finish if index is at the end of the stega text
- *         if self._index >= len(self.stega_text) - 1 and not self.exhausted:
+ *         if self.index >= len(self.stega_text) - 1 and not self.exhausted:
  *             self.finished = True             # <<<<<<<<<<<<<<
- *             return
+ *             return 1
  * 
  */
     __pyx_v_self->finished = 1;
 
-    /* "fmsApp/stegomarkov.pyx":233
- *         if self._index >= len(self.stega_text) - 1 and not self.exhausted:
+    /* "fmsApp/stegomarkov.pyx":228
+ *         if self.index >= len(self.stega_text) - 1 and not self.exhausted:
  *             self.finished = True
- *             return             # <<<<<<<<<<<<<<
+ *             return 1             # <<<<<<<<<<<<<<
  * 
  *         if self.exhausted:
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+    __Pyx_INCREF(__pyx_int_1);
+    __pyx_r = __pyx_int_1;
     goto __pyx_L0;
 
-    /* "fmsApp/stegomarkov.pyx":231
+    /* "fmsApp/stegomarkov.pyx":226
  * 
  *         # Finish if index is at the end of the stega text
- *         if self._index >= len(self.stega_text) - 1 and not self.exhausted:             # <<<<<<<<<<<<<<
+ *         if self.index >= len(self.stega_text) - 1 and not self.exhausted:             # <<<<<<<<<<<<<<
  *             self.finished = True
- *             return
+ *             return 1
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":235
- *             return
+  /* "fmsApp/stegomarkov.pyx":230
+ *             return 1
  * 
  *         if self.exhausted:             # <<<<<<<<<<<<<<
  *             self._choose_entrypoint()
@@ -12406,14 +12324,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6step(struct __pyx_obj_
  */
   if (__pyx_v_self->exhausted) {
 
-    /* "fmsApp/stegomarkov.pyx":236
+    /* "fmsApp/stegomarkov.pyx":231
  * 
  *         if self.exhausted:
  *             self._choose_entrypoint()             # <<<<<<<<<<<<<<
  *         else:
  *             self._choose_next_token()
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_choose_entrypoint); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 236, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_choose_entrypoint); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 231, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     __pyx_t_7 = 0;
@@ -12433,14 +12351,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6step(struct __pyx_obj_
       PyObject *__pyx_callargs[2] = {__pyx_t_6, NULL};
       __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_7, 0+__pyx_t_7);
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 236, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 231, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":235
- *             return
+    /* "fmsApp/stegomarkov.pyx":230
+ *             return 1
  * 
  *         if self.exhausted:             # <<<<<<<<<<<<<<
  *             self._choose_entrypoint()
@@ -12449,15 +12367,15 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6step(struct __pyx_obj_
     goto __pyx_L6;
   }
 
-  /* "fmsApp/stegomarkov.pyx":238
+  /* "fmsApp/stegomarkov.pyx":233
  *             self._choose_entrypoint()
  *         else:
  *             self._choose_next_token()             # <<<<<<<<<<<<<<
  * 
- *     def _choose_entrypoint(self):
+ *         return self.index / (len(self.stega_text) - 1)
  */
   /*else*/ {
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_choose_next_token); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 238, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_choose_next_token); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 233, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     __pyx_t_7 = 0;
@@ -12477,7 +12395,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6step(struct __pyx_obj_
       PyObject *__pyx_callargs[2] = {__pyx_t_6, NULL};
       __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_7, 0+__pyx_t_7);
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 238, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 233, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
@@ -12485,7 +12403,34 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6step(struct __pyx_obj_
   }
   __pyx_L6:;
 
-  /* "fmsApp/stegomarkov.pyx":227
+  /* "fmsApp/stegomarkov.pyx":235
+ *             self._choose_next_token()
+ * 
+ *         return self.index / (len(self.stega_text) - 1)             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_2 = __pyx_v_self->stega_text;
+  __Pyx_INCREF(__pyx_t_2);
+  if (unlikely(__pyx_t_2 == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
+    __PYX_ERR(0, 235, __pyx_L1_error)
+  }
+  __pyx_t_3 = __Pyx_PyList_GET_SIZE(__pyx_t_2); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 235, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_8 = (__pyx_t_3 - 1);
+  if (unlikely(__pyx_t_8 == 0)) {
+    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
+    __PYX_ERR(0, 235, __pyx_L1_error)
+  }
+  __pyx_t_2 = PyFloat_FromDouble((((double)__pyx_v_self->index) / ((double)__pyx_t_8))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 235, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
+  goto __pyx_L0;
+
+  /* "fmsApp/stegomarkov.pyx":222
  *             return [key[-1] for key in self.model.chain.model.keys() if key.count("___BEGIN__") == self.model.state_size - 1][1:]
  * 
  *     def step(self):             # <<<<<<<<<<<<<<
@@ -12494,8 +12439,6 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6step(struct __pyx_obj_
  */
 
   /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5);
@@ -12508,8 +12451,8 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6step(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":240
- *             self._choose_next_token()
+/* "fmsApp/stegomarkov.pyx":238
+ * 
  * 
  *     def _choose_entrypoint(self):             # <<<<<<<<<<<<<<
  *         """Choose a new starting point (entrypoint) for the Markov chain."""
@@ -12517,16 +12460,16 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6step(struct __pyx_obj_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_9_choose_entrypoint(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_7_choose_entrypoint(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint, "Choose a new starting point (entrypoint) for the Markov chain.");
-static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_9_choose_entrypoint = {"_choose_entrypoint", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_9_choose_entrypoint, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint};
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_9_choose_entrypoint(PyObject *__pyx_v_self, 
+PyDoc_STRVAR(__pyx_doc_6fmsApp_11stegomarkov_7Decoder_6_choose_entrypoint, "Choose a new starting point (entrypoint) for the Markov chain.");
+static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_7_choose_entrypoint = {"_choose_entrypoint", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_7_choose_entrypoint, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_6_choose_entrypoint};
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_7_choose_entrypoint(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -12551,14 +12494,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   if (unlikely(__pyx_nargs > 0)) {
     __Pyx_RaiseArgtupleInvalid("_choose_entrypoint", 1, 0, 0, __pyx_nargs); return NULL;}
   if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_FASTCALL(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "_choose_entrypoint", 0))) return NULL;
-  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
+  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_6_choose_entrypoint(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_6_choose_entrypoint(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
   PyObject *__pyx_v_token = NULL;
   PyObject *__pyx_v_embedded_index = NULL;
   PyObject *__pyx_v_bit_length = NULL;
@@ -12580,83 +12523,83 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_choose_entrypoint", 1);
 
-  /* "fmsApp/stegomarkov.pyx":242
+  /* "fmsApp/stegomarkov.pyx":240
  *     def _choose_entrypoint(self):
  *         """Choose a new starting point (entrypoint) for the Markov chain."""
  *         self.exhausted = False             # <<<<<<<<<<<<<<
- *         token = self.stega_text[self._index]
+ *         token = self.stega_text[self.index]
  * 
  */
   __pyx_v_self->exhausted = 0;
 
-  /* "fmsApp/stegomarkov.pyx":243
+  /* "fmsApp/stegomarkov.pyx":241
  *         """Choose a new starting point (entrypoint) for the Markov chain."""
  *         self.exhausted = False
- *         token = self.stega_text[self._index]             # <<<<<<<<<<<<<<
+ *         token = self.stega_text[self.index]             # <<<<<<<<<<<<<<
  * 
  *         # Check for end key
  */
   if (unlikely(__pyx_v_self->stega_text == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 243, __pyx_L1_error)
+    __PYX_ERR(0, 241, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_self->stega_text, __pyx_v_self->_index, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_self->stega_text, __pyx_v_self->index, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 241, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_token = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":246
+  /* "fmsApp/stegomarkov.pyx":244
  * 
  *         # Check for end key
  *         if token not in self.entrypoints:             # <<<<<<<<<<<<<<
- *             self._endkey = ord(token[-1]) - 97  # Assign endkey to the internal attribute
+ *             self.endkey = ord(token[-1]) - 97
  *             token = token[:-1]
  */
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_v_token, __pyx_v_self->entrypoints, Py_NE)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 246, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_v_token, __pyx_v_self->entrypoints, Py_NE)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 244, __pyx_L1_error)
   if (__pyx_t_2) {
 
-    /* "fmsApp/stegomarkov.pyx":247
+    /* "fmsApp/stegomarkov.pyx":245
  *         # Check for end key
  *         if token not in self.entrypoints:
- *             self._endkey = ord(token[-1]) - 97  # Assign endkey to the internal attribute             # <<<<<<<<<<<<<<
+ *             self.endkey = ord(token[-1]) - 97             # <<<<<<<<<<<<<<
  *             token = token[:-1]
  * 
  */
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_token, -1L, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 247, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_token, -1L, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 245, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_Ord(__pyx_t_1); if (unlikely(__pyx_t_3 == ((long)(long)(Py_UCS4)-1))) __PYX_ERR(0, 247, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Ord(__pyx_t_1); if (unlikely(__pyx_t_3 == ((long)(long)(Py_UCS4)-1))) __PYX_ERR(0, 245, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_v_self->_endkey = (__pyx_t_3 - 97);
+    __pyx_v_self->endkey = (__pyx_t_3 - 97);
 
-    /* "fmsApp/stegomarkov.pyx":248
+    /* "fmsApp/stegomarkov.pyx":246
  *         if token not in self.entrypoints:
- *             self._endkey = ord(token[-1]) - 97  # Assign endkey to the internal attribute
+ *             self.endkey = ord(token[-1]) - 97
  *             token = token[:-1]             # <<<<<<<<<<<<<<
  * 
  *         embedded_index = self.entrypoints.index(token)
  */
-    __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_token, 0, -1L, NULL, NULL, &__pyx_slice__9, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 248, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_token, 0, -1L, NULL, NULL, &__pyx_slice__9, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 246, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF_SET(__pyx_v_token, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":246
+    /* "fmsApp/stegomarkov.pyx":244
  * 
  *         # Check for end key
  *         if token not in self.entrypoints:             # <<<<<<<<<<<<<<
- *             self._endkey = ord(token[-1]) - 97  # Assign endkey to the internal attribute
+ *             self.endkey = ord(token[-1]) - 97
  *             token = token[:-1]
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":250
+  /* "fmsApp/stegomarkov.pyx":248
  *             token = token[:-1]
  * 
  *         embedded_index = self.entrypoints.index(token)             # <<<<<<<<<<<<<<
  *         bit_length = ceil(log2(len(self.entrypoints)))
  *         if len(self.entrypoints) < 2 ** bit_length:
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->entrypoints, __pyx_n_s_index); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->entrypoints, __pyx_n_s_index); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 248, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -12676,33 +12619,33 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint(str
     PyObject *__pyx_callargs[2] = {__pyx_t_5, __pyx_v_token};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 250, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 248, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __pyx_v_embedded_index = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":251
+  /* "fmsApp/stegomarkov.pyx":249
  * 
  *         embedded_index = self.entrypoints.index(token)
  *         bit_length = ceil(log2(len(self.entrypoints)))             # <<<<<<<<<<<<<<
  *         if len(self.entrypoints) < 2 ** bit_length:
  *             bit_length -= 1
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ceil); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ceil); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 249, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_log2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_log2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 249, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_8 = __pyx_v_self->entrypoints;
   __Pyx_INCREF(__pyx_t_8);
   if (unlikely(__pyx_t_8 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 251, __pyx_L1_error)
+    __PYX_ERR(0, 249, __pyx_L1_error)
   }
-  __pyx_t_9 = __Pyx_PyList_GET_SIZE(__pyx_t_8); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 251, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyList_GET_SIZE(__pyx_t_8); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 249, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = PyInt_FromSsize_t(__pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __pyx_t_8 = PyInt_FromSsize_t(__pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 249, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_t_10 = NULL;
   __pyx_t_6 = 0;
@@ -12723,7 +12666,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint(str
     __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_7, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 251, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 249, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
@@ -12746,64 +12689,64 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint(str
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 251, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 249, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __pyx_v_bit_length = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":252
+  /* "fmsApp/stegomarkov.pyx":250
  *         embedded_index = self.entrypoints.index(token)
  *         bit_length = ceil(log2(len(self.entrypoints)))
  *         if len(self.entrypoints) < 2 ** bit_length:             # <<<<<<<<<<<<<<
  *             bit_length -= 1
- *         bit_length = self._endkey if self._index == len(self.stega_text) - 1 else bit_length
+ *         bit_length = self.endkey if self.index == len(self.stega_text) - 1 else bit_length
  */
   __pyx_t_1 = __pyx_v_self->entrypoints;
   __Pyx_INCREF(__pyx_t_1);
   if (unlikely(__pyx_t_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 252, __pyx_L1_error)
+    __PYX_ERR(0, 250, __pyx_L1_error)
   }
-  __pyx_t_9 = __Pyx_PyList_GET_SIZE(__pyx_t_1); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyList_GET_SIZE(__pyx_t_1); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyNumber_PowerOf2(__pyx_int_2, __pyx_v_bit_length, Py_None); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyNumber_PowerOf2(__pyx_int_2, __pyx_v_bit_length, Py_None); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyObject_RichCompare(__pyx_t_1, __pyx_t_4, Py_LT); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_5 = PyObject_RichCompare(__pyx_t_1, __pyx_t_4, Py_LT); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (__pyx_t_2) {
 
-    /* "fmsApp/stegomarkov.pyx":253
+    /* "fmsApp/stegomarkov.pyx":251
  *         bit_length = ceil(log2(len(self.entrypoints)))
  *         if len(self.entrypoints) < 2 ** bit_length:
  *             bit_length -= 1             # <<<<<<<<<<<<<<
- *         bit_length = self._endkey if self._index == len(self.stega_text) - 1 else bit_length
+ *         bit_length = self.endkey if self.index == len(self.stega_text) - 1 else bit_length
  *         bit_string = bin(embedded_index)[2:].zfill(bit_length)
  */
-    __pyx_t_5 = __Pyx_PyInt_SubtractObjC(__pyx_v_bit_length, __pyx_int_1, 1, 1, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 253, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyInt_SubtractObjC(__pyx_v_bit_length, __pyx_int_1, 1, 1, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 251, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF_SET(__pyx_v_bit_length, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":252
+    /* "fmsApp/stegomarkov.pyx":250
  *         embedded_index = self.entrypoints.index(token)
  *         bit_length = ceil(log2(len(self.entrypoints)))
  *         if len(self.entrypoints) < 2 ** bit_length:             # <<<<<<<<<<<<<<
  *             bit_length -= 1
- *         bit_length = self._endkey if self._index == len(self.stega_text) - 1 else bit_length
+ *         bit_length = self.endkey if self.index == len(self.stega_text) - 1 else bit_length
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":254
+  /* "fmsApp/stegomarkov.pyx":252
  *         if len(self.entrypoints) < 2 ** bit_length:
  *             bit_length -= 1
- *         bit_length = self._endkey if self._index == len(self.stega_text) - 1 else bit_length             # <<<<<<<<<<<<<<
+ *         bit_length = self.endkey if self.index == len(self.stega_text) - 1 else bit_length             # <<<<<<<<<<<<<<
  *         bit_string = bin(embedded_index)[2:].zfill(bit_length)
  * 
  */
@@ -12811,13 +12754,13 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint(str
   __Pyx_INCREF(__pyx_t_4);
   if (unlikely(__pyx_t_4 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 254, __pyx_L1_error)
+    __PYX_ERR(0, 252, __pyx_L1_error)
   }
-  __pyx_t_9 = __Pyx_PyList_GET_SIZE(__pyx_t_4); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyList_GET_SIZE(__pyx_t_4); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_2 = (__pyx_v_self->_index == (__pyx_t_9 - 1));
+  __pyx_t_2 = (__pyx_v_self->index == (__pyx_t_9 - 1));
   if (__pyx_t_2) {
-    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_self->_endkey); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 254, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_self->endkey); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 252, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = __pyx_t_4;
     __pyx_t_4 = 0;
@@ -12828,19 +12771,19 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint(str
   __Pyx_DECREF_SET(__pyx_v_bit_length, __pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":255
+  /* "fmsApp/stegomarkov.pyx":253
  *             bit_length -= 1
- *         bit_length = self._endkey if self._index == len(self.stega_text) - 1 else bit_length
+ *         bit_length = self.endkey if self.index == len(self.stega_text) - 1 else bit_length
  *         bit_string = bin(embedded_index)[2:].zfill(bit_length)             # <<<<<<<<<<<<<<
  * 
  *         self.current_gram = (token,) if self.model.state_size == 1 else (*["___BEGIN__"] * (self.model.state_size - 1), token)
  */
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_bin, __pyx_v_embedded_index); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_bin, __pyx_v_embedded_index); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 253, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_t_4, 2, 0, NULL, NULL, &__pyx_slice__10, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_t_4, 2, 0, NULL, NULL, &__pyx_slice__10, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 253, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zfill); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zfill); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 253, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -12861,44 +12804,44 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint(str
     PyObject *__pyx_callargs[2] = {__pyx_t_1, __pyx_v_bit_length};
     __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 255, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 253, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __pyx_v_bit_string = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":257
+  /* "fmsApp/stegomarkov.pyx":255
  *         bit_string = bin(embedded_index)[2:].zfill(bit_length)
  * 
  *         self.current_gram = (token,) if self.model.state_size == 1 else (*["___BEGIN__"] * (self.model.state_size - 1), token)             # <<<<<<<<<<<<<<
  * 
  *         # Add bit string to output
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_state_size); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 257, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_state_size); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 255, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = (__Pyx_PyInt_BoolEqObjC(__pyx_t_4, __pyx_int_1, 1, 0)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 257, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyInt_BoolEqObjC(__pyx_t_4, __pyx_int_1, 1, 0)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 255, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (__pyx_t_2) {
-    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 257, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_INCREF(__pyx_v_token);
     __Pyx_GIVEREF(__pyx_v_token);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_token)) __PYX_ERR(0, 257, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_token)) __PYX_ERR(0, 255, __pyx_L1_error);
     __pyx_t_5 = __pyx_t_4;
     __pyx_t_4 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_state_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 257, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_state_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = __Pyx_PyInt_SubtractObjC(__pyx_t_1, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 257, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyInt_SubtractObjC(__pyx_t_1, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 257, __pyx_L1_error)
+    __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_n_s_BEGIN);
     __Pyx_GIVEREF(__pyx_n_s_BEGIN);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_BEGIN)) __PYX_ERR(0, 257, __pyx_L1_error);
-    { PyObject* __pyx_temp = PyNumber_InPlaceMultiply(__pyx_t_1, __pyx_t_7); if (unlikely(!__pyx_temp)) __PYX_ERR(0, 257, __pyx_L1_error)
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_BEGIN)) __PYX_ERR(0, 255, __pyx_L1_error);
+    { PyObject* __pyx_temp = PyNumber_InPlaceMultiply(__pyx_t_1, __pyx_t_7); if (unlikely(!__pyx_temp)) __PYX_ERR(0, 255, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_temp);
       __Pyx_DECREF(__pyx_t_1);
       __pyx_t_1 = __pyx_temp;
@@ -12906,11 +12849,11 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint(str
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_4 = __pyx_t_1;
     __pyx_t_1 = 0;
-    if (__Pyx_ListComp_Append(__pyx_t_4, __pyx_v_token) < 0) __PYX_ERR(0, 257, __pyx_L1_error)
+    if (__Pyx_ListComp_Append(__pyx_t_4, __pyx_v_token) < 0) __PYX_ERR(0, 255, __pyx_L1_error)
     {
       PyObject *__pyx_temp = PyList_AsTuple(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_4);
-      __pyx_t_4 = __pyx_temp; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 257, __pyx_L1_error)
+      __pyx_t_4 = __pyx_temp; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 255, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     __pyx_t_5 = __pyx_t_4;
@@ -12922,24 +12865,24 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint(str
   __pyx_v_self->current_gram = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":260
+  /* "fmsApp/stegomarkov.pyx":258
  * 
  *         # Add bit string to output
  *         self.output += bit_string             # <<<<<<<<<<<<<<
  * 
  *     def _choose_next_token(self):
  */
-  __pyx_t_5 = PyNumber_InPlaceAdd(__pyx_v_self->output, __pyx_v_bit_string); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_t_5 = PyNumber_InPlaceAdd(__pyx_v_self->output, __pyx_v_bit_string); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (!(likely(PyString_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_5))) __PYX_ERR(0, 260, __pyx_L1_error)
+  if (!(likely(PyString_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_5))) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_5);
   __Pyx_GOTREF(__pyx_v_self->output);
   __Pyx_DECREF(__pyx_v_self->output);
   __pyx_v_self->output = ((PyObject*)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":240
- *             self._choose_next_token()
+  /* "fmsApp/stegomarkov.pyx":238
+ * 
  * 
  *     def _choose_entrypoint(self):             # <<<<<<<<<<<<<<
  *         """Choose a new starting point (entrypoint) for the Markov chain."""
@@ -12968,7 +12911,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint(str
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":262
+/* "fmsApp/stegomarkov.pyx":260
  *         self.output += bit_string
  * 
  *     def _choose_next_token(self):             # <<<<<<<<<<<<<<
@@ -12977,16 +12920,16 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint(str
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_11_choose_next_token(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_9_choose_next_token(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token, "Choose the next token in the Markov chain.");
-static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_11_choose_next_token = {"_choose_next_token", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_11_choose_next_token, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token};
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_11_choose_next_token(PyObject *__pyx_v_self, 
+PyDoc_STRVAR(__pyx_doc_6fmsApp_11stegomarkov_7Decoder_8_choose_next_token, "Choose the next token in the Markov chain.");
+static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_9_choose_next_token = {"_choose_next_token", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_9_choose_next_token, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_8_choose_next_token};
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_9_choose_next_token(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -13011,14 +12954,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   if (unlikely(__pyx_nargs > 0)) {
     __Pyx_RaiseArgtupleInvalid("_choose_next_token", 1, 0, 0, __pyx_nargs); return NULL;}
   if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_FASTCALL(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "_choose_next_token", 0))) return NULL;
-  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
+  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_next_token(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_8_choose_next_token(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
   PyObject *__pyx_v_transitions = NULL;
   PyObject *__pyx_v_at_end = NULL;
   PyObject *__pyx_v_next_token = NULL;
@@ -13047,14 +12990,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_choose_next_token", 1);
 
-  /* "fmsApp/stegomarkov.pyx":264
+  /* "fmsApp/stegomarkov.pyx":262
  *     def _choose_next_token(self):
  *         """Choose the next token in the Markov chain."""
  *         transitions = self._get_transitions(self.current_gram)             # <<<<<<<<<<<<<<
- *         at_end = self._index == len(self.stega_text) - 1
+ *         at_end = self.index == len(self.stega_text) - 1
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_transitions); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 264, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_transitions); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 262, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -13074,37 +13017,37 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
     PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_v_self->current_gram};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 264, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 262, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_transitions = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":265
+  /* "fmsApp/stegomarkov.pyx":263
  *         """Choose the next token in the Markov chain."""
  *         transitions = self._get_transitions(self.current_gram)
- *         at_end = self._index == len(self.stega_text) - 1             # <<<<<<<<<<<<<<
+ *         at_end = self.index == len(self.stega_text) - 1             # <<<<<<<<<<<<<<
  * 
- *         next_token = self.stega_text[self._index + 1] if self._index < len(self.stega_text) - 1 else ""
+ *         next_token = self.stega_text[self.index + 1] if self.index < len(self.stega_text) - 1 else ""
  */
   __pyx_t_1 = __pyx_v_self->stega_text;
   __Pyx_INCREF(__pyx_t_1);
   if (unlikely(__pyx_t_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 265, __pyx_L1_error)
+    __PYX_ERR(0, 263, __pyx_L1_error)
   }
-  __pyx_t_5 = __Pyx_PyList_GET_SIZE(__pyx_t_1); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 265, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyList_GET_SIZE(__pyx_t_1); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyBool_FromLong((__pyx_v_self->_index == (__pyx_t_5 - 1))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 265, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong((__pyx_v_self->index == (__pyx_t_5 - 1))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_at_end = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":267
- *         at_end = self._index == len(self.stega_text) - 1
+  /* "fmsApp/stegomarkov.pyx":265
+ *         at_end = self.index == len(self.stega_text) - 1
  * 
- *         next_token = self.stega_text[self._index + 1] if self._index < len(self.stega_text) - 1 else ""             # <<<<<<<<<<<<<<
+ *         next_token = self.stega_text[self.index + 1] if self.index < len(self.stega_text) - 1 else ""             # <<<<<<<<<<<<<<
  * 
  *         # Get max possible bit length based on length of list
  */
@@ -13112,18 +13055,18 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
   __Pyx_INCREF(__pyx_t_2);
   if (unlikely(__pyx_t_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 267, __pyx_L1_error)
+    __PYX_ERR(0, 265, __pyx_L1_error)
   }
-  __pyx_t_5 = __Pyx_PyList_GET_SIZE(__pyx_t_2); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 267, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyList_GET_SIZE(__pyx_t_2); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = (__pyx_v_self->_index < (__pyx_t_5 - 1));
+  __pyx_t_6 = (__pyx_v_self->index < (__pyx_t_5 - 1));
   if (__pyx_t_6) {
     if (unlikely(__pyx_v_self->stega_text == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 267, __pyx_L1_error)
+      __PYX_ERR(0, 265, __pyx_L1_error)
     }
-    __pyx_t_7 = (__pyx_v_self->_index + 1);
-    __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_self->stega_text, __pyx_t_7, long, 1, __Pyx_PyInt_From_long, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 267, __pyx_L1_error)
+    __pyx_t_7 = (__pyx_v_self->index + 1);
+    __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_self->stega_text, __pyx_t_7, long, 1, __Pyx_PyInt_From_long, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 265, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_1 = __pyx_t_2;
     __pyx_t_2 = 0;
@@ -13134,28 +13077,28 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
   __pyx_v_next_token = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":270
+  /* "fmsApp/stegomarkov.pyx":268
  * 
  *         # Get max possible bit length based on length of list
  *         list_length = len(transitions)             # <<<<<<<<<<<<<<
  *         bit_length = ceil(log2(list_length))
  *         if list_length < 2 ** bit_length:
  */
-  __pyx_t_5 = PyObject_Length(__pyx_v_transitions); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 270, __pyx_L1_error)
+  __pyx_t_5 = PyObject_Length(__pyx_v_transitions); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 268, __pyx_L1_error)
   __pyx_v_list_length = __pyx_t_5;
 
-  /* "fmsApp/stegomarkov.pyx":271
+  /* "fmsApp/stegomarkov.pyx":269
  *         # Get max possible bit length based on length of list
  *         list_length = len(transitions)
  *         bit_length = ceil(log2(list_length))             # <<<<<<<<<<<<<<
  *         if list_length < 2 ** bit_length:
  *             bit_length -= 1
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_ceil); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_ceil); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 269, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_log2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_log2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 269, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_9 = PyInt_FromSsize_t(__pyx_v_list_length); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __pyx_t_9 = PyInt_FromSsize_t(__pyx_v_list_length); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 269, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __pyx_t_10 = NULL;
   __pyx_t_4 = 0;
@@ -13176,7 +13119,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
     __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_8, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 271, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 269, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   }
@@ -13199,44 +13142,44 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 271, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 269, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_bit_length = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":272
+  /* "fmsApp/stegomarkov.pyx":270
  *         list_length = len(transitions)
  *         bit_length = ceil(log2(list_length))
  *         if list_length < 2 ** bit_length:             # <<<<<<<<<<<<<<
  *             bit_length -= 1
  *             bit_length = 0 if list_length == 1 else bit_length
  */
-  __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_list_length); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_list_length); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 270, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyNumber_PowerOf2(__pyx_int_2, __pyx_v_bit_length, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyNumber_PowerOf2(__pyx_int_2, __pyx_v_bit_length, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 270, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_LT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_LT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 270, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 272, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 270, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_6) {
 
-    /* "fmsApp/stegomarkov.pyx":273
+    /* "fmsApp/stegomarkov.pyx":271
  *         bit_length = ceil(log2(list_length))
  *         if list_length < 2 ** bit_length:
  *             bit_length -= 1             # <<<<<<<<<<<<<<
  *             bit_length = 0 if list_length == 1 else bit_length
  * 
  */
-    __pyx_t_3 = __Pyx_PyInt_SubtractObjC(__pyx_v_bit_length, __pyx_int_1, 1, 1, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 273, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_SubtractObjC(__pyx_v_bit_length, __pyx_int_1, 1, 1, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 271, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF_SET(__pyx_v_bit_length, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":274
+    /* "fmsApp/stegomarkov.pyx":272
  *         if list_length < 2 ** bit_length:
  *             bit_length -= 1
  *             bit_length = 0 if list_length == 1 else bit_length             # <<<<<<<<<<<<<<
@@ -13254,7 +13197,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
     __Pyx_DECREF_SET(__pyx_v_bit_length, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":272
+    /* "fmsApp/stegomarkov.pyx":270
  *         list_length = len(transitions)
  *         bit_length = ceil(log2(list_length))
  *         if list_length < 2 ** bit_length:             # <<<<<<<<<<<<<<
@@ -13263,30 +13206,30 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":276
+  /* "fmsApp/stegomarkov.pyx":274
  *             bit_length = 0 if list_length == 1 else bit_length
  * 
  *         if "___END__" in transitions:             # <<<<<<<<<<<<<<
  *             self.exhausted = True
  *             self.current_gram = None
  */
-  __pyx_t_6 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_END, __pyx_v_transitions, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 276, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_END, __pyx_v_transitions, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 274, __pyx_L1_error)
   if (__pyx_t_6) {
 
-    /* "fmsApp/stegomarkov.pyx":277
+    /* "fmsApp/stegomarkov.pyx":275
  * 
  *         if "___END__" in transitions:
  *             self.exhausted = True             # <<<<<<<<<<<<<<
  *             self.current_gram = None
- *             self._index += 1
+ *             self.index += 1
  */
     __pyx_v_self->exhausted = 1;
 
-    /* "fmsApp/stegomarkov.pyx":278
+    /* "fmsApp/stegomarkov.pyx":276
  *         if "___END__" in transitions:
  *             self.exhausted = True
  *             self.current_gram = None             # <<<<<<<<<<<<<<
- *             self._index += 1
+ *             self.index += 1
  *             return
  */
     __Pyx_INCREF(Py_None);
@@ -13295,27 +13238,27 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
     __Pyx_DECREF(__pyx_v_self->current_gram);
     __pyx_v_self->current_gram = Py_None;
 
-    /* "fmsApp/stegomarkov.pyx":279
+    /* "fmsApp/stegomarkov.pyx":277
  *             self.exhausted = True
  *             self.current_gram = None
- *             self._index += 1             # <<<<<<<<<<<<<<
+ *             self.index += 1             # <<<<<<<<<<<<<<
  *             return
  *         else:
  */
-    __pyx_v_self->_index = (__pyx_v_self->_index + 1);
+    __pyx_v_self->index = (__pyx_v_self->index + 1);
 
-    /* "fmsApp/stegomarkov.pyx":280
+    /* "fmsApp/stegomarkov.pyx":278
  *             self.current_gram = None
- *             self._index += 1
+ *             self.index += 1
  *             return             # <<<<<<<<<<<<<<
  *         else:
- *             next_token = "" if at_end else self.stega_text[self._index + 1]
+ *             next_token = "" if at_end else self.stega_text[self.index + 1]
  */
     __Pyx_XDECREF(__pyx_r);
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "fmsApp/stegomarkov.pyx":276
+    /* "fmsApp/stegomarkov.pyx":274
  *             bit_length = 0 if list_length == 1 else bit_length
  * 
  *         if "___END__" in transitions:             # <<<<<<<<<<<<<<
@@ -13324,25 +13267,25 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":282
+  /* "fmsApp/stegomarkov.pyx":280
  *             return
  *         else:
- *             next_token = "" if at_end else self.stega_text[self._index + 1]             # <<<<<<<<<<<<<<
+ *             next_token = "" if at_end else self.stega_text[self.index + 1]             # <<<<<<<<<<<<<<
  * 
  *         # Check for end key
  */
   /*else*/ {
-    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_at_end); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 282, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_at_end); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 280, __pyx_L1_error)
     if (__pyx_t_6) {
       __Pyx_INCREF(__pyx_kp_s__4);
       __pyx_t_3 = __pyx_kp_s__4;
     } else {
       if (unlikely(__pyx_v_self->stega_text == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 282, __pyx_L1_error)
+        __PYX_ERR(0, 280, __pyx_L1_error)
       }
-      __pyx_t_7 = (__pyx_v_self->_index + 1);
-      __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_self->stega_text, __pyx_t_7, long, 1, __Pyx_PyInt_From_long, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 282, __pyx_L1_error)
+      __pyx_t_7 = (__pyx_v_self->index + 1);
+      __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_self->stega_text, __pyx_t_7, long, 1, __Pyx_PyInt_From_long, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 280, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_t_3 = __pyx_t_2;
       __pyx_t_2 = 0;
@@ -13351,63 +13294,63 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
     __pyx_t_3 = 0;
   }
 
-  /* "fmsApp/stegomarkov.pyx":285
+  /* "fmsApp/stegomarkov.pyx":283
  * 
  *         # Check for end key
  *         if next_token not in transitions and not at_end:             # <<<<<<<<<<<<<<
- *             self._endkey = ord(next_token[-1]) - 97  # Assign endkey when found
+ *             self.endkey = ord(next_token[-1]) - 97
  *             next_token = next_token[:-1]
  */
-  __pyx_t_11 = (__Pyx_PySequence_ContainsTF(__pyx_v_next_token, __pyx_v_transitions, Py_NE)); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 285, __pyx_L1_error)
+  __pyx_t_11 = (__Pyx_PySequence_ContainsTF(__pyx_v_next_token, __pyx_v_transitions, Py_NE)); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 283, __pyx_L1_error)
   if (__pyx_t_11) {
   } else {
     __pyx_t_6 = __pyx_t_11;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_v_at_end); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 285, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_v_at_end); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 283, __pyx_L1_error)
   __pyx_t_12 = (!__pyx_t_11);
   __pyx_t_6 = __pyx_t_12;
   __pyx_L6_bool_binop_done:;
   if (__pyx_t_6) {
 
-    /* "fmsApp/stegomarkov.pyx":286
+    /* "fmsApp/stegomarkov.pyx":284
  *         # Check for end key
  *         if next_token not in transitions and not at_end:
- *             self._endkey = ord(next_token[-1]) - 97  # Assign endkey when found             # <<<<<<<<<<<<<<
+ *             self.endkey = ord(next_token[-1]) - 97             # <<<<<<<<<<<<<<
  *             next_token = next_token[:-1]
- *         bit_length = self._endkey if self._index == len(self.stega_text) - 2 else bit_length
+ *         bit_length = self.endkey if self.index == len(self.stega_text) - 2 else bit_length
  */
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_next_token, -1L, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 286, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_next_token, -1L, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 284, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_7 = __Pyx_PyObject_Ord(__pyx_t_3); if (unlikely(__pyx_t_7 == ((long)(long)(Py_UCS4)-1))) __PYX_ERR(0, 286, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_Ord(__pyx_t_3); if (unlikely(__pyx_t_7 == ((long)(long)(Py_UCS4)-1))) __PYX_ERR(0, 284, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_v_self->_endkey = (__pyx_t_7 - 97);
+    __pyx_v_self->endkey = (__pyx_t_7 - 97);
 
-    /* "fmsApp/stegomarkov.pyx":287
+    /* "fmsApp/stegomarkov.pyx":285
  *         if next_token not in transitions and not at_end:
- *             self._endkey = ord(next_token[-1]) - 97  # Assign endkey when found
+ *             self.endkey = ord(next_token[-1]) - 97
  *             next_token = next_token[:-1]             # <<<<<<<<<<<<<<
- *         bit_length = self._endkey if self._index == len(self.stega_text) - 2 else bit_length
+ *         bit_length = self.endkey if self.index == len(self.stega_text) - 2 else bit_length
  * 
  */
-    __pyx_t_3 = __Pyx_PyObject_GetSlice(__pyx_v_next_token, 0, -1L, NULL, NULL, &__pyx_slice__9, 0, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 287, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetSlice(__pyx_v_next_token, 0, -1L, NULL, NULL, &__pyx_slice__9, 0, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 285, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF_SET(__pyx_v_next_token, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":285
+    /* "fmsApp/stegomarkov.pyx":283
  * 
  *         # Check for end key
  *         if next_token not in transitions and not at_end:             # <<<<<<<<<<<<<<
- *             self._endkey = ord(next_token[-1]) - 97  # Assign endkey when found
+ *             self.endkey = ord(next_token[-1]) - 97
  *             next_token = next_token[:-1]
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":288
- *             self._endkey = ord(next_token[-1]) - 97  # Assign endkey when found
+  /* "fmsApp/stegomarkov.pyx":286
+ *             self.endkey = ord(next_token[-1]) - 97
  *             next_token = next_token[:-1]
- *         bit_length = self._endkey if self._index == len(self.stega_text) - 2 else bit_length             # <<<<<<<<<<<<<<
+ *         bit_length = self.endkey if self.index == len(self.stega_text) - 2 else bit_length             # <<<<<<<<<<<<<<
  * 
  *         if bit_length != 0:
  */
@@ -13415,13 +13358,13 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
   __Pyx_INCREF(__pyx_t_2);
   if (unlikely(__pyx_t_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 288, __pyx_L1_error)
+    __PYX_ERR(0, 286, __pyx_L1_error)
   }
-  __pyx_t_5 = __Pyx_PyList_GET_SIZE(__pyx_t_2); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 288, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyList_GET_SIZE(__pyx_t_2); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 286, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = (__pyx_v_self->_index == (__pyx_t_5 - 2));
+  __pyx_t_6 = (__pyx_v_self->index == (__pyx_t_5 - 2));
   if (__pyx_t_6) {
-    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->_endkey); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 288, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->endkey); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 286, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_3 = __pyx_t_2;
     __pyx_t_2 = 0;
@@ -13432,29 +13375,29 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
   __Pyx_DECREF_SET(__pyx_v_bit_length, __pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":290
- *         bit_length = self._endkey if self._index == len(self.stega_text) - 2 else bit_length
+  /* "fmsApp/stegomarkov.pyx":288
+ *         bit_length = self.endkey if self.index == len(self.stega_text) - 2 else bit_length
  * 
  *         if bit_length != 0:             # <<<<<<<<<<<<<<
  *             embedded_index = "N/A" if at_end else transitions.index(next_token)
  *             bit_string = "" if at_end else bin(embedded_index)[2:].zfill(bit_length)
  */
-  __pyx_t_6 = (__Pyx_PyInt_BoolNeObjC(__pyx_v_bit_length, __pyx_int_0, 0, 0)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 290, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyInt_BoolNeObjC(__pyx_v_bit_length, __pyx_int_0, 0, 0)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 288, __pyx_L1_error)
   if (__pyx_t_6) {
 
-    /* "fmsApp/stegomarkov.pyx":291
+    /* "fmsApp/stegomarkov.pyx":289
  * 
  *         if bit_length != 0:
  *             embedded_index = "N/A" if at_end else transitions.index(next_token)             # <<<<<<<<<<<<<<
  *             bit_string = "" if at_end else bin(embedded_index)[2:].zfill(bit_length)
  *         else:
  */
-    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_at_end); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 291, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_at_end); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 289, __pyx_L1_error)
     if (__pyx_t_6) {
       __Pyx_INCREF(__pyx_kp_s_N_A);
       __pyx_t_3 = __pyx_kp_s_N_A;
     } else {
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_transitions, __pyx_n_s_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 291, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_transitions, __pyx_n_s_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 289, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_8 = NULL;
       __pyx_t_4 = 0;
@@ -13474,7 +13417,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
         PyObject *__pyx_callargs[2] = {__pyx_t_8, __pyx_v_next_token};
         __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
         __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 291, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 289, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       }
@@ -13484,24 +13427,24 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
     __pyx_v_embedded_index = __pyx_t_3;
     __pyx_t_3 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":292
+    /* "fmsApp/stegomarkov.pyx":290
  *         if bit_length != 0:
  *             embedded_index = "N/A" if at_end else transitions.index(next_token)
  *             bit_string = "" if at_end else bin(embedded_index)[2:].zfill(bit_length)             # <<<<<<<<<<<<<<
  *         else:
  *             embedded_index = "N/A"
  */
-    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_at_end); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 292, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_at_end); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 290, __pyx_L1_error)
     if (__pyx_t_6) {
       __Pyx_INCREF(__pyx_kp_s__4);
       __pyx_t_3 = __pyx_kp_s__4;
     } else {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_bin, __pyx_v_embedded_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 292, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_bin, __pyx_v_embedded_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 290, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_8 = __Pyx_PyObject_GetSlice(__pyx_t_1, 2, 0, NULL, NULL, &__pyx_slice__10, 1, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 292, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_GetSlice(__pyx_t_1, 2, 0, NULL, NULL, &__pyx_slice__10, 1, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 290, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_zfill); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 292, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_zfill); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 290, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_8 = NULL;
@@ -13522,7 +13465,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
         PyObject *__pyx_callargs[2] = {__pyx_t_8, __pyx_v_bit_length};
         __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
         __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 292, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 290, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       }
@@ -13532,8 +13475,8 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
     __pyx_v_bit_string = __pyx_t_3;
     __pyx_t_3 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":290
- *         bit_length = self._endkey if self._index == len(self.stega_text) - 2 else bit_length
+    /* "fmsApp/stegomarkov.pyx":288
+ *         bit_length = self.endkey if self.index == len(self.stega_text) - 2 else bit_length
  * 
  *         if bit_length != 0:             # <<<<<<<<<<<<<<
  *             embedded_index = "N/A" if at_end else transitions.index(next_token)
@@ -13542,7 +13485,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
     goto __pyx_L8;
   }
 
-  /* "fmsApp/stegomarkov.pyx":294
+  /* "fmsApp/stegomarkov.pyx":292
  *             bit_string = "" if at_end else bin(embedded_index)[2:].zfill(bit_length)
  *         else:
  *             embedded_index = "N/A"             # <<<<<<<<<<<<<<
@@ -13553,7 +13496,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
     __Pyx_INCREF(__pyx_kp_s_N_A);
     __pyx_v_embedded_index = __pyx_kp_s_N_A;
 
-    /* "fmsApp/stegomarkov.pyx":295
+    /* "fmsApp/stegomarkov.pyx":293
  *         else:
  *             embedded_index = "N/A"
  *             bit_string = ""             # <<<<<<<<<<<<<<
@@ -13565,37 +13508,37 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
   }
   __pyx_L8:;
 
-  /* "fmsApp/stegomarkov.pyx":298
+  /* "fmsApp/stegomarkov.pyx":296
  * 
  *         # Construct gram
  *         next_gram = list(self.current_gram)             # <<<<<<<<<<<<<<
  *         next_gram.append(next_token)
  *         self.current_gram = tuple(next_gram[1:])
  */
-  __pyx_t_3 = PySequence_List(__pyx_v_self->current_gram); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 298, __pyx_L1_error)
+  __pyx_t_3 = PySequence_List(__pyx_v_self->current_gram); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 296, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_v_next_gram = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":299
+  /* "fmsApp/stegomarkov.pyx":297
  *         # Construct gram
  *         next_gram = list(self.current_gram)
  *         next_gram.append(next_token)             # <<<<<<<<<<<<<<
  *         self.current_gram = tuple(next_gram[1:])
  * 
  */
-  __pyx_t_13 = __Pyx_PyList_Append(__pyx_v_next_gram, __pyx_v_next_token); if (unlikely(__pyx_t_13 == ((int)-1))) __PYX_ERR(0, 299, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyList_Append(__pyx_v_next_gram, __pyx_v_next_token); if (unlikely(__pyx_t_13 == ((int)-1))) __PYX_ERR(0, 297, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":300
+  /* "fmsApp/stegomarkov.pyx":298
  *         next_gram = list(self.current_gram)
  *         next_gram.append(next_token)
  *         self.current_gram = tuple(next_gram[1:])             # <<<<<<<<<<<<<<
  * 
  *         # Add bit string to output
  */
-  __pyx_t_3 = __Pyx_PyList_GetSlice(__pyx_v_next_gram, 1, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 300, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyList_GetSlice(__pyx_v_next_gram, 1, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 298, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = PyList_AsTuple(((PyObject*)__pyx_t_3)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 300, __pyx_L1_error)
+  __pyx_t_2 = PyList_AsTuple(((PyObject*)__pyx_t_3)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 298, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_GIVEREF(__pyx_t_2);
@@ -13604,32 +13547,32 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
   __pyx_v_self->current_gram = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":303
+  /* "fmsApp/stegomarkov.pyx":301
  * 
  *         # Add bit string to output
  *         self.output += bit_string             # <<<<<<<<<<<<<<
  * 
- *         self._index += 1
+ *         self.index += 1
  */
-  __pyx_t_2 = PyNumber_InPlaceAdd(__pyx_v_self->output, __pyx_v_bit_string); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 303, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_InPlaceAdd(__pyx_v_self->output, __pyx_v_bit_string); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 301, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (!(likely(PyString_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_2))) __PYX_ERR(0, 303, __pyx_L1_error)
+  if (!(likely(PyString_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_2))) __PYX_ERR(0, 301, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_2);
   __Pyx_GOTREF(__pyx_v_self->output);
   __Pyx_DECREF(__pyx_v_self->output);
   __pyx_v_self->output = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":305
+  /* "fmsApp/stegomarkov.pyx":303
  *         self.output += bit_string
  * 
- *         self._index += 1             # <<<<<<<<<<<<<<
+ *         self.index += 1             # <<<<<<<<<<<<<<
  * 
- *     def solve(self):
+ * 
  */
-  __pyx_v_self->_index = (__pyx_v_self->_index + 1);
+  __pyx_v_self->index = (__pyx_v_self->index + 1);
 
-  /* "fmsApp/stegomarkov.pyx":262
+  /* "fmsApp/stegomarkov.pyx":260
  *         self.output += bit_string
  * 
  *     def _choose_next_token(self):             # <<<<<<<<<<<<<<
@@ -13662,8 +13605,8 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":307
- *         self._index += 1
+/* "fmsApp/stegomarkov.pyx":306
+ * 
  * 
  *     def solve(self):             # <<<<<<<<<<<<<<
  *         """Consumes the entire steganographic text and generates an output bitstream."""
@@ -13671,16 +13614,16 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token(st
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_13solve(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_11solve(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_6fmsApp_11stegomarkov_7Decoder_12solve, "Consumes the entire steganographic text and generates an output bitstream.");
-static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_13solve = {"solve", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_13solve, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_12solve};
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_13solve(PyObject *__pyx_v_self, 
+PyDoc_STRVAR(__pyx_doc_6fmsApp_11stegomarkov_7Decoder_10solve, "Consumes the entire steganographic text and generates an output bitstream.");
+static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_11solve = {"solve", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_11solve, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_10solve};
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_11solve(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -13705,14 +13648,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   if (unlikely(__pyx_nargs > 0)) {
     __Pyx_RaiseArgtupleInvalid("solve", 1, 0, 0, __pyx_nargs); return NULL;}
   if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_FASTCALL(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "solve", 0))) return NULL;
-  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_12solve(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
+  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_10solve(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_12solve(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_10solve(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -13725,7 +13668,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_12solve(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("solve", 1);
 
-  /* "fmsApp/stegomarkov.pyx":309
+  /* "fmsApp/stegomarkov.pyx":308
  *     def solve(self):
  *         """Consumes the entire steganographic text and generates an output bitstream."""
  *         while not self.finished:             # <<<<<<<<<<<<<<
@@ -13736,14 +13679,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_12solve(struct __pyx_ob
     __pyx_t_1 = (!__pyx_v_self->finished);
     if (!__pyx_t_1) break;
 
-    /* "fmsApp/stegomarkov.pyx":310
+    /* "fmsApp/stegomarkov.pyx":309
  *         """Consumes the entire steganographic text and generates an output bitstream."""
  *         while not self.finished:
  *             self.step()             # <<<<<<<<<<<<<<
  * 
  *         return self.output
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_step); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 310, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_step); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 309, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     __pyx_t_5 = 0;
@@ -13763,14 +13706,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_12solve(struct __pyx_ob
       PyObject *__pyx_callargs[2] = {__pyx_t_4, NULL};
       __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 310, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 309, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
 
-  /* "fmsApp/stegomarkov.pyx":312
+  /* "fmsApp/stegomarkov.pyx":311
  *             self.step()
  * 
  *         return self.output             # <<<<<<<<<<<<<<
@@ -13782,8 +13725,8 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_12solve(struct __pyx_ob
   __pyx_r = __pyx_v_self->output;
   goto __pyx_L0;
 
-  /* "fmsApp/stegomarkov.pyx":307
- *         self._index += 1
+  /* "fmsApp/stegomarkov.pyx":306
+ * 
  * 
  *     def solve(self):             # <<<<<<<<<<<<<<
  *         """Consumes the entire steganographic text and generates an output bitstream."""
@@ -13803,7 +13746,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_12solve(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":314
+/* "fmsApp/stegomarkov.pyx":313
  *         return self.output
  * 
  *     def _get_transitions(self, gram):             # <<<<<<<<<<<<<<
@@ -13812,16 +13755,16 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_12solve(struct __pyx_ob
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_15_get_transitions(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_13_get_transitions(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_6fmsApp_11stegomarkov_7Decoder_14_get_transitions, "Get possible transitions for the current gram in the Markov chain.");
-static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_15_get_transitions = {"_get_transitions", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_15_get_transitions, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_14_get_transitions};
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_15_get_transitions(PyObject *__pyx_v_self, 
+PyDoc_STRVAR(__pyx_doc_6fmsApp_11stegomarkov_7Decoder_12_get_transitions, "Get possible transitions for the current gram in the Markov chain.");
+static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_13_get_transitions = {"_get_transitions", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_13_get_transitions, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_12_get_transitions};
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_13_get_transitions(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -13865,12 +13808,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 314, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 313, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_get_transitions") < 0)) __PYX_ERR(0, 314, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_get_transitions") < 0)) __PYX_ERR(0, 313, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -13881,7 +13824,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_get_transitions", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 314, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_get_transitions", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 313, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -13895,7 +13838,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_get_transitions(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self), __pyx_v_gram);
+  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_12_get_transitions(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self), __pyx_v_gram);
 
   /* function exit code */
   {
@@ -13908,7 +13851,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":317
+/* "fmsApp/stegomarkov.pyx":316
  *         """Get possible transitions for the current gram in the Markov chain."""
  *         trans_matrix = self.model.chain.model[gram]
  *         trans_matrix = sorted(trans_matrix.items(), key=lambda kv: (kv[1]), reverse=True)             # <<<<<<<<<<<<<<
@@ -13969,12 +13912,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 317, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 316, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "lambda3") < 0)) __PYX_ERR(0, 317, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "lambda3") < 0)) __PYX_ERR(0, 316, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -13985,7 +13928,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("lambda3", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 317, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("lambda3", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 316, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -14021,7 +13964,7 @@ static PyObject *__pyx_lambda_funcdef_lambda3(CYTHON_UNUSED PyObject *__pyx_self
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("lambda3", 1);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_kv, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_kv, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -14038,7 +13981,7 @@ static PyObject *__pyx_lambda_funcdef_lambda3(CYTHON_UNUSED PyObject *__pyx_self
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":314
+/* "fmsApp/stegomarkov.pyx":313
  *         return self.output
  * 
  *     def _get_transitions(self, gram):             # <<<<<<<<<<<<<<
@@ -14046,7 +13989,7 @@ static PyObject *__pyx_lambda_funcdef_lambda3(CYTHON_UNUSED PyObject *__pyx_self
  *         trans_matrix = self.model.chain.model[gram]
  */
 
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_get_transitions(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self, PyObject *__pyx_v_gram) {
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_12_get_transitions(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self, PyObject *__pyx_v_gram) {
   PyObject *__pyx_v_trans_matrix = NULL;
   PyObject *__pyx_v_transitions = NULL;
   PyObject *__pyx_8genexpr7__pyx_v_i = NULL;
@@ -14063,32 +14006,32 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_get_transitions(stru
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_get_transitions", 1);
 
-  /* "fmsApp/stegomarkov.pyx":316
+  /* "fmsApp/stegomarkov.pyx":315
  *     def _get_transitions(self, gram):
  *         """Get possible transitions for the current gram in the Markov chain."""
  *         trans_matrix = self.model.chain.model[gram]             # <<<<<<<<<<<<<<
  *         trans_matrix = sorted(trans_matrix.items(), key=lambda kv: (kv[1]), reverse=True)
  *         transitions = [i[0] for i in trans_matrix]
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_chain); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 316, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->model, __pyx_n_s_chain); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 315, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_model); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 316, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_model); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 315, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_v_gram); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 316, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_v_gram); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 315, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_trans_matrix = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":317
+  /* "fmsApp/stegomarkov.pyx":316
  *         """Get possible transitions for the current gram in the Markov chain."""
  *         trans_matrix = self.model.chain.model[gram]
  *         trans_matrix = sorted(trans_matrix.items(), key=lambda kv: (kv[1]), reverse=True)             # <<<<<<<<<<<<<<
  *         transitions = [i[0] for i in trans_matrix]
  *         return transitions
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_trans_matrix, __pyx_n_s_items); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_trans_matrix, __pyx_n_s_items); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -14108,30 +14051,30 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_get_transitions(stru
     PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 317, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 316, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 317, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 316, __pyx_L1_error);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_16_get_transitions_lambda3, 0, __pyx_n_s_get_transitions_locals_lambda, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_16_get_transitions_lambda3, 0, __pyx_n_s_get_transitions_locals_lambda, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_key, __pyx_t_3) < 0) __PYX_ERR(0, 317, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_key, __pyx_t_3) < 0) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 317, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_sorted, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 317, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 316, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_sorted, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF_SET(__pyx_v_trans_matrix, __pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":318
+  /* "fmsApp/stegomarkov.pyx":317
  *         trans_matrix = self.model.chain.model[gram]
  *         trans_matrix = sorted(trans_matrix.items(), key=lambda kv: (kv[1]), reverse=True)
  *         transitions = [i[0] for i in trans_matrix]             # <<<<<<<<<<<<<<
@@ -14139,16 +14082,16 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_get_transitions(stru
  * 
  */
   { /* enter inner scope */
-    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 318, __pyx_L5_error)
+    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 317, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (likely(PyList_CheckExact(__pyx_v_trans_matrix)) || PyTuple_CheckExact(__pyx_v_trans_matrix)) {
       __pyx_t_1 = __pyx_v_trans_matrix; __Pyx_INCREF(__pyx_t_1);
       __pyx_t_5 = 0;
       __pyx_t_6 = NULL;
     } else {
-      __pyx_t_5 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_trans_matrix); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 318, __pyx_L5_error)
+      __pyx_t_5 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_trans_matrix); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 317, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 318, __pyx_L5_error)
+      __pyx_t_6 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 317, __pyx_L5_error)
     }
     for (;;) {
       if (likely(!__pyx_t_6)) {
@@ -14156,28 +14099,28 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_get_transitions(stru
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 318, __pyx_L5_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 317, __pyx_L5_error)
             #endif
             if (__pyx_t_5 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 318, __pyx_L5_error)
+          __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 317, __pyx_L5_error)
           #else
-          __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 318, __pyx_L5_error)
+          __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 317, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_2);
           #endif
         } else {
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_1);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 318, __pyx_L5_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 317, __pyx_L5_error)
             #endif
             if (__pyx_t_5 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 318, __pyx_L5_error)
+          __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely((0 < 0))) __PYX_ERR(0, 317, __pyx_L5_error)
           #else
-          __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 318, __pyx_L5_error)
+          __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 317, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_2);
           #endif
         }
@@ -14187,7 +14130,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_get_transitions(stru
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 318, __pyx_L5_error)
+            else __PYX_ERR(0, 317, __pyx_L5_error)
           }
           break;
         }
@@ -14195,9 +14138,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_get_transitions(stru
       }
       __Pyx_XDECREF_SET(__pyx_8genexpr7__pyx_v_i, __pyx_t_2);
       __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_GetItemInt(__pyx_8genexpr7__pyx_v_i, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 318, __pyx_L5_error)
+      __pyx_t_2 = __Pyx_GetItemInt(__pyx_8genexpr7__pyx_v_i, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 317, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_2);
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_2))) __PYX_ERR(0, 318, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_2))) __PYX_ERR(0, 317, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -14211,7 +14154,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_get_transitions(stru
   __pyx_v_transitions = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":319
+  /* "fmsApp/stegomarkov.pyx":318
  *         trans_matrix = sorted(trans_matrix.items(), key=lambda kv: (kv[1]), reverse=True)
  *         transitions = [i[0] for i in trans_matrix]
  *         return transitions             # <<<<<<<<<<<<<<
@@ -14223,7 +14166,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_get_transitions(stru
   __pyx_r = __pyx_v_transitions;
   goto __pyx_L0;
 
-  /* "fmsApp/stegomarkov.pyx":314
+  /* "fmsApp/stegomarkov.pyx":313
  *         return self.output
  * 
  *     def _get_transitions(self, gram):             # <<<<<<<<<<<<<<
@@ -14247,7 +14190,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_get_transitions(stru
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":321
+/* "fmsApp/stegomarkov.pyx":320
  *         return transitions
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
@@ -14256,16 +14199,16 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_get_transitions(stru
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_17_pretty_print_list(CYTHON_UNUSED PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_15_pretty_print_list(CYTHON_UNUSED PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list, "Pretty print a list, showing only up to `limit` items.");
-static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_17_pretty_print_list = {"_pretty_print_list", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_17_pretty_print_list, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list};
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_17_pretty_print_list(CYTHON_UNUSED PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_6fmsApp_11stegomarkov_7Decoder_14_pretty_print_list, "Pretty print a list, showing only up to `limit` items.");
+static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_15_pretty_print_list = {"_pretty_print_list", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_15_pretty_print_list, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_14_pretty_print_list};
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_15_pretty_print_list(CYTHON_UNUSED PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -14312,7 +14255,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 321, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 320, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -14320,14 +14263,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 321, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 320, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("_pretty_print_list", 1, 2, 2, 1); __PYX_ERR(0, 321, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_pretty_print_list", 1, 2, 2, 1); __PYX_ERR(0, 320, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_pretty_print_list") < 0)) __PYX_ERR(0, 321, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_pretty_print_list") < 0)) __PYX_ERR(0, 320, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -14340,7 +14283,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_pretty_print_list", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 321, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_pretty_print_list", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 320, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -14354,7 +14297,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(__pyx_v_lst, __pyx_v_limit);
+  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_pretty_print_list(__pyx_v_lst, __pyx_v_limit);
 
   /* function exit code */
   {
@@ -14367,7 +14310,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":324
+/* "fmsApp/stegomarkov.pyx":323
  *     def _pretty_print_list(lst, limit):
  *         """Pretty print a list, showing only up to `limit` items."""
  *         lst = list(map(lambda s: f"'{s}'", lst))             # <<<<<<<<<<<<<<
@@ -14428,12 +14371,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 324, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 323, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "lambda4") < 0)) __PYX_ERR(0, 324, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "lambda4") < 0)) __PYX_ERR(0, 323, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -14444,7 +14387,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("lambda4", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 324, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("lambda4", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 323, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -14483,7 +14426,7 @@ static PyObject *__pyx_lambda_funcdef_lambda4(CYTHON_UNUSED PyObject *__pyx_self
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("lambda4", 1);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 324, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 323, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = 0;
   __pyx_t_3 = 127;
@@ -14491,7 +14434,7 @@ static PyObject *__pyx_lambda_funcdef_lambda4(CYTHON_UNUSED PyObject *__pyx_self
   __pyx_t_2 += 1;
   __Pyx_GIVEREF(__pyx_kp_u__7);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u__7);
-  __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_v_s, __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 324, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_v_s, __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 323, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) : __pyx_t_3;
   __pyx_t_2 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_4);
@@ -14502,7 +14445,7 @@ static PyObject *__pyx_lambda_funcdef_lambda4(CYTHON_UNUSED PyObject *__pyx_self
   __pyx_t_2 += 1;
   __Pyx_GIVEREF(__pyx_kp_u__7);
   PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_kp_u__7);
-  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 324, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 323, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_4;
@@ -14521,7 +14464,7 @@ static PyObject *__pyx_lambda_funcdef_lambda4(CYTHON_UNUSED PyObject *__pyx_self
   return __pyx_r;
 }
 
-/* "fmsApp/stegomarkov.pyx":321
+/* "fmsApp/stegomarkov.pyx":320
  *         return transitions
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
@@ -14529,7 +14472,7 @@ static PyObject *__pyx_lambda_funcdef_lambda4(CYTHON_UNUSED PyObject *__pyx_self
  *         """Pretty print a list, showing only up to `limit` items."""
  */
 
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(PyObject *__pyx_v_lst, PyObject *__pyx_v_limit) {
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_14_pretty_print_list(PyObject *__pyx_v_lst, PyObject *__pyx_v_limit) {
   PyObject *__pyx_v_truncated_list = NULL;
   PyObject *__pyx_v_remaining_count = NULL;
   PyObject *__pyx_r = NULL;
@@ -14547,44 +14490,44 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
   __Pyx_RefNannySetupContext("_pretty_print_list", 0);
   __Pyx_INCREF(__pyx_v_lst);
 
-  /* "fmsApp/stegomarkov.pyx":324
+  /* "fmsApp/stegomarkov.pyx":323
  *     def _pretty_print_list(lst, limit):
  *         """Pretty print a list, showing only up to `limit` items."""
  *         lst = list(map(lambda s: f"'{s}'", lst))             # <<<<<<<<<<<<<<
  *         if not lst:
  *             return "None"
  */
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_18_pretty_print_list_lambda4, 0, __pyx_n_s_pretty_print_list_locals_lambda, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 324, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_18_pretty_print_list_lambda4, 0, __pyx_n_s_pretty_print_list_locals_lambda, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 323, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 324, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 323, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 324, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 323, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_lst);
   __Pyx_GIVEREF(__pyx_v_lst);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_lst)) __PYX_ERR(0, 324, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_lst)) __PYX_ERR(0, 323, __pyx_L1_error);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_map, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 324, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_map, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 323, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PySequence_ListKeepNew(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 324, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PySequence_ListKeepNew(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 323, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF_SET(__pyx_v_lst, __pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "fmsApp/stegomarkov.pyx":325
+  /* "fmsApp/stegomarkov.pyx":324
  *         """Pretty print a list, showing only up to `limit` items."""
  *         lst = list(map(lambda s: f"'{s}'", lst))
  *         if not lst:             # <<<<<<<<<<<<<<
  *             return "None"
  *         elif len(lst) == 1:
  */
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_lst); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 325, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_lst); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 324, __pyx_L1_error)
   __pyx_t_4 = (!__pyx_t_3);
   if (__pyx_t_4) {
 
-    /* "fmsApp/stegomarkov.pyx":326
+    /* "fmsApp/stegomarkov.pyx":325
  *         lst = list(map(lambda s: f"'{s}'", lst))
  *         if not lst:
  *             return "None"             # <<<<<<<<<<<<<<
@@ -14596,7 +14539,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
     __pyx_r = __pyx_n_s_None;
     goto __pyx_L0;
 
-    /* "fmsApp/stegomarkov.pyx":325
+    /* "fmsApp/stegomarkov.pyx":324
  *         """Pretty print a list, showing only up to `limit` items."""
  *         lst = list(map(lambda s: f"'{s}'", lst))
  *         if not lst:             # <<<<<<<<<<<<<<
@@ -14605,18 +14548,18 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":327
+  /* "fmsApp/stegomarkov.pyx":326
  *         if not lst:
  *             return "None"
  *         elif len(lst) == 1:             # <<<<<<<<<<<<<<
  *             return lst[0]
  *         elif len(lst) == 2:
  */
-  __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 327, __pyx_L1_error)
+  __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 326, __pyx_L1_error)
   __pyx_t_4 = (__pyx_t_5 == 1);
   if (__pyx_t_4) {
 
-    /* "fmsApp/stegomarkov.pyx":328
+    /* "fmsApp/stegomarkov.pyx":327
  *             return "None"
  *         elif len(lst) == 1:
  *             return lst[0]             # <<<<<<<<<<<<<<
@@ -14624,13 +14567,13 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
  *             return f"{lst[0]} and {lst[1]}"
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_lst, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 328, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_lst, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 327, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_r = __pyx_t_2;
     __pyx_t_2 = 0;
     goto __pyx_L0;
 
-    /* "fmsApp/stegomarkov.pyx":327
+    /* "fmsApp/stegomarkov.pyx":326
  *         if not lst:
  *             return "None"
  *         elif len(lst) == 1:             # <<<<<<<<<<<<<<
@@ -14639,18 +14582,18 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":329
+  /* "fmsApp/stegomarkov.pyx":328
  *         elif len(lst) == 1:
  *             return lst[0]
  *         elif len(lst) == 2:             # <<<<<<<<<<<<<<
  *             return f"{lst[0]} and {lst[1]}"
  *         elif len(lst) <= limit:
  */
-  __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 329, __pyx_L1_error)
+  __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 328, __pyx_L1_error)
   __pyx_t_4 = (__pyx_t_5 == 2);
   if (__pyx_t_4) {
 
-    /* "fmsApp/stegomarkov.pyx":330
+    /* "fmsApp/stegomarkov.pyx":329
  *             return lst[0]
  *         elif len(lst) == 2:
  *             return f"{lst[0]} and {lst[1]}"             # <<<<<<<<<<<<<<
@@ -14658,13 +14601,13 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
  *             return ", ".join(lst[:-1]) + ", and " + lst[-1]
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 330, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 329, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_5 = 0;
     __pyx_t_6 = 127;
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_lst, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 330, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_lst, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 329, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = __Pyx_PyObject_FormatSimple(__pyx_t_1, __pyx_empty_unicode); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 330, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_FormatSimple(__pyx_t_1, __pyx_empty_unicode); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 329, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) : __pyx_t_6;
@@ -14676,9 +14619,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
     __pyx_t_5 += 5;
     __Pyx_GIVEREF(__pyx_kp_u_and);
     PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_kp_u_and);
-    __pyx_t_7 = __Pyx_GetItemInt(__pyx_v_lst, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 330, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_GetItemInt(__pyx_v_lst, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 329, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_7, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 330, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_7, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 329, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) : __pyx_t_6;
@@ -14686,14 +14629,14 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
     __Pyx_GIVEREF(__pyx_t_1);
     PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyUnicode_Join(__pyx_t_2, 3, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 330, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyUnicode_Join(__pyx_t_2, 3, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 329, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "fmsApp/stegomarkov.pyx":329
+    /* "fmsApp/stegomarkov.pyx":328
  *         elif len(lst) == 1:
  *             return lst[0]
  *         elif len(lst) == 2:             # <<<<<<<<<<<<<<
@@ -14702,23 +14645,23 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":331
+  /* "fmsApp/stegomarkov.pyx":330
  *         elif len(lst) == 2:
  *             return f"{lst[0]} and {lst[1]}"
  *         elif len(lst) <= limit:             # <<<<<<<<<<<<<<
  *             return ", ".join(lst[:-1]) + ", and " + lst[-1]
  *         else:
  */
-  __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 331, __pyx_L1_error)
-  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 331, __pyx_L1_error)
+  __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 330, __pyx_L1_error)
+  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 330, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_v_limit, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 331, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_v_limit, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 330, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 331, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 330, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "fmsApp/stegomarkov.pyx":332
+    /* "fmsApp/stegomarkov.pyx":331
  *             return f"{lst[0]} and {lst[1]}"
  *         elif len(lst) <= limit:
  *             return ", ".join(lst[:-1]) + ", and " + lst[-1]             # <<<<<<<<<<<<<<
@@ -14726,17 +14669,17 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
  *             truncated_list = lst[:limit]
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_v_lst, 0, -1L, NULL, NULL, &__pyx_slice__9, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 332, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_v_lst, 0, -1L, NULL, NULL, &__pyx_slice__9, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 331, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyString_Join(__pyx_kp_s__8, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 332, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyString_Join(__pyx_kp_s__8, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 331, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_kp_s_and_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 332, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_kp_s_and_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 331, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_lst, -1L, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 332, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_lst, -1L, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 331, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = PyNumber_Add(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 332, __pyx_L1_error)
+    __pyx_t_7 = PyNumber_Add(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 331, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -14744,7 +14687,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
     __pyx_t_7 = 0;
     goto __pyx_L0;
 
-    /* "fmsApp/stegomarkov.pyx":331
+    /* "fmsApp/stegomarkov.pyx":330
  *         elif len(lst) == 2:
  *             return f"{lst[0]} and {lst[1]}"
  *         elif len(lst) <= limit:             # <<<<<<<<<<<<<<
@@ -14753,7 +14696,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
  */
   }
 
-  /* "fmsApp/stegomarkov.pyx":334
+  /* "fmsApp/stegomarkov.pyx":333
  *             return ", ".join(lst[:-1]) + ", and " + lst[-1]
  *         else:
  *             truncated_list = lst[:limit]             # <<<<<<<<<<<<<<
@@ -14761,35 +14704,35 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
  *             return ", ".join(truncated_list) + f", and {remaining_count} more"
  */
   /*else*/ {
-    __pyx_t_7 = __Pyx_PyObject_GetSlice(__pyx_v_lst, 0, 0, NULL, &__pyx_v_limit, NULL, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 334, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetSlice(__pyx_v_lst, 0, 0, NULL, &__pyx_v_limit, NULL, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 333, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_v_truncated_list = __pyx_t_7;
     __pyx_t_7 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":335
+    /* "fmsApp/stegomarkov.pyx":334
  *         else:
  *             truncated_list = lst[:limit]
  *             remaining_count = len(lst) - limit             # <<<<<<<<<<<<<<
  *             return ", ".join(truncated_list) + f", and {remaining_count} more"
  */
-    __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 335, __pyx_L1_error)
-    __pyx_t_7 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 335, __pyx_L1_error)
+    __pyx_t_5 = PyObject_Length(__pyx_v_lst); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 334, __pyx_L1_error)
+    __pyx_t_7 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 334, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_1 = PyNumber_Subtract(__pyx_t_7, __pyx_v_limit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 335, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Subtract(__pyx_t_7, __pyx_v_limit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 334, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_remaining_count = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "fmsApp/stegomarkov.pyx":336
+    /* "fmsApp/stegomarkov.pyx":335
  *             truncated_list = lst[:limit]
  *             remaining_count = len(lst) - limit
  *             return ", ".join(truncated_list) + f", and {remaining_count} more"             # <<<<<<<<<<<<<<
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyString_Join(__pyx_kp_s__8, __pyx_v_truncated_list); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 336, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyString_Join(__pyx_kp_s__8, __pyx_v_truncated_list); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 335, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 336, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 335, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_5 = 0;
     __pyx_t_6 = 127;
@@ -14797,7 +14740,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
     __pyx_t_5 += 6;
     __Pyx_GIVEREF(__pyx_kp_u_and_2);
     PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_kp_u_and_2);
-    __pyx_t_2 = __Pyx_PyObject_FormatSimple(__pyx_v_remaining_count, __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 336, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_FormatSimple(__pyx_v_remaining_count, __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 335, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_6 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) > __pyx_t_6) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) : __pyx_t_6;
     __pyx_t_5 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_2);
@@ -14808,10 +14751,10 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
     __pyx_t_5 += 5;
     __Pyx_GIVEREF(__pyx_kp_u_more);
     PyTuple_SET_ITEM(__pyx_t_7, 2, __pyx_kp_u_more);
-    __pyx_t_2 = __Pyx_PyUnicode_Join(__pyx_t_7, 3, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 336, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyUnicode_Join(__pyx_t_7, 3, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 335, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = PyNumber_Add(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 336, __pyx_L1_error)
+    __pyx_t_7 = PyNumber_Add(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 335, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -14820,7 +14763,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
     goto __pyx_L0;
   }
 
-  /* "fmsApp/stegomarkov.pyx":321
+  /* "fmsApp/stegomarkov.pyx":320
  *         return transitions
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
@@ -14851,15 +14794,15 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list(Py
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_19__reduce_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_17__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_19__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_19__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_19__reduce_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_17__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_17__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_17__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -14884,14 +14827,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   if (unlikely(__pyx_nargs > 0)) {
     __Pyx_RaiseArgtupleInvalid("__reduce_cython__", 1, 0, 0, __pyx_nargs); return NULL;}
   if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_FASTCALL(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__reduce_cython__", 0))) return NULL;
-  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__reduce_cython__(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
+  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_16__reduce_cython__(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__reduce_cython__(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_16__reduce_cython__(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self) {
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v__dict = 0;
   int __pyx_v_use_setstate;
@@ -14913,32 +14856,32 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__reduce_cython__(str
   /* "(tree fragment)":5
  *     cdef object _dict
  *     cdef bint use_setstate
- *     state = (self._endkey, self._index, self.current_gram, self.entrypoints, self.exhausted, self.finished, self.logging, self.model, self.output, self.stega_text)             # <<<<<<<<<<<<<<
+ *     state = (self.current_gram, self.endkey, self.entrypoints, self.exhausted, self.finished, self.index, self.logging, self.model, self.output, self.stega_text)             # <<<<<<<<<<<<<<
  *     _dict = getattr(self, '__dict__', None)
  *     if _dict is not None:
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_endkey); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 5, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->endkey); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->_index); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 5, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_self->exhausted); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_self->exhausted); if (unlikely(!__pyx_t_3)) __PYX_ERR(2, 5, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_self->finished); if (unlikely(!__pyx_t_3)) __PYX_ERR(2, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyBool_FromLong(__pyx_v_self->finished); if (unlikely(!__pyx_t_4)) __PYX_ERR(2, 5, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_self->index); if (unlikely(!__pyx_t_4)) __PYX_ERR(2, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = __Pyx_PyBool_FromLong(__pyx_v_self->logging); if (unlikely(!__pyx_t_5)) __PYX_ERR(2, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = PyTuple_New(10); if (unlikely(!__pyx_t_6)) __PYX_ERR(2, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1)) __PYX_ERR(2, 5, __pyx_L1_error);
-  __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_2)) __PYX_ERR(2, 5, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self->current_gram);
   __Pyx_GIVEREF(__pyx_v_self->current_gram);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_v_self->current_gram)) __PYX_ERR(2, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_v_self->current_gram)) __PYX_ERR(2, 5, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_1);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_1)) __PYX_ERR(2, 5, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self->entrypoints);
   __Pyx_GIVEREF(__pyx_v_self->entrypoints);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 3, __pyx_v_self->entrypoints)) __PYX_ERR(2, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_v_self->entrypoints)) __PYX_ERR(2, 5, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_2);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 3, __pyx_t_2)) __PYX_ERR(2, 5, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_3);
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 4, __pyx_t_3)) __PYX_ERR(2, 5, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_4);
@@ -14964,7 +14907,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__reduce_cython__(str
 
   /* "(tree fragment)":6
  *     cdef bint use_setstate
- *     state = (self._endkey, self._index, self.current_gram, self.entrypoints, self.exhausted, self.finished, self.logging, self.model, self.output, self.stega_text)
+ *     state = (self.current_gram, self.endkey, self.entrypoints, self.exhausted, self.finished, self.index, self.logging, self.model, self.output, self.stega_text)
  *     _dict = getattr(self, '__dict__', None)             # <<<<<<<<<<<<<<
  *     if _dict is not None:
  *         state += (_dict,)
@@ -14975,7 +14918,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__reduce_cython__(str
   __pyx_t_6 = 0;
 
   /* "(tree fragment)":7
- *     state = (self._endkey, self._index, self.current_gram, self.entrypoints, self.exhausted, self.finished, self.logging, self.model, self.output, self.stega_text)
+ *     state = (self.current_gram, self.endkey, self.entrypoints, self.exhausted, self.finished, self.index, self.logging, self.model, self.output, self.stega_text)
  *     _dict = getattr(self, '__dict__', None)
  *     if _dict is not None:             # <<<<<<<<<<<<<<
  *         state += (_dict,)
@@ -15012,7 +14955,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__reduce_cython__(str
     __pyx_v_use_setstate = 1;
 
     /* "(tree fragment)":7
- *     state = (self._endkey, self._index, self.current_gram, self.entrypoints, self.exhausted, self.finished, self.logging, self.model, self.output, self.stega_text)
+ *     state = (self.current_gram, self.endkey, self.entrypoints, self.exhausted, self.finished, self.index, self.logging, self.model, self.output, self.stega_text)
  *     _dict = getattr(self, '__dict__', None)
  *     if _dict is not None:             # <<<<<<<<<<<<<<
  *         state += (_dict,)
@@ -15026,7 +14969,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__reduce_cython__(str
  *     else:
  *         use_setstate = self.current_gram is not None or self.entrypoints is not None or self.model is not None or self.output is not None or self.stega_text is not None             # <<<<<<<<<<<<<<
  *     if use_setstate:
- *         return __pyx_unpickle_Decoder, (type(self), 0xbf5fd1a, None), state
+ *         return __pyx_unpickle_Decoder, (type(self), 0x616f0f5, None), state
  */
   /*else*/ {
     __pyx_t_8 = (__pyx_v_self->current_gram != Py_None);
@@ -15064,7 +15007,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__reduce_cython__(str
  *     else:
  *         use_setstate = self.current_gram is not None or self.entrypoints is not None or self.model is not None or self.output is not None or self.stega_text is not None
  *     if use_setstate:             # <<<<<<<<<<<<<<
- *         return __pyx_unpickle_Decoder, (type(self), 0xbf5fd1a, None), state
+ *         return __pyx_unpickle_Decoder, (type(self), 0x616f0f5, None), state
  *     else:
  */
   if (__pyx_v_use_setstate) {
@@ -15072,9 +15015,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__reduce_cython__(str
     /* "(tree fragment)":13
  *         use_setstate = self.current_gram is not None or self.entrypoints is not None or self.model is not None or self.output is not None or self.stega_text is not None
  *     if use_setstate:
- *         return __pyx_unpickle_Decoder, (type(self), 0xbf5fd1a, None), state             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_Decoder, (type(self), 0x616f0f5, None), state             # <<<<<<<<<<<<<<
  *     else:
- *         return __pyx_unpickle_Decoder, (type(self), 0xbf5fd1a, state)
+ *         return __pyx_unpickle_Decoder, (type(self), 0x616f0f5, state)
  */
     __Pyx_XDECREF(__pyx_r);
     __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_pyx_unpickle_Decoder); if (unlikely(!__pyx_t_5)) __PYX_ERR(2, 13, __pyx_L1_error)
@@ -15084,9 +15027,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__reduce_cython__(str
     __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
     __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))))) __PYX_ERR(2, 13, __pyx_L1_error);
-    __Pyx_INCREF(__pyx_int_200670490);
-    __Pyx_GIVEREF(__pyx_int_200670490);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_int_200670490)) __PYX_ERR(2, 13, __pyx_L1_error);
+    __Pyx_INCREF(__pyx_int_102166773);
+    __Pyx_GIVEREF(__pyx_int_102166773);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_int_102166773)) __PYX_ERR(2, 13, __pyx_L1_error);
     __Pyx_INCREF(Py_None);
     __Pyx_GIVEREF(Py_None);
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 2, Py_None)) __PYX_ERR(2, 13, __pyx_L1_error);
@@ -15109,15 +15052,15 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__reduce_cython__(str
  *     else:
  *         use_setstate = self.current_gram is not None or self.entrypoints is not None or self.model is not None or self.output is not None or self.stega_text is not None
  *     if use_setstate:             # <<<<<<<<<<<<<<
- *         return __pyx_unpickle_Decoder, (type(self), 0xbf5fd1a, None), state
+ *         return __pyx_unpickle_Decoder, (type(self), 0x616f0f5, None), state
  *     else:
  */
   }
 
   /* "(tree fragment)":15
- *         return __pyx_unpickle_Decoder, (type(self), 0xbf5fd1a, None), state
+ *         return __pyx_unpickle_Decoder, (type(self), 0x616f0f5, None), state
  *     else:
- *         return __pyx_unpickle_Decoder, (type(self), 0xbf5fd1a, state)             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_Decoder, (type(self), 0x616f0f5, state)             # <<<<<<<<<<<<<<
  * def __setstate_cython__(self, __pyx_state):
  *     __pyx_unpickle_Decoder__set_state(self, __pyx_state)
  */
@@ -15130,9 +15073,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__reduce_cython__(str
     __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
     __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))))) __PYX_ERR(2, 15, __pyx_L1_error);
-    __Pyx_INCREF(__pyx_int_200670490);
-    __Pyx_GIVEREF(__pyx_int_200670490);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_int_200670490)) __PYX_ERR(2, 15, __pyx_L1_error);
+    __Pyx_INCREF(__pyx_int_102166773);
+    __Pyx_GIVEREF(__pyx_int_102166773);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_int_102166773)) __PYX_ERR(2, 15, __pyx_L1_error);
     __Pyx_INCREF(__pyx_v_state);
     __Pyx_GIVEREF(__pyx_v_state);
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_v_state)) __PYX_ERR(2, 15, __pyx_L1_error);
@@ -15175,21 +15118,21 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__reduce_cython__(str
 
 /* "(tree fragment)":16
  *     else:
- *         return __pyx_unpickle_Decoder, (type(self), 0xbf5fd1a, state)
+ *         return __pyx_unpickle_Decoder, (type(self), 0x616f0f5, state)
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     __pyx_unpickle_Decoder__set_state(self, __pyx_state)
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_21__setstate_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_19__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_21__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_21__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_21__setstate_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_6fmsApp_11stegomarkov_7Decoder_19__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_19__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6fmsApp_11stegomarkov_7Decoder_19__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -15263,7 +15206,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_20__setstate_cython__(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self), __pyx_v___pyx_state);
+  __pyx_r = __pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__setstate_cython__(((struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *)__pyx_v_self), __pyx_v___pyx_state);
 
   /* function exit code */
   {
@@ -15276,7 +15219,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_20__setstate_cython__(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_18__setstate_cython__(struct __pyx_obj_6fmsApp_11stegomarkov_Decoder *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -15286,7 +15229,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_20__setstate_cython__(s
   __Pyx_RefNannySetupContext("__setstate_cython__", 1);
 
   /* "(tree fragment)":17
- *         return __pyx_unpickle_Decoder, (type(self), 0xbf5fd1a, state)
+ *         return __pyx_unpickle_Decoder, (type(self), 0x616f0f5, state)
  * def __setstate_cython__(self, __pyx_state):
  *     __pyx_unpickle_Decoder__set_state(self, __pyx_state)             # <<<<<<<<<<<<<<
  */
@@ -15297,7 +15240,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_7Decoder_20__setstate_cython__(s
 
   /* "(tree fragment)":16
  *     else:
- *         return __pyx_unpickle_Decoder, (type(self), 0xbf5fd1a, state)
+ *         return __pyx_unpickle_Decoder, (type(self), 0x616f0f5, state)
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     __pyx_unpickle_Decoder__set_state(self, __pyx_state)
  */
@@ -15465,9 +15408,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_6__pyx_unpickle_Encoder(CYTHON_U
   /* "(tree fragment)":4
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
- *     if __pyx_checksum not in (0x5fb5542, 0x89e8fed, 0x3a1949f):             # <<<<<<<<<<<<<<
+ *     if __pyx_checksum not in (0x4ea1e69, 0x00ab748, 0x2cd6441):             # <<<<<<<<<<<<<<
  *         from pickle import PickleError as __pyx_PickleError
- *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x5fb5542, 0x89e8fed, 0x3a1949f) = (_end_key_index, _output_tokens, bitstream, current_gram, end_key, entrypoints, exhausted, finished, logging, model))" % __pyx_checksum
+ *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x4ea1e69, 0x00ab748, 0x2cd6441) = (bitstream, bitstream_length, current_gram, end_key, entrypoints, exhausted, finished, logging, model, output_tokens))" % __pyx_checksum
  */
   __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -15477,9 +15420,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_6__pyx_unpickle_Encoder(CYTHON_U
 
     /* "(tree fragment)":5
  *     cdef object __pyx_result
- *     if __pyx_checksum not in (0x5fb5542, 0x89e8fed, 0x3a1949f):
+ *     if __pyx_checksum not in (0x4ea1e69, 0x00ab748, 0x2cd6441):
  *         from pickle import PickleError as __pyx_PickleError             # <<<<<<<<<<<<<<
- *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x5fb5542, 0x89e8fed, 0x3a1949f) = (_end_key_index, _output_tokens, bitstream, current_gram, end_key, entrypoints, exhausted, finished, logging, model))" % __pyx_checksum
+ *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x4ea1e69, 0x00ab748, 0x2cd6441) = (bitstream, bitstream_length, current_gram, end_key, entrypoints, exhausted, finished, logging, model, output_tokens))" % __pyx_checksum
  *     __pyx_result = Encoder.__new__(__pyx_type)
  */
     __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 5, __pyx_L1_error)
@@ -15498,9 +15441,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_6__pyx_unpickle_Encoder(CYTHON_U
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
     /* "(tree fragment)":6
- *     if __pyx_checksum not in (0x5fb5542, 0x89e8fed, 0x3a1949f):
+ *     if __pyx_checksum not in (0x4ea1e69, 0x00ab748, 0x2cd6441):
  *         from pickle import PickleError as __pyx_PickleError
- *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x5fb5542, 0x89e8fed, 0x3a1949f) = (_end_key_index, _output_tokens, bitstream, current_gram, end_key, entrypoints, exhausted, finished, logging, model))" % __pyx_checksum             # <<<<<<<<<<<<<<
+ *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x4ea1e69, 0x00ab748, 0x2cd6441) = (bitstream, bitstream_length, current_gram, end_key, entrypoints, exhausted, finished, logging, model, output_tokens))" % __pyx_checksum             # <<<<<<<<<<<<<<
  *     __pyx_result = Encoder.__new__(__pyx_type)
  *     if __pyx_state is not None:
  */
@@ -15516,15 +15459,15 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_6__pyx_unpickle_Encoder(CYTHON_U
     /* "(tree fragment)":4
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
- *     if __pyx_checksum not in (0x5fb5542, 0x89e8fed, 0x3a1949f):             # <<<<<<<<<<<<<<
+ *     if __pyx_checksum not in (0x4ea1e69, 0x00ab748, 0x2cd6441):             # <<<<<<<<<<<<<<
  *         from pickle import PickleError as __pyx_PickleError
- *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x5fb5542, 0x89e8fed, 0x3a1949f) = (_end_key_index, _output_tokens, bitstream, current_gram, end_key, entrypoints, exhausted, finished, logging, model))" % __pyx_checksum
+ *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x4ea1e69, 0x00ab748, 0x2cd6441) = (bitstream, bitstream_length, current_gram, end_key, entrypoints, exhausted, finished, logging, model, output_tokens))" % __pyx_checksum
  */
   }
 
   /* "(tree fragment)":7
  *         from pickle import PickleError as __pyx_PickleError
- *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x5fb5542, 0x89e8fed, 0x3a1949f) = (_end_key_index, _output_tokens, bitstream, current_gram, end_key, entrypoints, exhausted, finished, logging, model))" % __pyx_checksum
+ *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x4ea1e69, 0x00ab748, 0x2cd6441) = (bitstream, bitstream_length, current_gram, end_key, entrypoints, exhausted, finished, logging, model, output_tokens))" % __pyx_checksum
  *     __pyx_result = Encoder.__new__(__pyx_type)             # <<<<<<<<<<<<<<
  *     if __pyx_state is not None:
  *         __pyx_unpickle_Encoder__set_state(<Encoder> __pyx_result, __pyx_state)
@@ -15557,7 +15500,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_6__pyx_unpickle_Encoder(CYTHON_U
   __pyx_t_1 = 0;
 
   /* "(tree fragment)":8
- *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x5fb5542, 0x89e8fed, 0x3a1949f) = (_end_key_index, _output_tokens, bitstream, current_gram, end_key, entrypoints, exhausted, finished, logging, model))" % __pyx_checksum
+ *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x4ea1e69, 0x00ab748, 0x2cd6441) = (bitstream, bitstream_length, current_gram, end_key, entrypoints, exhausted, finished, logging, model, output_tokens))" % __pyx_checksum
  *     __pyx_result = Encoder.__new__(__pyx_type)
  *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
  *         __pyx_unpickle_Encoder__set_state(<Encoder> __pyx_result, __pyx_state)
@@ -15579,7 +15522,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_6__pyx_unpickle_Encoder(CYTHON_U
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
     /* "(tree fragment)":8
- *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x5fb5542, 0x89e8fed, 0x3a1949f) = (_end_key_index, _output_tokens, bitstream, current_gram, end_key, entrypoints, exhausted, finished, logging, model))" % __pyx_checksum
+ *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x4ea1e69, 0x00ab748, 0x2cd6441) = (bitstream, bitstream_length, current_gram, end_key, entrypoints, exhausted, finished, logging, model, output_tokens))" % __pyx_checksum
  *     __pyx_result = Encoder.__new__(__pyx_type)
  *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
  *         __pyx_unpickle_Encoder__set_state(<Encoder> __pyx_result, __pyx_state)
@@ -15592,7 +15535,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_6__pyx_unpickle_Encoder(CYTHON_U
  *         __pyx_unpickle_Encoder__set_state(<Encoder> __pyx_result, __pyx_state)
  *     return __pyx_result             # <<<<<<<<<<<<<<
  * cdef __pyx_unpickle_Encoder__set_state(Encoder __pyx_result, tuple __pyx_state):
- *     __pyx_result._end_key_index = __pyx_state[0]; __pyx_result._output_tokens = __pyx_state[1]; __pyx_result.bitstream = __pyx_state[2]; __pyx_result.current_gram = __pyx_state[3]; __pyx_result.end_key = __pyx_state[4]; __pyx_result.entrypoints = __pyx_state[5]; __pyx_result.exhausted = __pyx_state[6]; __pyx_result.finished = __pyx_state[7]; __pyx_result.logging = __pyx_state[8]; __pyx_result.model = __pyx_state[9]
+ *     __pyx_result.bitstream = __pyx_state[0]; __pyx_result.bitstream_length = __pyx_state[1]; __pyx_result.current_gram = __pyx_state[2]; __pyx_result.end_key = __pyx_state[3]; __pyx_result.entrypoints = __pyx_state[4]; __pyx_result.exhausted = __pyx_state[5]; __pyx_result.finished = __pyx_state[6]; __pyx_result.logging = __pyx_state[7]; __pyx_result.model = __pyx_state[8]; __pyx_result.output_tokens = __pyx_state[9]
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v___pyx_result);
@@ -15624,7 +15567,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_6__pyx_unpickle_Encoder(CYTHON_U
  *         __pyx_unpickle_Encoder__set_state(<Encoder> __pyx_result, __pyx_state)
  *     return __pyx_result
  * cdef __pyx_unpickle_Encoder__set_state(Encoder __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
- *     __pyx_result._end_key_index = __pyx_state[0]; __pyx_result._output_tokens = __pyx_state[1]; __pyx_result.bitstream = __pyx_state[2]; __pyx_result.current_gram = __pyx_state[3]; __pyx_result.end_key = __pyx_state[4]; __pyx_result.entrypoints = __pyx_state[5]; __pyx_result.exhausted = __pyx_state[6]; __pyx_result.finished = __pyx_state[7]; __pyx_result.logging = __pyx_state[8]; __pyx_result.model = __pyx_state[9]
+ *     __pyx_result.bitstream = __pyx_state[0]; __pyx_result.bitstream_length = __pyx_state[1]; __pyx_result.current_gram = __pyx_state[2]; __pyx_result.end_key = __pyx_state[3]; __pyx_result.entrypoints = __pyx_state[4]; __pyx_result.exhausted = __pyx_state[5]; __pyx_result.finished = __pyx_state[6]; __pyx_result.logging = __pyx_state[7]; __pyx_result.model = __pyx_state[8]; __pyx_result.output_tokens = __pyx_state[9]
  *     if len(__pyx_state) > 10 and hasattr(__pyx_result, '__dict__'):
  */
 
@@ -15648,7 +15591,7 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Encoder__set_state
   /* "(tree fragment)":12
  *     return __pyx_result
  * cdef __pyx_unpickle_Encoder__set_state(Encoder __pyx_result, tuple __pyx_state):
- *     __pyx_result._end_key_index = __pyx_state[0]; __pyx_result._output_tokens = __pyx_state[1]; __pyx_result.bitstream = __pyx_state[2]; __pyx_result.current_gram = __pyx_state[3]; __pyx_result.end_key = __pyx_state[4]; __pyx_result.entrypoints = __pyx_state[5]; __pyx_result.exhausted = __pyx_state[6]; __pyx_result.finished = __pyx_state[7]; __pyx_result.logging = __pyx_state[8]; __pyx_result.model = __pyx_state[9]             # <<<<<<<<<<<<<<
+ *     __pyx_result.bitstream = __pyx_state[0]; __pyx_result.bitstream_length = __pyx_state[1]; __pyx_result.current_gram = __pyx_state[2]; __pyx_result.end_key = __pyx_state[3]; __pyx_result.entrypoints = __pyx_state[4]; __pyx_result.exhausted = __pyx_state[5]; __pyx_result.finished = __pyx_state[6]; __pyx_result.logging = __pyx_state[7]; __pyx_result.model = __pyx_state[8]; __pyx_result.output_tokens = __pyx_state[9]             # <<<<<<<<<<<<<<
  *     if len(__pyx_state) > 10 and hasattr(__pyx_result, '__dict__'):
  *         __pyx_result.__dict__.update(__pyx_state[10])
  */
@@ -15657,27 +15600,6 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Encoder__set_state
     __PYX_ERR(2, 12, __pyx_L1_error)
   }
   __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) __PYX_ERR(2, 12, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v___pyx_result->_end_key_index = __pyx_t_2;
-  if (unlikely(__pyx_v___pyx_state == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(2, 12, __pyx_L1_error)
-  }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(2, 12, __pyx_L1_error)
-  __Pyx_GIVEREF(__pyx_t_1);
-  __Pyx_GOTREF(__pyx_v___pyx_result->_output_tokens);
-  __Pyx_DECREF(__pyx_v___pyx_result->_output_tokens);
-  __pyx_v___pyx_result->_output_tokens = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
-  if (unlikely(__pyx_v___pyx_state == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(2, 12, __pyx_L1_error)
-  }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_1))) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
@@ -15689,7 +15611,16 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Encoder__set_state
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     __PYX_ERR(2, 12, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) __PYX_ERR(2, 12, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v___pyx_result->bitstream_length = __pyx_t_2;
+  if (unlikely(__pyx_v___pyx_state == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    __PYX_ERR(2, 12, __pyx_L1_error)
+  }
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v___pyx_result->current_gram);
@@ -15700,7 +15631,7 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Encoder__set_state
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     __PYX_ERR(2, 12, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -15709,7 +15640,7 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Encoder__set_state
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     __PYX_ERR(2, 12, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 5, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
@@ -15721,7 +15652,7 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Encoder__set_state
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     __PYX_ERR(2, 12, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 6, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 5, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -15730,7 +15661,7 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Encoder__set_state
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     __PYX_ERR(2, 12, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 7, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 6, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -15739,7 +15670,7 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Encoder__set_state
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     __PYX_ERR(2, 12, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 8, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 7, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -15748,17 +15679,29 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Encoder__set_state
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     __PYX_ERR(2, 12, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 9, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 8, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v___pyx_result->model);
   __Pyx_DECREF(__pyx_v___pyx_result->model);
   __pyx_v___pyx_result->model = __pyx_t_1;
   __pyx_t_1 = 0;
+  if (unlikely(__pyx_v___pyx_state == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    __PYX_ERR(2, 12, __pyx_L1_error)
+  }
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 9, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(2, 12, __pyx_L1_error)
+  __Pyx_GIVEREF(__pyx_t_1);
+  __Pyx_GOTREF(__pyx_v___pyx_result->output_tokens);
+  __Pyx_DECREF(__pyx_v___pyx_result->output_tokens);
+  __pyx_v___pyx_result->output_tokens = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
 
   /* "(tree fragment)":13
  * cdef __pyx_unpickle_Encoder__set_state(Encoder __pyx_result, tuple __pyx_state):
- *     __pyx_result._end_key_index = __pyx_state[0]; __pyx_result._output_tokens = __pyx_state[1]; __pyx_result.bitstream = __pyx_state[2]; __pyx_result.current_gram = __pyx_state[3]; __pyx_result.end_key = __pyx_state[4]; __pyx_result.entrypoints = __pyx_state[5]; __pyx_result.exhausted = __pyx_state[6]; __pyx_result.finished = __pyx_state[7]; __pyx_result.logging = __pyx_state[8]; __pyx_result.model = __pyx_state[9]
+ *     __pyx_result.bitstream = __pyx_state[0]; __pyx_result.bitstream_length = __pyx_state[1]; __pyx_result.current_gram = __pyx_state[2]; __pyx_result.end_key = __pyx_state[3]; __pyx_result.entrypoints = __pyx_state[4]; __pyx_result.exhausted = __pyx_state[5]; __pyx_result.finished = __pyx_state[6]; __pyx_result.logging = __pyx_state[7]; __pyx_result.model = __pyx_state[8]; __pyx_result.output_tokens = __pyx_state[9]
  *     if len(__pyx_state) > 10 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
  *         __pyx_result.__dict__.update(__pyx_state[10])
  */
@@ -15779,7 +15722,7 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Encoder__set_state
   if (__pyx_t_3) {
 
     /* "(tree fragment)":14
- *     __pyx_result._end_key_index = __pyx_state[0]; __pyx_result._output_tokens = __pyx_state[1]; __pyx_result.bitstream = __pyx_state[2]; __pyx_result.current_gram = __pyx_state[3]; __pyx_result.end_key = __pyx_state[4]; __pyx_result.entrypoints = __pyx_state[5]; __pyx_result.exhausted = __pyx_state[6]; __pyx_result.finished = __pyx_state[7]; __pyx_result.logging = __pyx_state[8]; __pyx_result.model = __pyx_state[9]
+ *     __pyx_result.bitstream = __pyx_state[0]; __pyx_result.bitstream_length = __pyx_state[1]; __pyx_result.current_gram = __pyx_state[2]; __pyx_result.end_key = __pyx_state[3]; __pyx_result.entrypoints = __pyx_state[4]; __pyx_result.exhausted = __pyx_state[5]; __pyx_result.finished = __pyx_state[6]; __pyx_result.logging = __pyx_state[7]; __pyx_result.model = __pyx_state[8]; __pyx_result.output_tokens = __pyx_state[9]
  *     if len(__pyx_state) > 10 and hasattr(__pyx_result, '__dict__'):
  *         __pyx_result.__dict__.update(__pyx_state[10])             # <<<<<<<<<<<<<<
  */
@@ -15821,7 +15764,7 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Encoder__set_state
 
     /* "(tree fragment)":13
  * cdef __pyx_unpickle_Encoder__set_state(Encoder __pyx_result, tuple __pyx_state):
- *     __pyx_result._end_key_index = __pyx_state[0]; __pyx_result._output_tokens = __pyx_state[1]; __pyx_result.bitstream = __pyx_state[2]; __pyx_result.current_gram = __pyx_state[3]; __pyx_result.end_key = __pyx_state[4]; __pyx_result.entrypoints = __pyx_state[5]; __pyx_result.exhausted = __pyx_state[6]; __pyx_result.finished = __pyx_state[7]; __pyx_result.logging = __pyx_state[8]; __pyx_result.model = __pyx_state[9]
+ *     __pyx_result.bitstream = __pyx_state[0]; __pyx_result.bitstream_length = __pyx_state[1]; __pyx_result.current_gram = __pyx_state[2]; __pyx_result.end_key = __pyx_state[3]; __pyx_result.entrypoints = __pyx_state[4]; __pyx_result.exhausted = __pyx_state[5]; __pyx_result.finished = __pyx_state[6]; __pyx_result.logging = __pyx_state[7]; __pyx_result.model = __pyx_state[8]; __pyx_result.output_tokens = __pyx_state[9]
  *     if len(__pyx_state) > 10 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
  *         __pyx_result.__dict__.update(__pyx_state[10])
  */
@@ -15831,7 +15774,7 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Encoder__set_state
  *         __pyx_unpickle_Encoder__set_state(<Encoder> __pyx_result, __pyx_state)
  *     return __pyx_result
  * cdef __pyx_unpickle_Encoder__set_state(Encoder __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
- *     __pyx_result._end_key_index = __pyx_state[0]; __pyx_result._output_tokens = __pyx_state[1]; __pyx_result.bitstream = __pyx_state[2]; __pyx_result.current_gram = __pyx_state[3]; __pyx_result.end_key = __pyx_state[4]; __pyx_result.entrypoints = __pyx_state[5]; __pyx_result.exhausted = __pyx_state[6]; __pyx_result.finished = __pyx_state[7]; __pyx_result.logging = __pyx_state[8]; __pyx_result.model = __pyx_state[9]
+ *     __pyx_result.bitstream = __pyx_state[0]; __pyx_result.bitstream_length = __pyx_state[1]; __pyx_result.current_gram = __pyx_state[2]; __pyx_result.end_key = __pyx_state[3]; __pyx_result.entrypoints = __pyx_state[4]; __pyx_result.exhausted = __pyx_state[5]; __pyx_result.finished = __pyx_state[6]; __pyx_result.logging = __pyx_state[7]; __pyx_result.model = __pyx_state[8]; __pyx_result.output_tokens = __pyx_state[9]
  *     if len(__pyx_state) > 10 and hasattr(__pyx_result, '__dict__'):
  */
 
@@ -16001,9 +15944,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_8__pyx_unpickle_Decoder(CYTHON_U
   /* "(tree fragment)":4
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
- *     if __pyx_checksum not in (0xbf5fd1a, 0xceab81c, 0x132e9e8):             # <<<<<<<<<<<<<<
+ *     if __pyx_checksum not in (0x616f0f5, 0x93eadf1, 0x9390499):             # <<<<<<<<<<<<<<
  *         from pickle import PickleError as __pyx_PickleError
- *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0xbf5fd1a, 0xceab81c, 0x132e9e8) = (_endkey, _index, current_gram, entrypoints, exhausted, finished, logging, model, output, stega_text))" % __pyx_checksum
+ *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x616f0f5, 0x93eadf1, 0x9390499) = (current_gram, endkey, entrypoints, exhausted, finished, index, logging, model, output, stega_text))" % __pyx_checksum
  */
   __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -16013,9 +15956,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_8__pyx_unpickle_Decoder(CYTHON_U
 
     /* "(tree fragment)":5
  *     cdef object __pyx_result
- *     if __pyx_checksum not in (0xbf5fd1a, 0xceab81c, 0x132e9e8):
+ *     if __pyx_checksum not in (0x616f0f5, 0x93eadf1, 0x9390499):
  *         from pickle import PickleError as __pyx_PickleError             # <<<<<<<<<<<<<<
- *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0xbf5fd1a, 0xceab81c, 0x132e9e8) = (_endkey, _index, current_gram, entrypoints, exhausted, finished, logging, model, output, stega_text))" % __pyx_checksum
+ *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x616f0f5, 0x93eadf1, 0x9390499) = (current_gram, endkey, entrypoints, exhausted, finished, index, logging, model, output, stega_text))" % __pyx_checksum
  *     __pyx_result = Decoder.__new__(__pyx_type)
  */
     __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 5, __pyx_L1_error)
@@ -16034,9 +15977,9 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_8__pyx_unpickle_Decoder(CYTHON_U
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
     /* "(tree fragment)":6
- *     if __pyx_checksum not in (0xbf5fd1a, 0xceab81c, 0x132e9e8):
+ *     if __pyx_checksum not in (0x616f0f5, 0x93eadf1, 0x9390499):
  *         from pickle import PickleError as __pyx_PickleError
- *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0xbf5fd1a, 0xceab81c, 0x132e9e8) = (_endkey, _index, current_gram, entrypoints, exhausted, finished, logging, model, output, stega_text))" % __pyx_checksum             # <<<<<<<<<<<<<<
+ *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x616f0f5, 0x93eadf1, 0x9390499) = (current_gram, endkey, entrypoints, exhausted, finished, index, logging, model, output, stega_text))" % __pyx_checksum             # <<<<<<<<<<<<<<
  *     __pyx_result = Decoder.__new__(__pyx_type)
  *     if __pyx_state is not None:
  */
@@ -16052,15 +15995,15 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_8__pyx_unpickle_Decoder(CYTHON_U
     /* "(tree fragment)":4
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
- *     if __pyx_checksum not in (0xbf5fd1a, 0xceab81c, 0x132e9e8):             # <<<<<<<<<<<<<<
+ *     if __pyx_checksum not in (0x616f0f5, 0x93eadf1, 0x9390499):             # <<<<<<<<<<<<<<
  *         from pickle import PickleError as __pyx_PickleError
- *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0xbf5fd1a, 0xceab81c, 0x132e9e8) = (_endkey, _index, current_gram, entrypoints, exhausted, finished, logging, model, output, stega_text))" % __pyx_checksum
+ *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x616f0f5, 0x93eadf1, 0x9390499) = (current_gram, endkey, entrypoints, exhausted, finished, index, logging, model, output, stega_text))" % __pyx_checksum
  */
   }
 
   /* "(tree fragment)":7
  *         from pickle import PickleError as __pyx_PickleError
- *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0xbf5fd1a, 0xceab81c, 0x132e9e8) = (_endkey, _index, current_gram, entrypoints, exhausted, finished, logging, model, output, stega_text))" % __pyx_checksum
+ *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x616f0f5, 0x93eadf1, 0x9390499) = (current_gram, endkey, entrypoints, exhausted, finished, index, logging, model, output, stega_text))" % __pyx_checksum
  *     __pyx_result = Decoder.__new__(__pyx_type)             # <<<<<<<<<<<<<<
  *     if __pyx_state is not None:
  *         __pyx_unpickle_Decoder__set_state(<Decoder> __pyx_result, __pyx_state)
@@ -16093,7 +16036,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_8__pyx_unpickle_Decoder(CYTHON_U
   __pyx_t_1 = 0;
 
   /* "(tree fragment)":8
- *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0xbf5fd1a, 0xceab81c, 0x132e9e8) = (_endkey, _index, current_gram, entrypoints, exhausted, finished, logging, model, output, stega_text))" % __pyx_checksum
+ *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x616f0f5, 0x93eadf1, 0x9390499) = (current_gram, endkey, entrypoints, exhausted, finished, index, logging, model, output, stega_text))" % __pyx_checksum
  *     __pyx_result = Decoder.__new__(__pyx_type)
  *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
  *         __pyx_unpickle_Decoder__set_state(<Decoder> __pyx_result, __pyx_state)
@@ -16115,7 +16058,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_8__pyx_unpickle_Decoder(CYTHON_U
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
     /* "(tree fragment)":8
- *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0xbf5fd1a, 0xceab81c, 0x132e9e8) = (_endkey, _index, current_gram, entrypoints, exhausted, finished, logging, model, output, stega_text))" % __pyx_checksum
+ *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x616f0f5, 0x93eadf1, 0x9390499) = (current_gram, endkey, entrypoints, exhausted, finished, index, logging, model, output, stega_text))" % __pyx_checksum
  *     __pyx_result = Decoder.__new__(__pyx_type)
  *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
  *         __pyx_unpickle_Decoder__set_state(<Decoder> __pyx_result, __pyx_state)
@@ -16128,7 +16071,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_8__pyx_unpickle_Decoder(CYTHON_U
  *         __pyx_unpickle_Decoder__set_state(<Decoder> __pyx_result, __pyx_state)
  *     return __pyx_result             # <<<<<<<<<<<<<<
  * cdef __pyx_unpickle_Decoder__set_state(Decoder __pyx_result, tuple __pyx_state):
- *     __pyx_result._endkey = __pyx_state[0]; __pyx_result._index = __pyx_state[1]; __pyx_result.current_gram = __pyx_state[2]; __pyx_result.entrypoints = __pyx_state[3]; __pyx_result.exhausted = __pyx_state[4]; __pyx_result.finished = __pyx_state[5]; __pyx_result.logging = __pyx_state[6]; __pyx_result.model = __pyx_state[7]; __pyx_result.output = __pyx_state[8]; __pyx_result.stega_text = __pyx_state[9]
+ *     __pyx_result.current_gram = __pyx_state[0]; __pyx_result.endkey = __pyx_state[1]; __pyx_result.entrypoints = __pyx_state[2]; __pyx_result.exhausted = __pyx_state[3]; __pyx_result.finished = __pyx_state[4]; __pyx_result.index = __pyx_state[5]; __pyx_result.logging = __pyx_state[6]; __pyx_result.model = __pyx_state[7]; __pyx_result.output = __pyx_state[8]; __pyx_result.stega_text = __pyx_state[9]
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v___pyx_result);
@@ -16160,7 +16103,7 @@ static PyObject *__pyx_pf_6fmsApp_11stegomarkov_8__pyx_unpickle_Decoder(CYTHON_U
  *         __pyx_unpickle_Decoder__set_state(<Decoder> __pyx_result, __pyx_state)
  *     return __pyx_result
  * cdef __pyx_unpickle_Decoder__set_state(Decoder __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
- *     __pyx_result._endkey = __pyx_state[0]; __pyx_result._index = __pyx_state[1]; __pyx_result.current_gram = __pyx_state[2]; __pyx_result.entrypoints = __pyx_state[3]; __pyx_result.exhausted = __pyx_state[4]; __pyx_result.finished = __pyx_state[5]; __pyx_result.logging = __pyx_state[6]; __pyx_result.model = __pyx_state[7]; __pyx_result.output = __pyx_state[8]; __pyx_result.stega_text = __pyx_state[9]
+ *     __pyx_result.current_gram = __pyx_state[0]; __pyx_result.endkey = __pyx_state[1]; __pyx_result.entrypoints = __pyx_state[2]; __pyx_result.exhausted = __pyx_state[3]; __pyx_result.finished = __pyx_state[4]; __pyx_result.index = __pyx_state[5]; __pyx_result.logging = __pyx_state[6]; __pyx_result.model = __pyx_state[7]; __pyx_result.output = __pyx_state[8]; __pyx_result.stega_text = __pyx_state[9]
  *     if len(__pyx_state) > 10 and hasattr(__pyx_result, '__dict__'):
  */
 
@@ -16184,7 +16127,7 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Decoder__set_state
   /* "(tree fragment)":12
  *     return __pyx_result
  * cdef __pyx_unpickle_Decoder__set_state(Decoder __pyx_result, tuple __pyx_state):
- *     __pyx_result._endkey = __pyx_state[0]; __pyx_result._index = __pyx_state[1]; __pyx_result.current_gram = __pyx_state[2]; __pyx_result.entrypoints = __pyx_state[3]; __pyx_result.exhausted = __pyx_state[4]; __pyx_result.finished = __pyx_state[5]; __pyx_result.logging = __pyx_state[6]; __pyx_result.model = __pyx_state[7]; __pyx_result.output = __pyx_state[8]; __pyx_result.stega_text = __pyx_state[9]             # <<<<<<<<<<<<<<
+ *     __pyx_result.current_gram = __pyx_state[0]; __pyx_result.endkey = __pyx_state[1]; __pyx_result.entrypoints = __pyx_state[2]; __pyx_result.exhausted = __pyx_state[3]; __pyx_result.finished = __pyx_state[4]; __pyx_result.index = __pyx_state[5]; __pyx_result.logging = __pyx_state[6]; __pyx_result.model = __pyx_state[7]; __pyx_result.output = __pyx_state[8]; __pyx_result.stega_text = __pyx_state[9]             # <<<<<<<<<<<<<<
  *     if len(__pyx_state) > 10 and hasattr(__pyx_result, '__dict__'):
  *         __pyx_result.__dict__.update(__pyx_state[10])
  */
@@ -16193,24 +16136,6 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Decoder__set_state
     __PYX_ERR(2, 12, __pyx_L1_error)
   }
   __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) __PYX_ERR(2, 12, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v___pyx_result->_endkey = __pyx_t_2;
-  if (unlikely(__pyx_v___pyx_state == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(2, 12, __pyx_L1_error)
-  }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) __PYX_ERR(2, 12, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v___pyx_result->_index = __pyx_t_2;
-  if (unlikely(__pyx_v___pyx_state == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(2, 12, __pyx_L1_error)
-  }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v___pyx_result->current_gram);
@@ -16221,7 +16146,16 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Decoder__set_state
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     __PYX_ERR(2, 12, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) __PYX_ERR(2, 12, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v___pyx_result->endkey = __pyx_t_2;
+  if (unlikely(__pyx_v___pyx_state == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    __PYX_ERR(2, 12, __pyx_L1_error)
+  }
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
@@ -16233,7 +16167,7 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Decoder__set_state
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     __PYX_ERR(2, 12, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -16242,11 +16176,20 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Decoder__set_state
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     __PYX_ERR(2, 12, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 5, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v___pyx_result->finished = __pyx_t_3;
+  if (unlikely(__pyx_v___pyx_state == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    __PYX_ERR(2, 12, __pyx_L1_error)
+  }
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 5, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) __PYX_ERR(2, 12, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v___pyx_result->index = __pyx_t_2;
   if (unlikely(__pyx_v___pyx_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     __PYX_ERR(2, 12, __pyx_L1_error)
@@ -16294,7 +16237,7 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Decoder__set_state
 
   /* "(tree fragment)":13
  * cdef __pyx_unpickle_Decoder__set_state(Decoder __pyx_result, tuple __pyx_state):
- *     __pyx_result._endkey = __pyx_state[0]; __pyx_result._index = __pyx_state[1]; __pyx_result.current_gram = __pyx_state[2]; __pyx_result.entrypoints = __pyx_state[3]; __pyx_result.exhausted = __pyx_state[4]; __pyx_result.finished = __pyx_state[5]; __pyx_result.logging = __pyx_state[6]; __pyx_result.model = __pyx_state[7]; __pyx_result.output = __pyx_state[8]; __pyx_result.stega_text = __pyx_state[9]
+ *     __pyx_result.current_gram = __pyx_state[0]; __pyx_result.endkey = __pyx_state[1]; __pyx_result.entrypoints = __pyx_state[2]; __pyx_result.exhausted = __pyx_state[3]; __pyx_result.finished = __pyx_state[4]; __pyx_result.index = __pyx_state[5]; __pyx_result.logging = __pyx_state[6]; __pyx_result.model = __pyx_state[7]; __pyx_result.output = __pyx_state[8]; __pyx_result.stega_text = __pyx_state[9]
  *     if len(__pyx_state) > 10 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
  *         __pyx_result.__dict__.update(__pyx_state[10])
  */
@@ -16315,7 +16258,7 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Decoder__set_state
   if (__pyx_t_3) {
 
     /* "(tree fragment)":14
- *     __pyx_result._endkey = __pyx_state[0]; __pyx_result._index = __pyx_state[1]; __pyx_result.current_gram = __pyx_state[2]; __pyx_result.entrypoints = __pyx_state[3]; __pyx_result.exhausted = __pyx_state[4]; __pyx_result.finished = __pyx_state[5]; __pyx_result.logging = __pyx_state[6]; __pyx_result.model = __pyx_state[7]; __pyx_result.output = __pyx_state[8]; __pyx_result.stega_text = __pyx_state[9]
+ *     __pyx_result.current_gram = __pyx_state[0]; __pyx_result.endkey = __pyx_state[1]; __pyx_result.entrypoints = __pyx_state[2]; __pyx_result.exhausted = __pyx_state[3]; __pyx_result.finished = __pyx_state[4]; __pyx_result.index = __pyx_state[5]; __pyx_result.logging = __pyx_state[6]; __pyx_result.model = __pyx_state[7]; __pyx_result.output = __pyx_state[8]; __pyx_result.stega_text = __pyx_state[9]
  *     if len(__pyx_state) > 10 and hasattr(__pyx_result, '__dict__'):
  *         __pyx_result.__dict__.update(__pyx_state[10])             # <<<<<<<<<<<<<<
  */
@@ -16357,7 +16300,7 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Decoder__set_state
 
     /* "(tree fragment)":13
  * cdef __pyx_unpickle_Decoder__set_state(Decoder __pyx_result, tuple __pyx_state):
- *     __pyx_result._endkey = __pyx_state[0]; __pyx_result._index = __pyx_state[1]; __pyx_result.current_gram = __pyx_state[2]; __pyx_result.entrypoints = __pyx_state[3]; __pyx_result.exhausted = __pyx_state[4]; __pyx_result.finished = __pyx_state[5]; __pyx_result.logging = __pyx_state[6]; __pyx_result.model = __pyx_state[7]; __pyx_result.output = __pyx_state[8]; __pyx_result.stega_text = __pyx_state[9]
+ *     __pyx_result.current_gram = __pyx_state[0]; __pyx_result.endkey = __pyx_state[1]; __pyx_result.entrypoints = __pyx_state[2]; __pyx_result.exhausted = __pyx_state[3]; __pyx_result.finished = __pyx_state[4]; __pyx_result.index = __pyx_state[5]; __pyx_result.logging = __pyx_state[6]; __pyx_result.model = __pyx_state[7]; __pyx_result.output = __pyx_state[8]; __pyx_result.stega_text = __pyx_state[9]
  *     if len(__pyx_state) > 10 and hasattr(__pyx_result, '__dict__'):             # <<<<<<<<<<<<<<
  *         __pyx_result.__dict__.update(__pyx_state[10])
  */
@@ -16367,7 +16310,7 @@ static PyObject *__pyx_f_6fmsApp_11stegomarkov___pyx_unpickle_Decoder__set_state
  *         __pyx_unpickle_Decoder__set_state(<Decoder> __pyx_result, __pyx_state)
  *     return __pyx_result
  * cdef __pyx_unpickle_Decoder__set_state(Decoder __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
- *     __pyx_result._endkey = __pyx_state[0]; __pyx_result._index = __pyx_state[1]; __pyx_result.current_gram = __pyx_state[2]; __pyx_result.entrypoints = __pyx_state[3]; __pyx_result.exhausted = __pyx_state[4]; __pyx_result.finished = __pyx_state[5]; __pyx_result.logging = __pyx_state[6]; __pyx_result.model = __pyx_state[7]; __pyx_result.output = __pyx_state[8]; __pyx_result.stega_text = __pyx_state[9]
+ *     __pyx_result.current_gram = __pyx_state[0]; __pyx_result.endkey = __pyx_state[1]; __pyx_result.entrypoints = __pyx_state[2]; __pyx_result.exhausted = __pyx_state[3]; __pyx_result.finished = __pyx_state[4]; __pyx_result.index = __pyx_state[5]; __pyx_result.logging = __pyx_state[6]; __pyx_result.model = __pyx_state[7]; __pyx_result.output = __pyx_state[8]; __pyx_result.stega_text = __pyx_state[9]
  *     if len(__pyx_state) > 10 and hasattr(__pyx_result, '__dict__'):
  */
 
@@ -16406,7 +16349,7 @@ static PyObject *__pyx_tp_new_6fmsApp_11stegomarkov_Encoder(PyTypeObject *t, CYT
   p->bitstream = ((PyObject*)Py_None); Py_INCREF(Py_None);
   p->entrypoints = ((PyObject*)Py_None); Py_INCREF(Py_None);
   p->current_gram = Py_None; Py_INCREF(Py_None);
-  p->_output_tokens = ((PyObject*)Py_None); Py_INCREF(Py_None);
+  p->output_tokens = ((PyObject*)Py_None); Py_INCREF(Py_None);
   return o;
 }
 
@@ -16424,7 +16367,7 @@ static void __pyx_tp_dealloc_6fmsApp_11stegomarkov_Encoder(PyObject *o) {
   Py_CLEAR(p->bitstream);
   Py_CLEAR(p->entrypoints);
   Py_CLEAR(p->current_gram);
-  Py_CLEAR(p->_output_tokens);
+  Py_CLEAR(p->output_tokens);
   #if CYTHON_USE_TYPE_SLOTS || CYTHON_COMPILING_IN_PYPY
   (*Py_TYPE(o)->tp_free)(o);
   #else
@@ -16447,8 +16390,8 @@ static int __pyx_tp_traverse_6fmsApp_11stegomarkov_Encoder(PyObject *o, visitpro
   if (p->current_gram) {
     e = (*v)(p->current_gram, a); if (e) return e;
   }
-  if (p->_output_tokens) {
-    e = (*v)(p->_output_tokens, a); if (e) return e;
+  if (p->output_tokens) {
+    e = (*v)(p->output_tokens, a); if (e) return e;
   }
   return 0;
 }
@@ -16465,22 +16408,18 @@ static int __pyx_tp_clear_6fmsApp_11stegomarkov_Encoder(PyObject *o) {
   tmp = ((PyObject*)p->current_gram);
   p->current_gram = Py_None; Py_INCREF(Py_None);
   Py_XDECREF(tmp);
-  tmp = ((PyObject*)p->_output_tokens);
-  p->_output_tokens = ((PyObject*)Py_None); Py_INCREF(Py_None);
+  tmp = ((PyObject*)p->output_tokens);
+  p->output_tokens = ((PyObject*)Py_None); Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
 
-static PyObject *__pyx_getprop_6fmsApp_11stegomarkov_7Encoder_output_tokens(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_6fmsApp_11stegomarkov_7Encoder_13output_tokens_1__get__(o);
-}
-
-static PyObject *__pyx_getprop_6fmsApp_11stegomarkov_7Encoder_end_key_index(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_6fmsApp_11stegomarkov_7Encoder_13end_key_index_1__get__(o);
-}
-
 static PyObject *__pyx_getprop_6fmsApp_11stegomarkov_7Encoder_output(PyObject *o, CYTHON_UNUSED void *x) {
   return __pyx_pw_6fmsApp_11stegomarkov_7Encoder_6output_1__get__(o);
+}
+
+static PyObject *__pyx_getprop_6fmsApp_11stegomarkov_7Encoder_finished(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_6fmsApp_11stegomarkov_7Encoder_8finished_1__get__(o);
 }
 
 static PyMethodDef __pyx_methods_6fmsApp_11stegomarkov_Encoder[] = {
@@ -16499,9 +16438,8 @@ static PyMethodDef __pyx_methods_6fmsApp_11stegomarkov_Encoder[] = {
 };
 
 static struct PyGetSetDef __pyx_getsets_6fmsApp_11stegomarkov_Encoder[] = {
-  {(char *)"output_tokens", __pyx_getprop_6fmsApp_11stegomarkov_7Encoder_output_tokens, 0, (char *)PyDoc_STR("Public property to access the index where the end key was injected."), 0},
-  {(char *)"end_key_index", __pyx_getprop_6fmsApp_11stegomarkov_7Encoder_end_key_index, 0, (char *)PyDoc_STR("Public property to access the index where the end key was injected."), 0},
   {(char *)"output", __pyx_getprop_6fmsApp_11stegomarkov_7Encoder_output, 0, (char *)PyDoc_STR("Returns the current state of the output string."), 0},
+  {(char *)"finished", __pyx_getprop_6fmsApp_11stegomarkov_7Encoder_finished, 0, (char *)0, 0},
   {0, 0, 0, 0, 0}
 };
 #if CYTHON_USE_TYPE_SPECS
@@ -16694,26 +16632,30 @@ static int __pyx_tp_clear_6fmsApp_11stegomarkov_Decoder(PyObject *o) {
   return 0;
 }
 
-static PyObject *__pyx_getprop_6fmsApp_11stegomarkov_7Decoder_endkey(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_6fmsApp_11stegomarkov_7Decoder_6endkey_1__get__(o);
+static PyObject *__pyx_getprop_6fmsApp_11stegomarkov_7Decoder_output(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_6fmsApp_11stegomarkov_7Decoder_6output_1__get__(o);
+}
+
+static PyObject *__pyx_getprop_6fmsApp_11stegomarkov_7Decoder_finished(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_6fmsApp_11stegomarkov_7Decoder_8finished_1__get__(o);
 }
 
 static PyMethodDef __pyx_methods_6fmsApp_11stegomarkov_Decoder[] = {
-  {"index", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_3index, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_2index},
-  {"_get_entrypoints", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_5_get_entrypoints, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_4_get_entrypoints},
-  {"step", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_7step, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_6step},
-  {"_choose_entrypoint", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_9_choose_entrypoint, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_8_choose_entrypoint},
-  {"_choose_next_token", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_11_choose_next_token, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_10_choose_next_token},
-  {"solve", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_13solve, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_12solve},
-  {"_get_transitions", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_15_get_transitions, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_14_get_transitions},
-  {"_pretty_print_list", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_17_pretty_print_list, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_16_pretty_print_list},
-  {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_19__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_21__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"_get_entrypoints", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_3_get_entrypoints, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_2_get_entrypoints},
+  {"step", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_5step, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_4step},
+  {"_choose_entrypoint", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_7_choose_entrypoint, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_6_choose_entrypoint},
+  {"_choose_next_token", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_9_choose_next_token, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_8_choose_next_token},
+  {"solve", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_11solve, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_10solve},
+  {"_get_transitions", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_13_get_transitions, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_12_get_transitions},
+  {"_pretty_print_list", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_15_pretty_print_list, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6fmsApp_11stegomarkov_7Decoder_14_pretty_print_list},
+  {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_17__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6fmsApp_11stegomarkov_7Decoder_19__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
 };
 
 static struct PyGetSetDef __pyx_getsets_6fmsApp_11stegomarkov_Decoder[] = {
-  {(char *)"endkey", __pyx_getprop_6fmsApp_11stegomarkov_7Decoder_endkey, 0, (char *)PyDoc_STR("Public property to access the end key."), 0},
+  {(char *)"output", __pyx_getprop_6fmsApp_11stegomarkov_7Decoder_output, 0, (char *)0, 0},
+  {(char *)"finished", __pyx_getprop_6fmsApp_11stegomarkov_7Decoder_finished, 0, (char *)0, 0},
   {0, 0, 0, 0, 0}
 };
 #if CYTHON_USE_TYPE_SPECS
@@ -17019,7 +16961,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_Decoder__get_entrypoints, __pyx_k_Decoder__get_entrypoints, sizeof(__pyx_k_Decoder__get_entrypoints), 0, 0, 1, 1},
     {&__pyx_n_s_Decoder__get_transitions, __pyx_k_Decoder__get_transitions, sizeof(__pyx_k_Decoder__get_transitions), 0, 0, 1, 1},
     {&__pyx_n_s_Decoder__pretty_print_list, __pyx_k_Decoder__pretty_print_list, sizeof(__pyx_k_Decoder__pretty_print_list), 0, 0, 1, 1},
-    {&__pyx_n_s_Decoder_index, __pyx_k_Decoder_index, sizeof(__pyx_k_Decoder_index), 0, 0, 1, 1},
     {&__pyx_n_s_Decoder_solve, __pyx_k_Decoder_solve, sizeof(__pyx_k_Decoder_solve), 0, 0, 1, 1},
     {&__pyx_n_s_Decoder_step, __pyx_k_Decoder_step, sizeof(__pyx_k_Decoder_step), 0, 0, 1, 1},
     {&__pyx_n_s_END, __pyx_k_END, sizeof(__pyx_k_END), 0, 0, 1, 1},
@@ -17045,7 +16986,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u__12, __pyx_k__12, sizeof(__pyx_k__12), 0, 1, 0, 0},
     {&__pyx_n_s__14, __pyx_k__14, sizeof(__pyx_k__14), 0, 0, 1, 1},
     {&__pyx_kp_s__4, __pyx_k__4, sizeof(__pyx_k__4), 0, 0, 1, 0},
-    {&__pyx_n_s__57, __pyx_k__57, sizeof(__pyx_k__57), 0, 0, 1, 1},
+    {&__pyx_n_s__56, __pyx_k__56, sizeof(__pyx_k__56), 0, 0, 1, 1},
     {&__pyx_kp_s__6, __pyx_k__6, sizeof(__pyx_k__6), 0, 0, 1, 0},
     {&__pyx_kp_u__7, __pyx_k__7, sizeof(__pyx_k__7), 0, 1, 0, 0},
     {&__pyx_kp_s__8, __pyx_k__8, sizeof(__pyx_k__8), 0, 0, 1, 0},
@@ -17195,13 +17136,13 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
 }
 /* #### Code section: cached_builtins ### */
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(0, 159, __pyx_L1_error)
   __pyx_builtin_open = __Pyx_GetBuiltinName(__pyx_n_s_open); if (!__pyx_builtin_open) __PYX_ERR(0, 11, __pyx_L1_error)
   __pyx_builtin_map = __Pyx_GetBuiltinName(__pyx_n_s_map); if (!__pyx_builtin_map) __PYX_ERR(0, 22, __pyx_L1_error)
   __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 26, __pyx_L1_error)
-  __pyx_builtin_chr = __Pyx_GetBuiltinName(__pyx_n_s_chr); if (!__pyx_builtin_chr) __PYX_ERR(0, 132, __pyx_L1_error)
-  __pyx_builtin_sorted = __Pyx_GetBuiltinName(__pyx_n_s_sorted); if (!__pyx_builtin_sorted) __PYX_ERR(0, 159, __pyx_L1_error)
-  __pyx_builtin_bin = __Pyx_GetBuiltinName(__pyx_n_s_bin); if (!__pyx_builtin_bin) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_builtin_chr = __Pyx_GetBuiltinName(__pyx_n_s_chr); if (!__pyx_builtin_chr) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_builtin_sorted = __Pyx_GetBuiltinName(__pyx_n_s_sorted); if (!__pyx_builtin_sorted) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_builtin_bin = __Pyx_GetBuiltinName(__pyx_n_s_bin); if (!__pyx_builtin_bin) __PYX_ERR(0, 253, __pyx_L1_error)
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(1, 1025, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -17257,39 +17198,39 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "fmsApp/stegomarkov.pyx":174
+  /* "fmsApp/stegomarkov.pyx":170
  *             return f"{lst[0]} and {lst[1]}"
  *         elif len(lst) <= limit:
  *             return ", ".join(lst[:-1]) + ", and " + lst[-1]             # <<<<<<<<<<<<<<
  *         else:
  *             truncated_list = lst[:limit]
  */
-  __pyx_slice__9 = PySlice_New(Py_None, __pyx_int_neg_1, Py_None); if (unlikely(!__pyx_slice__9)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_slice__9 = PySlice_New(Py_None, __pyx_int_neg_1, Py_None); if (unlikely(!__pyx_slice__9)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__9);
   __Pyx_GIVEREF(__pyx_slice__9);
 
-  /* "fmsApp/stegomarkov.pyx":255
+  /* "fmsApp/stegomarkov.pyx":253
  *             bit_length -= 1
- *         bit_length = self._endkey if self._index == len(self.stega_text) - 1 else bit_length
+ *         bit_length = self.endkey if self.index == len(self.stega_text) - 1 else bit_length
  *         bit_string = bin(embedded_index)[2:].zfill(bit_length)             # <<<<<<<<<<<<<<
  * 
  *         self.current_gram = (token,) if self.model.state_size == 1 else (*["___BEGIN__"] * (self.model.state_size - 1), token)
  */
-  __pyx_slice__10 = PySlice_New(__pyx_int_2, Py_None, Py_None); if (unlikely(!__pyx_slice__10)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_slice__10 = PySlice_New(__pyx_int_2, Py_None, Py_None); if (unlikely(!__pyx_slice__10)) __PYX_ERR(0, 253, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__10);
   __Pyx_GIVEREF(__pyx_slice__10);
 
   /* "(tree fragment)":4
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
- *     if __pyx_checksum not in (0x5fb5542, 0x89e8fed, 0x3a1949f):             # <<<<<<<<<<<<<<
+ *     if __pyx_checksum not in (0x4ea1e69, 0x00ab748, 0x2cd6441):             # <<<<<<<<<<<<<<
  *         from pickle import PickleError as __pyx_PickleError
- *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x5fb5542, 0x89e8fed, 0x3a1949f) = (_end_key_index, _output_tokens, bitstream, current_gram, end_key, entrypoints, exhausted, finished, logging, model))" % __pyx_checksum
+ *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0x4ea1e69, 0x00ab748, 0x2cd6441) = (bitstream, bitstream_length, current_gram, end_key, entrypoints, exhausted, finished, logging, model, output_tokens))" % __pyx_checksum
  */
-  __pyx_tuple__11 = PyTuple_Pack(3, __pyx_int_100357442, __pyx_int_144609261, __pyx_int_60920991); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(2, 4, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(3, __pyx_int_82452073, __pyx_int_702280, __pyx_int_47014977); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(2, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_tuple__13 = PyTuple_Pack(3, __pyx_int_200670490, __pyx_int_216709148, __pyx_int_20113896); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(2, 4, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(3, __pyx_int_102166773, __pyx_int_155102705, __pyx_int_154731673); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(2, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
 
@@ -17330,7 +17271,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_bitstream_to_file, 24, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 24, __pyx_L1_error)
 
   /* "fmsApp/stegomarkov.pyx":61
- *         self._end_key_index = -1
+ *         self.end_key = 0
  * 
  *     def _get_entrypoints(self):             # <<<<<<<<<<<<<<
  *         """Get valid entry points from the Markov model."""
@@ -17341,98 +17282,98 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__21);
   __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_get_entrypoints, 61, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 61, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":83
- *         return " ".join(self._output_tokens)
+  /* "fmsApp/stegomarkov.pyx":77
+ *         return self.finished
  * 
  *     def step(self):             # <<<<<<<<<<<<<<
  *         """Generates a new word for the output and appends it to the output string."""
  *         if self.finished:
  */
-  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_step, 83, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_step, 77, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 77, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":93
- *             self._choose_next_token()
+  /* "fmsApp/stegomarkov.pyx":89
+ *         return (self.bitstream_length - len(self.bitstream)) / self.bitstream_length
  * 
  *     def _choose_entrypoint(self):             # <<<<<<<<<<<<<<
  *         """Choose a new starting point (entrypoint) for the Markov chain."""
  *         self.exhausted = False
  */
-  __pyx_tuple__25 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_next_token, __pyx_n_s_removed, __pyx_n_s_bit_length, __pyx_n_s_encoded_index); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_tuple__25 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_next_token, __pyx_n_s_removed, __pyx_n_s_bit_length, __pyx_n_s_encoded_index); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
-  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_choose_entrypoint, 93, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_choose_entrypoint, 89, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 89, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":107
+  /* "fmsApp/stegomarkov.pyx":103
  *             self._inject_end_key(removed)
  * 
  *     def _choose_next_token(self):             # <<<<<<<<<<<<<<
  *         """Choose the next token in the Markov chain."""
  *         transitions = self._get_transitions(self.current_gram)
  */
-  __pyx_tuple__27 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_transitions, __pyx_n_s_next_token, __pyx_n_s_removed, __pyx_n_s_bit_length, __pyx_n_s_encoded_index, __pyx_n_s_next_gram); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_tuple__27 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_transitions, __pyx_n_s_next_token, __pyx_n_s_removed, __pyx_n_s_bit_length, __pyx_n_s_encoded_index, __pyx_n_s_next_gram); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__27);
   __Pyx_GIVEREF(__pyx_tuple__27);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_choose_next_token, 107, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_choose_next_token, 103, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 103, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":128
+  /* "fmsApp/stegomarkov.pyx":124
  *             self._inject_end_key(removed)
  * 
  *     def _inject_end_key(self, removed):             # <<<<<<<<<<<<<<
  *         """Inject the end key to mark the end of encoding."""
- *         self.end_key = len(removed)  # Keeping this for the length of removed bits
+ *         self.end_key = len(removed)
  */
-  __pyx_tuple__29 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_removed); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_tuple__29 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_removed, __pyx_n_s_i); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 124, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__29);
   __Pyx_GIVEREF(__pyx_tuple__29);
-  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_inject_end_key, 128, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_inject_end_key, 124, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 124, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":135
+  /* "fmsApp/stegomarkov.pyx":131
  *         self.finished = True
  * 
  *     def generate(self):             # <<<<<<<<<<<<<<
  *         """Consumes the entire bitstream and generates the output for it."""
  *         while not self.finished:
  */
-  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_generate, 135, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_generate, 131, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 131, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":142
+  /* "fmsApp/stegomarkov.pyx":138
  *         return self.output
  * 
  *     def _consume_from_list(self, lst):             # <<<<<<<<<<<<<<
  *         """Consume bits from the bitstream and choose an item from the list based on the bits."""
  *         list_length = len(lst)
  */
-  __pyx_tuple__32 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_lst, __pyx_n_s_list_length, __pyx_n_s_bit_length, __pyx_n_s_encoded_index, __pyx_n_s_next_token, __pyx_n_s_removed); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_tuple__32 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_lst, __pyx_n_s_list_length, __pyx_n_s_bit_length, __pyx_n_s_encoded_index, __pyx_n_s_next_token, __pyx_n_s_removed); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__32);
   __Pyx_GIVEREF(__pyx_tuple__32);
-  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_consume_from_list, 142, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_consume_from_list, 138, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) __PYX_ERR(0, 138, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":156
+  /* "fmsApp/stegomarkov.pyx":152
  *         return next_token, removed, bit_length, encoded_index
  * 
  *     def _get_transitions(self, gram):             # <<<<<<<<<<<<<<
  *         """Get possible transitions for the current gram in the Markov chain."""
  *         trans_matrix = self.model.chain.model[gram]
  */
-  __pyx_tuple__34 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_gram, __pyx_n_s_trans_matrix, __pyx_n_s_transitions, __pyx_n_s_i); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __pyx_tuple__34 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_gram, __pyx_n_s_trans_matrix, __pyx_n_s_transitions, __pyx_n_s_i); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 152, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__34);
   __Pyx_GIVEREF(__pyx_tuple__34);
-  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_get_transitions, 156, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_get_transitions, 152, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) __PYX_ERR(0, 152, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":163
+  /* "fmsApp/stegomarkov.pyx":159
  *         return transitions
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def _pretty_print_list(lst, limit):
  *         """Pretty print a list, showing only up to `limit` items."""
  */
-  __pyx_tuple__36 = PyTuple_Pack(4, __pyx_n_s_lst, __pyx_n_s_limit, __pyx_n_s_truncated_list, __pyx_n_s_remaining_count); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_tuple__36 = PyTuple_Pack(4, __pyx_n_s_lst, __pyx_n_s_limit, __pyx_n_s_truncated_list, __pyx_n_s_remaining_count); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__36);
   __Pyx_GIVEREF(__pyx_tuple__36);
-  __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_pretty_print_list, 163, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_pretty_print_list, 159, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) __PYX_ERR(0, 159, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
@@ -17446,7 +17387,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
   /* "(tree fragment)":16
  *     else:
- *         return __pyx_unpickle_Encoder, (type(self), 0x5fb5542, state)
+ *         return __pyx_unpickle_Encoder, (type(self), 0x4ea1e69, state)
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     __pyx_unpickle_Encoder__set_state(self, __pyx_state)
  */
@@ -17455,109 +17396,100 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__40);
   __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_setstate_cython, 16, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(2, 16, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":216
- *         return self._endkey
- * 
- *     def index(self):             # <<<<<<<<<<<<<<
- *         """Public property to access the index."""
- *         return self._index
- */
-  __pyx_codeobj__42 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_index, 216, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__42)) __PYX_ERR(0, 216, __pyx_L1_error)
-
-  /* "fmsApp/stegomarkov.pyx":220
- *         return self._index
+  /* "fmsApp/stegomarkov.pyx":215
+ *         return self.finished
  * 
  *     def _get_entrypoints(self):             # <<<<<<<<<<<<<<
  *         """Get valid entry points from the Markov model."""
  *         if self.model.state_size == 1:
  */
-  __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_get_entrypoints, 220, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) __PYX_ERR(0, 220, __pyx_L1_error)
+  __pyx_codeobj__42 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_get_entrypoints, 215, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__42)) __PYX_ERR(0, 215, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":227
+  /* "fmsApp/stegomarkov.pyx":222
  *             return [key[-1] for key in self.model.chain.model.keys() if key.count("___BEGIN__") == self.model.state_size - 1][1:]
  * 
  *     def step(self):             # <<<<<<<<<<<<<<
  *         """Consumes a word from the steganographic text and appends the appropriate bits to the output."""
  * 
  */
-  __pyx_codeobj__44 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_step, 227, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__44)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_step, 222, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) __PYX_ERR(0, 222, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":240
- *             self._choose_next_token()
+  /* "fmsApp/stegomarkov.pyx":238
+ * 
  * 
  *     def _choose_entrypoint(self):             # <<<<<<<<<<<<<<
  *         """Choose a new starting point (entrypoint) for the Markov chain."""
  *         self.exhausted = False
  */
-  __pyx_tuple__45 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_token, __pyx_n_s_embedded_index, __pyx_n_s_bit_length, __pyx_n_s_bit_string); if (unlikely(!__pyx_tuple__45)) __PYX_ERR(0, 240, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__45);
-  __Pyx_GIVEREF(__pyx_tuple__45);
-  __pyx_codeobj__46 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__45, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_choose_entrypoint, 240, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__46)) __PYX_ERR(0, 240, __pyx_L1_error)
+  __pyx_tuple__44 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_token, __pyx_n_s_embedded_index, __pyx_n_s_bit_length, __pyx_n_s_bit_string); if (unlikely(!__pyx_tuple__44)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__44);
+  __Pyx_GIVEREF(__pyx_tuple__44);
+  __pyx_codeobj__45 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__44, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_choose_entrypoint, 238, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__45)) __PYX_ERR(0, 238, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":262
+  /* "fmsApp/stegomarkov.pyx":260
  *         self.output += bit_string
  * 
  *     def _choose_next_token(self):             # <<<<<<<<<<<<<<
  *         """Choose the next token in the Markov chain."""
  *         transitions = self._get_transitions(self.current_gram)
  */
-  __pyx_tuple__47 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_transitions, __pyx_n_s_at_end, __pyx_n_s_next_token, __pyx_n_s_list_length, __pyx_n_s_bit_length, __pyx_n_s_embedded_index, __pyx_n_s_bit_string, __pyx_n_s_next_gram); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 262, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__47);
-  __Pyx_GIVEREF(__pyx_tuple__47);
-  __pyx_codeobj__48 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__47, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_choose_next_token, 262, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__48)) __PYX_ERR(0, 262, __pyx_L1_error)
+  __pyx_tuple__46 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_transitions, __pyx_n_s_at_end, __pyx_n_s_next_token, __pyx_n_s_list_length, __pyx_n_s_bit_length, __pyx_n_s_embedded_index, __pyx_n_s_bit_string, __pyx_n_s_next_gram); if (unlikely(!__pyx_tuple__46)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__46);
+  __Pyx_GIVEREF(__pyx_tuple__46);
+  __pyx_codeobj__47 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__46, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_choose_next_token, 260, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__47)) __PYX_ERR(0, 260, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":307
- *         self._index += 1
+  /* "fmsApp/stegomarkov.pyx":306
+ * 
  * 
  *     def solve(self):             # <<<<<<<<<<<<<<
  *         """Consumes the entire steganographic text and generates an output bitstream."""
  *         while not self.finished:
  */
-  __pyx_codeobj__49 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_solve, 307, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__49)) __PYX_ERR(0, 307, __pyx_L1_error)
+  __pyx_codeobj__48 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_solve, 306, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__48)) __PYX_ERR(0, 306, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":314
+  /* "fmsApp/stegomarkov.pyx":313
  *         return self.output
  * 
  *     def _get_transitions(self, gram):             # <<<<<<<<<<<<<<
  *         """Get possible transitions for the current gram in the Markov chain."""
  *         trans_matrix = self.model.chain.model[gram]
  */
-  __pyx_codeobj__50 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_get_transitions, 314, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__50)) __PYX_ERR(0, 314, __pyx_L1_error)
+  __pyx_codeobj__49 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_get_transitions, 313, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__49)) __PYX_ERR(0, 313, __pyx_L1_error)
 
-  /* "fmsApp/stegomarkov.pyx":321
+  /* "fmsApp/stegomarkov.pyx":320
  *         return transitions
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def _pretty_print_list(lst, limit):
  *         """Pretty print a list, showing only up to `limit` items."""
  */
-  __pyx_codeobj__51 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_pretty_print_list, 321, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__51)) __PYX_ERR(0, 321, __pyx_L1_error)
+  __pyx_codeobj__50 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fmsApp_stegomarkov_pyx, __pyx_n_s_pretty_print_list, 320, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__50)) __PYX_ERR(0, 320, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
  *     cdef tuple state
  *     cdef object _dict
  */
-  __pyx_codeobj__52 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_reduce_cython, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__52)) __PYX_ERR(2, 1, __pyx_L1_error)
+  __pyx_codeobj__51 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_reduce_cython, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__51)) __PYX_ERR(2, 1, __pyx_L1_error)
 
   /* "(tree fragment)":16
  *     else:
- *         return __pyx_unpickle_Decoder, (type(self), 0xbf5fd1a, state)
+ *         return __pyx_unpickle_Decoder, (type(self), 0x616f0f5, state)
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     __pyx_unpickle_Decoder__set_state(self, __pyx_state)
  */
-  __pyx_codeobj__53 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_setstate_cython, 16, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__53)) __PYX_ERR(2, 16, __pyx_L1_error)
+  __pyx_codeobj__52 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_setstate_cython, 16, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__52)) __PYX_ERR(2, 16, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __pyx_unpickle_Encoder(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
  */
-  __pyx_tuple__54 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__54)) __PYX_ERR(2, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__54);
-  __Pyx_GIVEREF(__pyx_tuple__54);
-  __pyx_codeobj__55 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__54, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_Encoder, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__55)) __PYX_ERR(2, 1, __pyx_L1_error)
-  __pyx_codeobj__56 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__54, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_Decoder, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__56)) __PYX_ERR(2, 1, __pyx_L1_error)
+  __pyx_tuple__53 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__53)) __PYX_ERR(2, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__53);
+  __Pyx_GIVEREF(__pyx_tuple__53);
+  __pyx_codeobj__54 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__53, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_Encoder, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__54)) __PYX_ERR(2, 1, __pyx_L1_error)
+  __pyx_codeobj__55 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__53, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_Decoder, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__55)) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -17573,12 +17505,12 @@ static CYTHON_SMALL_CODE int __Pyx_InitConstants(void) {
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_2 = PyInt_FromLong(2); if (unlikely(!__pyx_int_2)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_int_20113896 = PyInt_FromLong(20113896L); if (unlikely(!__pyx_int_20113896)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_int_60920991 = PyInt_FromLong(60920991L); if (unlikely(!__pyx_int_60920991)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_int_100357442 = PyInt_FromLong(100357442L); if (unlikely(!__pyx_int_100357442)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_int_144609261 = PyInt_FromLong(144609261L); if (unlikely(!__pyx_int_144609261)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_int_200670490 = PyInt_FromLong(200670490L); if (unlikely(!__pyx_int_200670490)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_int_216709148 = PyInt_FromLong(216709148L); if (unlikely(!__pyx_int_216709148)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_702280 = PyInt_FromLong(702280L); if (unlikely(!__pyx_int_702280)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_47014977 = PyInt_FromLong(47014977L); if (unlikely(!__pyx_int_47014977)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_82452073 = PyInt_FromLong(82452073L); if (unlikely(!__pyx_int_82452073)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_102166773 = PyInt_FromLong(102166773L); if (unlikely(!__pyx_int_102166773)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_154731673 = PyInt_FromLong(154731673L); if (unlikely(!__pyx_int_154731673)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_155102705 = PyInt_FromLong(155102705L); if (unlikely(!__pyx_int_155102705)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_neg_1 = PyInt_FromLong(-1); if (unlikely(!__pyx_int_neg_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -17675,15 +17607,15 @@ static int __Pyx_modinit_type_init_code(void) {
   if (__Pyx_setup_reduce((PyObject *) __pyx_ptype_6fmsApp_11stegomarkov_Encoder) < 0) __PYX_ERR(0, 32, __pyx_L1_error)
   #endif
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_ptype_6fmsApp_11stegomarkov_Decoder = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_6fmsApp_11stegomarkov_Decoder_spec, NULL); if (unlikely(!__pyx_ptype_6fmsApp_11stegomarkov_Decoder)) __PYX_ERR(0, 182, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_6fmsApp_11stegomarkov_Decoder_spec, __pyx_ptype_6fmsApp_11stegomarkov_Decoder) < 0) __PYX_ERR(0, 182, __pyx_L1_error)
+  __pyx_ptype_6fmsApp_11stegomarkov_Decoder = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_6fmsApp_11stegomarkov_Decoder_spec, NULL); if (unlikely(!__pyx_ptype_6fmsApp_11stegomarkov_Decoder)) __PYX_ERR(0, 178, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_6fmsApp_11stegomarkov_Decoder_spec, __pyx_ptype_6fmsApp_11stegomarkov_Decoder) < 0) __PYX_ERR(0, 178, __pyx_L1_error)
   #else
   __pyx_ptype_6fmsApp_11stegomarkov_Decoder = &__pyx_type_6fmsApp_11stegomarkov_Decoder;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_ptype_6fmsApp_11stegomarkov_Decoder) < 0) __PYX_ERR(0, 182, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_ptype_6fmsApp_11stegomarkov_Decoder) < 0) __PYX_ERR(0, 178, __pyx_L1_error)
   #endif
   #if PY_MAJOR_VERSION < 3
   __pyx_ptype_6fmsApp_11stegomarkov_Decoder->tp_print = 0;
@@ -17693,9 +17625,9 @@ static int __Pyx_modinit_type_init_code(void) {
     __pyx_ptype_6fmsApp_11stegomarkov_Decoder->tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
   #endif
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Decoder, (PyObject *) __pyx_ptype_6fmsApp_11stegomarkov_Decoder) < 0) __PYX_ERR(0, 182, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Decoder, (PyObject *) __pyx_ptype_6fmsApp_11stegomarkov_Decoder) < 0) __PYX_ERR(0, 178, __pyx_L1_error)
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if (__Pyx_setup_reduce((PyObject *) __pyx_ptype_6fmsApp_11stegomarkov_Decoder) < 0) __PYX_ERR(0, 182, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject *) __pyx_ptype_6fmsApp_11stegomarkov_Decoder) < 0) __PYX_ERR(0, 178, __pyx_L1_error)
   #endif
   #if CYTHON_USE_TYPE_SPECS
   __pyx_ptype_6fmsApp_11stegomarkov___pyx_scope_struct__genexpr = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_6fmsApp_11stegomarkov___pyx_scope_struct__genexpr_spec, NULL); if (unlikely(!__pyx_ptype_6fmsApp_11stegomarkov___pyx_scope_struct__genexpr)) __PYX_ERR(0, 27, __pyx_L1_error)
@@ -18191,7 +18123,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "fmsApp/stegomarkov.pyx":61
- *         self._end_key_index = -1
+ *         self.end_key = 0
  * 
  *     def _get_entrypoints(self):             # <<<<<<<<<<<<<<
  *         """Get valid entry points from the Markov model."""
@@ -18203,115 +18135,115 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Encoder);
 
-  /* "fmsApp/stegomarkov.pyx":83
- *         return " ".join(self._output_tokens)
+  /* "fmsApp/stegomarkov.pyx":77
+ *         return self.finished
  * 
  *     def step(self):             # <<<<<<<<<<<<<<
  *         """Generates a new word for the output and appends it to the output string."""
  *         if self.finished:
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_5step, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder_step, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_5step, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder_step, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_step, __pyx_t_2) < 0) __PYX_ERR(0, 83, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_step, __pyx_t_2) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Encoder);
 
-  /* "fmsApp/stegomarkov.pyx":93
- *             self._choose_next_token()
+  /* "fmsApp/stegomarkov.pyx":89
+ *         return (self.bitstream_length - len(self.bitstream)) / self.bitstream_length
  * 
  *     def _choose_entrypoint(self):             # <<<<<<<<<<<<<<
  *         """Choose a new starting point (entrypoint) for the Markov chain."""
  *         self.exhausted = False
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_7_choose_entrypoint, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder__choose_entrypoint, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_7_choose_entrypoint, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder__choose_entrypoint, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_choose_entrypoint, __pyx_t_2) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_choose_entrypoint, __pyx_t_2) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Encoder);
 
-  /* "fmsApp/stegomarkov.pyx":107
+  /* "fmsApp/stegomarkov.pyx":103
  *             self._inject_end_key(removed)
  * 
  *     def _choose_next_token(self):             # <<<<<<<<<<<<<<
  *         """Choose the next token in the Markov chain."""
  *         transitions = self._get_transitions(self.current_gram)
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_9_choose_next_token, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder__choose_next_token, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_9_choose_next_token, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder__choose_next_token, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_choose_next_token, __pyx_t_2) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_choose_next_token, __pyx_t_2) < 0) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Encoder);
 
-  /* "fmsApp/stegomarkov.pyx":128
+  /* "fmsApp/stegomarkov.pyx":124
  *             self._inject_end_key(removed)
  * 
  *     def _inject_end_key(self, removed):             # <<<<<<<<<<<<<<
  *         """Inject the end key to mark the end of encoding."""
- *         self.end_key = len(removed)  # Keeping this for the length of removed bits
+ *         self.end_key = len(removed)
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_11_inject_end_key, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder__inject_end_key, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_11_inject_end_key, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder__inject_end_key, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_inject_end_key, __pyx_t_2) < 0) __PYX_ERR(0, 128, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_inject_end_key, __pyx_t_2) < 0) __PYX_ERR(0, 124, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Encoder);
 
-  /* "fmsApp/stegomarkov.pyx":135
+  /* "fmsApp/stegomarkov.pyx":131
  *         self.finished = True
  * 
  *     def generate(self):             # <<<<<<<<<<<<<<
  *         """Consumes the entire bitstream and generates the output for it."""
  *         while not self.finished:
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_13generate, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder_generate, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__31)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_13generate, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder_generate, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__31)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_generate, __pyx_t_2) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_generate, __pyx_t_2) < 0) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Encoder);
 
-  /* "fmsApp/stegomarkov.pyx":142
+  /* "fmsApp/stegomarkov.pyx":138
  *         return self.output
  * 
  *     def _consume_from_list(self, lst):             # <<<<<<<<<<<<<<
  *         """Consume bits from the bitstream and choose an item from the list based on the bits."""
  *         list_length = len(lst)
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_15_consume_from_list, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder__consume_from_list, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__33)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_15_consume_from_list, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder__consume_from_list, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__33)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_consume_from_list, __pyx_t_2) < 0) __PYX_ERR(0, 142, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_consume_from_list, __pyx_t_2) < 0) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Encoder);
 
-  /* "fmsApp/stegomarkov.pyx":156
+  /* "fmsApp/stegomarkov.pyx":152
  *         return next_token, removed, bit_length, encoded_index
  * 
  *     def _get_transitions(self, gram):             # <<<<<<<<<<<<<<
  *         """Get possible transitions for the current gram in the Markov chain."""
  *         trans_matrix = self.model.chain.model[gram]
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_17_get_transitions, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder__get_transitions, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__35)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_17_get_transitions, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder__get_transitions, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__35)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 152, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_get_transitions, __pyx_t_2) < 0) __PYX_ERR(0, 156, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_get_transitions, __pyx_t_2) < 0) __PYX_ERR(0, 152, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Encoder);
 
-  /* "fmsApp/stegomarkov.pyx":163
+  /* "fmsApp/stegomarkov.pyx":159
  *         return transitions
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def _pretty_print_list(lst, limit):
  *         """Pretty print a list, showing only up to `limit` items."""
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_19_pretty_print_list, __Pyx_CYFUNCTION_STATICMETHOD | __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder__pretty_print_list, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__37)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Encoder_19_pretty_print_list, __Pyx_CYFUNCTION_STATICMETHOD | __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Encoder__pretty_print_list, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__37)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_pretty_print_list, __pyx_t_2) < 0) __PYX_ERR(0, 163, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_pretty_print_list, __pyx_t_2) < 0) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Encoder);
-  __Pyx_GetNameInClass(__pyx_t_2, (PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_pretty_print_list); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __Pyx_GetNameInClass(__pyx_t_2, (PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_pretty_print_list); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_pretty_print_list, __pyx_t_3) < 0) __PYX_ERR(0, 163, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Encoder, __pyx_n_s_pretty_print_list, __pyx_t_3) < 0) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Encoder);
 
@@ -18328,7 +18260,7 @@ if (!__Pyx_RefNanny) {
 
   /* "(tree fragment)":16
  *     else:
- *         return __pyx_unpickle_Encoder, (type(self), 0x5fb5542, state)
+ *         return __pyx_unpickle_Encoder, (type(self), 0x4ea1e69, state)
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     __pyx_unpickle_Encoder__set_state(self, __pyx_state)
  */
@@ -18338,115 +18270,102 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Encoder);
 
-  /* "fmsApp/stegomarkov.pyx":216
- *         return self._endkey
- * 
- *     def index(self):             # <<<<<<<<<<<<<<
- *         """Public property to access the index."""
- *         return self._index
- */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_3index, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder_index, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__42)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 216, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_index, __pyx_t_3) < 0) __PYX_ERR(0, 216, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Decoder);
-
-  /* "fmsApp/stegomarkov.pyx":220
- *         return self._index
+  /* "fmsApp/stegomarkov.pyx":215
+ *         return self.finished
  * 
  *     def _get_entrypoints(self):             # <<<<<<<<<<<<<<
  *         """Get valid entry points from the Markov model."""
  *         if self.model.state_size == 1:
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_5_get_entrypoints, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder__get_entrypoints, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__43)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 220, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_3_get_entrypoints, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder__get_entrypoints, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__42)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 215, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_get_entrypoints, __pyx_t_3) < 0) __PYX_ERR(0, 220, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_get_entrypoints, __pyx_t_3) < 0) __PYX_ERR(0, 215, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Decoder);
 
-  /* "fmsApp/stegomarkov.pyx":227
+  /* "fmsApp/stegomarkov.pyx":222
  *             return [key[-1] for key in self.model.chain.model.keys() if key.count("___BEGIN__") == self.model.state_size - 1][1:]
  * 
  *     def step(self):             # <<<<<<<<<<<<<<
  *         """Consumes a word from the steganographic text and appends the appropriate bits to the output."""
  * 
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_7step, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder_step, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__44)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_5step, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder_step, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__43)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 222, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_step, __pyx_t_3) < 0) __PYX_ERR(0, 227, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_step, __pyx_t_3) < 0) __PYX_ERR(0, 222, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Decoder);
 
-  /* "fmsApp/stegomarkov.pyx":240
- *             self._choose_next_token()
+  /* "fmsApp/stegomarkov.pyx":238
+ * 
  * 
  *     def _choose_entrypoint(self):             # <<<<<<<<<<<<<<
  *         """Choose a new starting point (entrypoint) for the Markov chain."""
  *         self.exhausted = False
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_9_choose_entrypoint, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder__choose_entrypoint, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__46)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 240, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_7_choose_entrypoint, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder__choose_entrypoint, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__45)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_choose_entrypoint, __pyx_t_3) < 0) __PYX_ERR(0, 240, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_choose_entrypoint, __pyx_t_3) < 0) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Decoder);
 
-  /* "fmsApp/stegomarkov.pyx":262
+  /* "fmsApp/stegomarkov.pyx":260
  *         self.output += bit_string
  * 
  *     def _choose_next_token(self):             # <<<<<<<<<<<<<<
  *         """Choose the next token in the Markov chain."""
  *         transitions = self._get_transitions(self.current_gram)
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_11_choose_next_token, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder__choose_next_token, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__48)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 262, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_9_choose_next_token, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder__choose_next_token, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__47)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 260, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_choose_next_token, __pyx_t_3) < 0) __PYX_ERR(0, 262, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_choose_next_token, __pyx_t_3) < 0) __PYX_ERR(0, 260, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Decoder);
 
-  /* "fmsApp/stegomarkov.pyx":307
- *         self._index += 1
+  /* "fmsApp/stegomarkov.pyx":306
+ * 
  * 
  *     def solve(self):             # <<<<<<<<<<<<<<
  *         """Consumes the entire steganographic text and generates an output bitstream."""
  *         while not self.finished:
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_13solve, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder_solve, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__49)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 307, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_11solve, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder_solve, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__48)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 306, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_solve, __pyx_t_3) < 0) __PYX_ERR(0, 307, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_solve, __pyx_t_3) < 0) __PYX_ERR(0, 306, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Decoder);
 
-  /* "fmsApp/stegomarkov.pyx":314
+  /* "fmsApp/stegomarkov.pyx":313
  *         return self.output
  * 
  *     def _get_transitions(self, gram):             # <<<<<<<<<<<<<<
  *         """Get possible transitions for the current gram in the Markov chain."""
  *         trans_matrix = self.model.chain.model[gram]
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_15_get_transitions, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder__get_transitions, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__50)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 314, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_13_get_transitions, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder__get_transitions, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__49)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 313, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_get_transitions, __pyx_t_3) < 0) __PYX_ERR(0, 314, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_get_transitions, __pyx_t_3) < 0) __PYX_ERR(0, 313, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Decoder);
 
-  /* "fmsApp/stegomarkov.pyx":321
+  /* "fmsApp/stegomarkov.pyx":320
  *         return transitions
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def _pretty_print_list(lst, limit):
  *         """Pretty print a list, showing only up to `limit` items."""
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_17_pretty_print_list, __Pyx_CYFUNCTION_STATICMETHOD | __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder__pretty_print_list, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__51)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 321, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_15_pretty_print_list, __Pyx_CYFUNCTION_STATICMETHOD | __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder__pretty_print_list, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__50)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 320, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_pretty_print_list, __pyx_t_3) < 0) __PYX_ERR(0, 321, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_pretty_print_list, __pyx_t_3) < 0) __PYX_ERR(0, 320, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Decoder);
-  __Pyx_GetNameInClass(__pyx_t_3, (PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_pretty_print_list); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 321, __pyx_L1_error)
+  __Pyx_GetNameInClass(__pyx_t_3, (PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_pretty_print_list); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 320, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 321, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 320, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_pretty_print_list, __pyx_t_2) < 0) __PYX_ERR(0, 321, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_pretty_print_list, __pyx_t_2) < 0) __PYX_ERR(0, 320, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_6fmsApp_11stegomarkov_Decoder);
 
@@ -18455,7 +18374,7 @@ if (!__Pyx_RefNanny) {
  *     cdef tuple state
  *     cdef object _dict
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_19__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder___reduce_cython, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__52)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 1, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_17__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder___reduce_cython, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__51)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_reduce_cython, __pyx_t_2) < 0) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -18463,11 +18382,11 @@ if (!__Pyx_RefNanny) {
 
   /* "(tree fragment)":16
  *     else:
- *         return __pyx_unpickle_Decoder, (type(self), 0xbf5fd1a, state)
+ *         return __pyx_unpickle_Decoder, (type(self), 0x616f0f5, state)
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     __pyx_unpickle_Decoder__set_state(self, __pyx_state)
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_21__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder___setstate_cython, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__53)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 16, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7Decoder_19__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Decoder___setstate_cython, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__52)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_6fmsApp_11stegomarkov_Decoder, __pyx_n_s_setstate_cython, __pyx_t_2) < 0) __PYX_ERR(2, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -18478,7 +18397,7 @@ if (!__Pyx_RefNanny) {
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7__pyx_unpickle_Encoder, 0, __pyx_n_s_pyx_unpickle_Encoder, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__55)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 1, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_7__pyx_unpickle_Encoder, 0, __pyx_n_s_pyx_unpickle_Encoder, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__54)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_Encoder, __pyx_t_2) < 0) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -18487,10 +18406,10 @@ if (!__Pyx_RefNanny) {
  *         __pyx_unpickle_Encoder__set_state(<Encoder> __pyx_result, __pyx_state)
  *     return __pyx_result
  * cdef __pyx_unpickle_Encoder__set_state(Encoder __pyx_result, tuple __pyx_state):             # <<<<<<<<<<<<<<
- *     __pyx_result._end_key_index = __pyx_state[0]; __pyx_result._output_tokens = __pyx_state[1]; __pyx_result.bitstream = __pyx_state[2]; __pyx_result.current_gram = __pyx_state[3]; __pyx_result.end_key = __pyx_state[4]; __pyx_result.entrypoints = __pyx_state[5]; __pyx_result.exhausted = __pyx_state[6]; __pyx_result.finished = __pyx_state[7]; __pyx_result.logging = __pyx_state[8]; __pyx_result.model = __pyx_state[9]
+ *     __pyx_result.bitstream = __pyx_state[0]; __pyx_result.bitstream_length = __pyx_state[1]; __pyx_result.current_gram = __pyx_state[2]; __pyx_result.end_key = __pyx_state[3]; __pyx_result.entrypoints = __pyx_state[4]; __pyx_result.exhausted = __pyx_state[5]; __pyx_result.finished = __pyx_state[6]; __pyx_result.logging = __pyx_state[7]; __pyx_result.model = __pyx_state[8]; __pyx_result.output_tokens = __pyx_state[9]
  *     if len(__pyx_state) > 10 and hasattr(__pyx_result, '__dict__'):
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_9__pyx_unpickle_Decoder, 0, __pyx_n_s_pyx_unpickle_Decoder, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__56)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 1, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6fmsApp_11stegomarkov_9__pyx_unpickle_Decoder, 0, __pyx_n_s_pyx_unpickle_Decoder, NULL, __pyx_n_s_fmsApp_stegomarkov, __pyx_d, ((PyObject *)__pyx_codeobj__55)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_Decoder, __pyx_t_2) < 0) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -20714,59 +20633,55 @@ static CYTHON_INLINE PyObject* __Pyx_PyTuple_GetSlice(
 }
 #endif
 
-/* SetItemInt */
-static int __Pyx_SetItemInt_Generic(PyObject *o, PyObject *j, PyObject *v) {
-    int r;
-    if (unlikely(!j)) return -1;
-    r = PyObject_SetItem(o, j, v);
-    Py_DECREF(j);
-    return r;
+/* ObjectGetItem */
+#if CYTHON_USE_TYPE_SLOTS
+static PyObject *__Pyx_PyObject_GetIndex(PyObject *obj, PyObject *index) {
+    PyObject *runerr = NULL;
+    Py_ssize_t key_value;
+    key_value = __Pyx_PyIndex_AsSsize_t(index);
+    if (likely(key_value != -1 || !(runerr = PyErr_Occurred()))) {
+        return __Pyx_GetItemInt_Fast(obj, key_value, 0, 1, 1);
+    }
+    if (PyErr_GivenExceptionMatches(runerr, PyExc_OverflowError)) {
+        __Pyx_TypeName index_type_name = __Pyx_PyType_GetName(Py_TYPE(index));
+        PyErr_Clear();
+        PyErr_Format(PyExc_IndexError,
+            "cannot fit '" __Pyx_FMT_TYPENAME "' into an index-sized integer", index_type_name);
+        __Pyx_DECREF_TypeName(index_type_name);
+    }
+    return NULL;
 }
-static CYTHON_INLINE int __Pyx_SetItemInt_Fast(PyObject *o, Py_ssize_t i, PyObject *v, int is_list,
-                                               CYTHON_NCP_UNUSED int wraparound, CYTHON_NCP_UNUSED int boundscheck) {
-#if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS && CYTHON_USE_TYPE_SLOTS
-    if (is_list || PyList_CheckExact(o)) {
-        Py_ssize_t n = (!wraparound) ? i : ((likely(i >= 0)) ? i : i + PyList_GET_SIZE(o));
-        if ((!boundscheck) || likely(__Pyx_is_valid_index(n, PyList_GET_SIZE(o)))) {
-            PyObject* old = PyList_GET_ITEM(o, n);
-            Py_INCREF(v);
-            PyList_SET_ITEM(o, n, v);
-            Py_DECREF(old);
-            return 1;
-        }
-    } else {
-        PyMappingMethods *mm = Py_TYPE(o)->tp_as_mapping;
-        PySequenceMethods *sm = Py_TYPE(o)->tp_as_sequence;
-        if (mm && mm->mp_ass_subscript) {
-            int r;
-            PyObject *key = PyInt_FromSsize_t(i);
-            if (unlikely(!key)) return -1;
-            r = mm->mp_ass_subscript(o, key, v);
-            Py_DECREF(key);
-            return r;
-        }
-        if (likely(sm && sm->sq_ass_item)) {
-            if (wraparound && unlikely(i < 0) && likely(sm->sq_length)) {
-                Py_ssize_t l = sm->sq_length(o);
-                if (likely(l >= 0)) {
-                    i += l;
-                } else {
-                    if (!PyErr_ExceptionMatches(PyExc_OverflowError))
-                        return -1;
-                    PyErr_Clear();
-                }
-            }
-            return sm->sq_ass_item(o, i, v);
+static PyObject *__Pyx_PyObject_GetItem_Slow(PyObject *obj, PyObject *key) {
+    __Pyx_TypeName obj_type_name;
+    if (likely(PyType_Check(obj))) {
+        PyObject *meth = __Pyx_PyObject_GetAttrStrNoError(obj, __pyx_n_s_class_getitem);
+        if (!meth) {
+            PyErr_Clear();
+        } else {
+            PyObject *result = __Pyx_PyObject_CallOneArg(meth, key);
+            Py_DECREF(meth);
+            return result;
         }
     }
-#else
-    if (is_list || !PyMapping_Check(o))
-    {
-        return PySequence_SetItem(o, i, v);
+    obj_type_name = __Pyx_PyType_GetName(Py_TYPE(obj));
+    PyErr_Format(PyExc_TypeError,
+        "'" __Pyx_FMT_TYPENAME "' object is not subscriptable", obj_type_name);
+    __Pyx_DECREF_TypeName(obj_type_name);
+    return NULL;
+}
+static PyObject *__Pyx_PyObject_GetItem(PyObject *obj, PyObject *key) {
+    PyTypeObject *tp = Py_TYPE(obj);
+    PyMappingMethods *mm = tp->tp_as_mapping;
+    PySequenceMethods *sm = tp->tp_as_sequence;
+    if (likely(mm && mm->mp_subscript)) {
+        return mm->mp_subscript(obj, key);
     }
+    if (likely(sm && sm->sq_item)) {
+        return __Pyx_PyObject_GetIndex(obj, key);
+    }
+    return __Pyx_PyObject_GetItem_Slow(obj, key);
+}
 #endif
-    return __Pyx_SetItemInt_Generic(o, PyInt_FromSsize_t(i), v);
-}
 
 /* PyNumberPow2 */
 static PyObject* __Pyx__PyNumber_PowerOf2(PyObject *two, PyObject *exp, PyObject *none, int inplace) {
@@ -20817,56 +20732,6 @@ fallback:
 #endif
     return (inplace ? PyNumber_InPlacePower : PyNumber_Power)(two, exp, none);
 }
-
-/* ObjectGetItem */
-#if CYTHON_USE_TYPE_SLOTS
-static PyObject *__Pyx_PyObject_GetIndex(PyObject *obj, PyObject *index) {
-    PyObject *runerr = NULL;
-    Py_ssize_t key_value;
-    key_value = __Pyx_PyIndex_AsSsize_t(index);
-    if (likely(key_value != -1 || !(runerr = PyErr_Occurred()))) {
-        return __Pyx_GetItemInt_Fast(obj, key_value, 0, 1, 1);
-    }
-    if (PyErr_GivenExceptionMatches(runerr, PyExc_OverflowError)) {
-        __Pyx_TypeName index_type_name = __Pyx_PyType_GetName(Py_TYPE(index));
-        PyErr_Clear();
-        PyErr_Format(PyExc_IndexError,
-            "cannot fit '" __Pyx_FMT_TYPENAME "' into an index-sized integer", index_type_name);
-        __Pyx_DECREF_TypeName(index_type_name);
-    }
-    return NULL;
-}
-static PyObject *__Pyx_PyObject_GetItem_Slow(PyObject *obj, PyObject *key) {
-    __Pyx_TypeName obj_type_name;
-    if (likely(PyType_Check(obj))) {
-        PyObject *meth = __Pyx_PyObject_GetAttrStrNoError(obj, __pyx_n_s_class_getitem);
-        if (!meth) {
-            PyErr_Clear();
-        } else {
-            PyObject *result = __Pyx_PyObject_CallOneArg(meth, key);
-            Py_DECREF(meth);
-            return result;
-        }
-    }
-    obj_type_name = __Pyx_PyType_GetName(Py_TYPE(obj));
-    PyErr_Format(PyExc_TypeError,
-        "'" __Pyx_FMT_TYPENAME "' object is not subscriptable", obj_type_name);
-    __Pyx_DECREF_TypeName(obj_type_name);
-    return NULL;
-}
-static PyObject *__Pyx_PyObject_GetItem(PyObject *obj, PyObject *key) {
-    PyTypeObject *tp = Py_TYPE(obj);
-    PyMappingMethods *mm = tp->tp_as_mapping;
-    PySequenceMethods *sm = tp->tp_as_sequence;
-    if (likely(mm && mm->mp_subscript)) {
-        return mm->mp_subscript(obj, key);
-    }
-    if (likely(sm && sm->sq_item)) {
-        return __Pyx_PyObject_GetIndex(obj, key);
-    }
-    return __Pyx_PyObject_GetItem_Slow(obj, key);
-}
-#endif
 
 /* FixUpExtensionType */
 #if CYTHON_USE_TYPE_SPECS
@@ -24755,7 +24620,7 @@ __Pyx_PyType_GetName(PyTypeObject* tp)
     if (unlikely(name == NULL) || unlikely(!PyUnicode_Check(name))) {
         PyErr_Clear();
         Py_XDECREF(name);
-        name = __Pyx_NewRef(__pyx_n_s__57);
+        name = __Pyx_NewRef(__pyx_n_s__56);
     }
     return name;
 }
