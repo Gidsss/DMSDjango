@@ -4,3 +4,4 @@ markov_models/
 
 # Ignore the media uploads folder
 media/uploads 
+env/

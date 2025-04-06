@@ -192,14 +192,14 @@ def save_post(request):
                 encoder = Encoder(model, bitstream, logging=True)
                 old_progress = 0
                 while not encoder.finished:
-                    progress = min(5 + encoder.step() * 90, 100)  # Start at 5% and cap at 100%
-                    if progress - old_progress >= 5:
+                    progress = min(5 * ((5 + encoder.step() * 90) // 5), 100)  # Ensure increments of 5%
+                    if progress > old_progress:
                         cache.set(f'encode_progress_{user_id}', progress)
                         old_progress = progress
                         logger.info(f"Encoding Progress: {progress}%")
 
                 saved_post.file_data = encoder.output
-                cache.set(f'encode_progress_{user_id}', 100, timeout=900)  # Cache for 15 minutes and mark encoding as completed
+                cache.set(f'encode_progress_{user_id}', 100, timeout=900)  # Mark encoding as completed
                 logger.info("Encoding completed.")
 
             saved_post.save()
