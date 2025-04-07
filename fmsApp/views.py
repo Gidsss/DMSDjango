@@ -34,6 +34,9 @@ context = {
 logging.basicConfig(level=logging.INFO)  
 logger = logging.getLogger(__name__)
 
+model = build_model("markov_models/legal_corpus.json")
+logger.info("Markov model loaded successfully.")
+
 def get_markov_model():
     try:
         if 'markov_model' in globals() and globals()['markov_model'] is not None:
@@ -132,8 +135,8 @@ def manage_post(request, pk=None):
             user_id = request.user.id
 
             if post.file_data:
-                model = get_markov_model()
-                logger.info("Markov model loaded successfully for decoding.")
+                # model = get_markov_model()
+                # logger.info("Markov model loaded successfully for decoding.")
 
                 decode_start_time = time.time()
                 decoder = Decoder(model, post.file_data, logging=True)
@@ -198,12 +201,12 @@ def save_post(request):
 
                 # Load the Markov model
                 # Use the pre-loaded Markov model
-                model = get_markov_model()
-                if not model:
-                    logger.error("No pre-loaded Markov model found.")
-                    resp['msg'] = 'Error: Markov model not loaded.'
-                    return HttpResponse(json.dumps(resp), content_type="application/json")
-                logger.info("Using pre-loaded Markov model for encoding.")
+                # model = get_markov_model()
+                # if not model:
+                #     logger.error("No pre-loaded Markov model found.")
+                #     resp['msg'] = 'Error: Markov model not loaded.'
+                #     return HttpResponse(json.dumps(resp), content_type="application/json")
+                # logger.info("Using pre-loaded Markov model for encoding.")
 
                 # Encode step-by-step
                 encoder = Encoder(model, bitstream, logging=True)
