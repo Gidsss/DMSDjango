@@ -40,7 +40,7 @@
                             </td>
                             <td class="px-2 py-1 align-middle text-center">
                                 <a class="btn btn-outline-primary btn-sm edit-data" href="javascript:void(0)"
-                                    data-id="{{ post.pk }}" title="Edit">
+                                    data-id="{{ post.pk }}" title="View">
                                     <i class="fa fa-eye"></i>
                                 </a>
                                 <button class="btn btn-outline-danger btn-sm delete-data" type="button"
@@ -79,7 +79,7 @@
             $('#modal-footer-content').html('');
 
             // Call uni_modal with 'decode' as the action
-            uni_modal('<i class="fa fa-edit"></i> Edit Document', '{% url "manage-post" %}/' + postId, 'modal-md', 'decode');
+            uni_modal('<i class="fa fa-edit"></i> View Document', '{% url "manage-post" %}/' + postId, 'modal-md', 'decode');
         });
 
         $('.delete-data').click(function () {
