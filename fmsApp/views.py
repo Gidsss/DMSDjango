@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 from fms_django.settings import MEDIA_ROOT, MEDIA_URL
 import json
 from django.contrib import messages
@@ -10,12 +12,43 @@ from fmsApp.forms import UserRegistration, SavePost, UpdateProfile, UpdatePasswo
 from fmsApp.models import Post
 from cryptography.fernet import Fernet
 from django.conf import settings
+from django.core.cache import cache
 import base64
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from .models import Post
+import base64
+# from .stegomarkov_old import Encoder, Decoder, file_to_bitstream, bitstream_to_file, build_model
+from .stegomarkov import Encoder, Decoder, file_to_bitstream, bitstream_to_file, build_model
+import markovify
+import os
+import time
+import logging
 # Create your views here.
 
 context = {
     'page_title' : 'File Management System',
 }
+
+# Set up basic logging
+logging.basicConfig(level=logging.INFO)  
+logger = logging.getLogger(__name__)
+
+model = build_model("markov_models/legal_corpus.json")
+logger.info("Markov model loaded successfully.")
+
+def get_markov_model():
+    try:
+        if 'markov_model' in globals() and globals()['markov_model'] is not None:
+            logger.info("Successfully retrieved pre-loaded Markov model.")
+            return globals()['markov_model']
+        else:
+            logger.warning("Markov model not loaded or invalid. Returning None.")
+            return None
+    except Exception as e:
+        logger.error(f"Error retrieving Markov model: {str(e)}")
+        return None
+
 #login
 def login_user(request):
     logout(request)
@@ -89,36 +122,131 @@ def posts_mgt(request):
 
 @login_required
 def manage_post(request, pk=None):
-    context['page_title'] = 'Manage Post'
-    context['post'] = {}
-    if not pk is None:
-        post = Post.objects.get(id = pk)
-        context['post'] = post
-    return render(request,'manage_post.html',context)
+    resp = {'status': 'failed', 'msg': ''}
+
+    if request.method == 'GET':
+        user_id = request.user.id
+        cache.set(f'decode_progress_{user_id}', 0, timeout=1800)
+
+
+    try:
+        if pk is not None:
+            post = get_object_or_404(Post, id=pk)
+            user_id = request.user.id
+
+            if post.file_data:
+                # model = get_markov_model()
+                # logger.info("Markov model loaded successfully for decoding.")
+
+                decode_start_time = time.time()
+                decoder = Decoder(model, post.file_data, logging=True)
+                old_progress = 0
+
+                # Stepwise decoding to update progress
+                while not decoder.finished:
+                    progress = min(int(decoder.step() * 100), 100)
+                    if progress - old_progress >= 5:  # Update every 5%
+                        cache.set(f'decode_progress_{user_id}', progress)
+                        old_progress = progress
+                        logger.info(f"Decoding Progress: {progress}%")
+
+                decoded_file_data = decoder.solve()
+                decode_duration = time.time() - decode_start_time
+
+                logger.info(f"Decoding completed in {decode_duration:.6f} seconds")
+                context['decoded_file_data'] = decoded_file_data
+                cache.set(f'decode_progress_{user_id}', 100, timeout=1800)  # Mark decoding as completed
+            else:
+                logger.warning(f"No file data found for post ID {pk}.")
+            context['post'] = post
+    except Exception as e:
+        logger.error(f"Error managing post {pk}: {str(e)}", exc_info=True)
+        messages.error(request, 'An error occurred while processing the post.')
+
+    return render(request, 'manage_post.html', context)
+
+@login_required
+def add_post(request):
+    context = {'page_title': 'Add New Document'}
+
+    # Only render an empty form for adding a new post
+    return render(request, 'manage_post.html', context)
 
 @login_required
 def save_post(request):
-    resp = {'status':'failed', 'msg':''}
+    resp = {'status': 'failed', 'msg': ''}
+
     if request.method == 'POST':
-        if not request.POST['id'] == '':
+        user_id = request.user.id
+        cache.set(f'encode_progress_{user_id}', 0, timeout=900)  # Initialize progress
+
+        if request.POST.get('id') and not request.POST['id'] == '':
             post = Post.objects.get(id=request.POST['id'])
-            form = SavePost(request.POST,request.FILES,instance=post)
+            form = SavePost(request.POST, request.FILES, instance=post)
         else:
-            form = SavePost(request.POST,request.FILES)
+            form = SavePost(request.POST, request.FILES)
+
         if form.is_valid():
-            form.save()
-            messages.success(request,'File has been saved successfully.')
+            saved_post = form.save(commit=False)
+
+            if 'file_path' in request.FILES:
+                file = request.FILES['file_path']
+
+                # Save the file
+                file_path = default_storage.save(f"uploads/{file.name}", ContentFile(file.read()))
+                full_file_path = os.path.join(settings.MEDIA_ROOT, file_path)
+
+                # Convert file to binary bitstream
+                bitstream = file_to_bitstream(full_file_path)
+
+                # Load the Markov model
+                # Use the pre-loaded Markov model
+                # model = get_markov_model()
+                # if not model:
+                #     logger.error("No pre-loaded Markov model found.")
+                #     resp['msg'] = 'Error: Markov model not loaded.'
+                #     return HttpResponse(json.dumps(resp), content_type="application/json")
+                # logger.info("Using pre-loaded Markov model for encoding.")
+
+                # Encode step-by-step
+                encoder = Encoder(model, bitstream, logging=True)
+                old_progress = 0
+                while not encoder.finished:
+                    progress = min(5 * ((5 + encoder.step() * 90) // 5), 100)  # Ensure increments of 5%
+                    if progress > old_progress:
+                        cache.set(f'encode_progress_{user_id}', progress)
+                        old_progress = progress
+                        logger.info(f"Encoding Progress: {progress}%")
+
+                saved_post.file_data = encoder.output
+                cache.set(f'encode_progress_{user_id}', 100, timeout=900)  # Mark encoding as completed
+                logger.info("Encoding completed.")
+
+            saved_post.save()
+            # Add success message to the response
             resp['status'] = 'success'
+            resp['msg'] = 'Document has been saved successfully.'
         else:
-            for fields in form:
-                for error in fields.errors:
-                    resp['msg'] += str( error +'<br/>')
-            form = SavePost(request.POST,request.FILES)
-            
+            for field in form:
+                for error in field.errors:
+                    resp['msg'] += str(error) + '<br/>'
+
+    return HttpResponse(json.dumps(resp), content_type="application/json")
+
+@login_required
+def progress_status(request):
+    action = request.GET.get('action', None)
+    user_id = request.user.id
+    progress = 0
+
+    if action == 'encode':
+        progress = cache.get(f'encode_progress_{user_id}', 0)
+    elif action == 'decode':
+        progress = cache.get(f'decode_progress_{user_id}', 0)
     else:
-        resp['msg'] = "No Data sent."
-    print(resp)
-    return HttpResponse(json.dumps(resp),content_type="application/json")
+        progress = 0
+
+    return JsonResponse({'progress': progress})
 
 @login_required
 def delete_post(request):

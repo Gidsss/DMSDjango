@@ -5,7 +5,8 @@
             <div class="d-flex w-100 align-items-center justify-content-between">
                 <h4 class="card-title fw-bold">My Uploaded Files</h4>
                 <div class="tools">
-                    <button type="button" class="btn btn-primary rounded-0 bg-gradient btn-sm" id='add_new'><i class="fa fa-plus"></i> Add New</button>
+                    <button type="button" class="btn btn-primary rounded-0 bg-gradient btn-sm" id='add_new'><i
+                            class="fa fa-plus"></i> Add New</button>
                 </div>
             </div>
         </div>
@@ -34,12 +35,16 @@
                             <td class="px-2 py-1 align-middle">{{ forloop.counter }}</td>
                             <td class="px-2 py-1 align-middle">{{ post.date_created|date:"Y-m-d h:i A" }}</td>
                             <td class="px-2 py-1 align-middle">{{ post.title }}</td>
-                            <td class="px-2 py-1 align-middle"><p class="m-0 text-truncate">{{ post.description }}</p></td>
+                            <td class="px-2 py-1 align-middle">
+                                <p class="m-0 text-truncate">{{ post.description }}</p>
+                            </td>
                             <td class="px-2 py-1 align-middle text-center">
-                                <a class="btn btn-outline-primary btn-sm edit-data" href="javascript:void(0)" data-id="{{ post.pk }}" title="Edit">
-                                    <i class="fa fa-edit"></i>
+                                <a class="btn btn-outline-primary btn-sm edit-data" href="javascript:void(0)"
+                                    data-id="{{ post.pk }}" title="View">
+                                    <i class="fa fa-eye"></i>
                                 </a>
-                                <button class="btn btn-outline-danger btn-sm delete-data" type="button" data-id="{{ post.pk }}" title="Delete">
+                                <button class="btn btn-outline-danger btn-sm delete-data" type="button"
+                                    data-id="{{ post.pk }}" title="Delete">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </td>
@@ -53,38 +58,58 @@
 </div>
 {% endblock pageContent %} {% block ScriptBlock %}
 <script>
-    $(function() {
-        $('#add_new').click(function() {
-            uni_modal('<i class="fa fa-plus"></i> Add Departmnet', '{% url "manage-post" %}', 'modal-md')
-        })
-        $('.edit-data').click(function() {
-            uni_modal('<i class="fa fa-edit"></i> Edit post', '{% url "manage-post" %}/' + $(this).attr('data-id'), 'modal-md')
-        })
-        $('.delete-data').click(function() {
-            _conf("Are you sure to delete this post permanently?", "delete_post", [$(this).attr('data-id')])
-        })
+    $(function () {
+        $('#add_new').click(function () {
+            // Clear the modal content
+            $('#uni_modal .modal-title').html('');
+            $('#uni_modal .modal-body').html('');
+            $('#modal-footer-content').html('');
+
+            // Load the "Add New" modal using the new endpoint
+            uni_modal('<i class="fa fa-plus"></i> Add New Document', '{% url "add-post" %}', 'modal-md');
+        });
+
+
+        $('.edit-data').click(function () {
+            const postId = $(this).attr('data-id');
+            console.log("Editing post with ID:", postId);
+            // Clear the modal content
+            $('#uni_modal .modal-title').html('');
+            $('#uni_modal .modal-body').html('');
+            $('#modal-footer-content').html('');
+
+            // Call uni_modal with 'decode' as the action
+            uni_modal('<i class="fa fa-edit"></i> View Document', '{% url "manage-post" %}/' + postId, 'modal-md', 'decode');
+        });
+
+        $('.delete-data').click(function () {
+            const postId = $(this).attr('data-id');
+            console.log("Deleting post with ID:", postId);
+            _conf("Are you sure you want to delete this document permanently?", "delete_post", [postId]);
+        });
 
         $('#post-list').DataTable({
             columnDefs: [{
                 orderable: false,
                 targets: 4
             }],
-            initComplete: function(settings, json) {
-                $('table td, table th').addClass('px-2 py-1')
+            initComplete: function (settings, json) {
+                $('table td, table th').addClass('px-2 py-1');
             },
-            drawCallback: function(settings) {
-                $('table td, table th').addClass('px-2 py-1')
+            drawCallback: function (settings) {
+                $('table td, table th').addClass('px-2 py-1');
             }
-        })
-    })
+        });
+    });
 
     function delete_post($id) {
-        start_loader();
-        var _this = $(this)
+        console.log("Initiating delete for post ID:", $id);
+        var _this = $(this);
         $('.err-msg').remove();
-        var el = $('<div>')
-        el.addClass("alert alert-danger err-msg")
-        el.hide()
+        var el = $('<div>');
+        el.addClass("alert alert-danger err-msg");
+        el.hide();
+
         $.ajax({
             url: '{% url "delete-post" %}',
             headers: {
@@ -96,24 +121,26 @@
             },
             dataType: 'json',
             error: err => {
-                console.log(err)
-                el.text('An error occurred.')
-                el.show('slow')
-                end_loader()
+                console.log("Error during deletion:", err);
+                el.text('An error occurred.');
+                el.show('slow');
+                end_loader(); // End loader on error
             },
-            success: function(resp) {
+            success: function (resp) {
                 if (resp.status == 'success') {
-                    location.reload()
+                    location.reload();
                 } else if (!!resp.msg) {
-                    el.text('An error occurred.')
-                    el.show('slow')
+                    el.text('An error occurred.');
+                    el.show('slow');
                 } else {
-                    el.text('An error occurred.')
-                    el.show('slow')
+                    el.text('An error occurred.');
+                    el.show('slow');
                 }
-                end_loader()
+                end_loader(); // Ensure loader ends after completion
             }
-        })
+        });
     }
+
+
 </script>
 {% endblock ScriptBlock %}

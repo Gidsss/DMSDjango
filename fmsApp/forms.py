@@ -77,7 +77,7 @@ class SavePost(forms.ModelForm):
 
     class Meta:
         model= Post
-        fields = ('user','title','description','file_path')
+        fields = ('user','title','description','file_path', 'file_data')
     
     def clean_title(self):
         id = self.instance.id if not self.instance == None else 0
